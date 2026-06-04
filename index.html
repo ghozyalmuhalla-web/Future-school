@@ -1,413 +1,753 @@
 <!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>PELENGER - Mahasiswa Baik Hati</title>
+    
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Fredoka:wght@300..700&family=Quicksand:wght@300..700&display=swap" rel="stylesheet">
+    
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    
+    <!-- FontAwesome Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <!-- Tone.js for Beautiful UI Sounds -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/tone/14.8.49/Tone.js"></script>
+    
+    <!-- Canvas Confetti for Celebration effects -->
+    <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.6.0/dist/confetti.browser.min.js"></script>
 
-<html class="dark" lang="id"><head>
-<meta charset="utf-8"/>
-<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
-<title>EDULEGACY - Membangun Generasi, Menciptakan Warisan</title>
-<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
-<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
-<link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;700&amp;family=Geist:wght@400;500;700;800;900&amp;display=swap" rel="stylesheet"/>
-<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
-<script id="tailwind-config">
+    <!-- Tailwind Config for Palette -->
+    <script>
         tailwind.config = {
-            darkMode: "class",
             theme: {
                 extend: {
-                    "colors": {
-                        "on-tertiary": "#490080",
-                        "secondary": "#5de6ff",
-                        "surface-container-lowest": "#060e20",
-                        "on-secondary": "#00363e",
-                        "secondary-fixed-dim": "#2fd9f4",
-                        "on-primary-fixed": "#0f0069",
-                        "tertiary-fixed": "#f0dbff",
-                        "primary": "#c3c0ff",
-                        "on-primary": "#1d00a5",
-                        "neon-cyan-glow": "rgba(34, 211, 238, 0.4)",
-                        "surface-dim": "#0b1326",
-                        "inverse-on-surface": "#283044",
-                        "outline": "#918fa1",
-                        "tertiary-container": "#8822df",
-                        "on-secondary-fixed-variant": "#004e5a",
-                        "surface-tint": "#c3c0ff",
-                        "secondary-fixed": "#a2eeff",
-                        "surface-container-highest": "#2d3449",
-                        "surface-bright": "#31394d",
-                        "surface-container-low": "#131b2e",
-                        "outline-variant": "#464555",
-                        "secondary-container": "#00cbe6",
-                        "surface": "#0b1326",
-                        "error": "#ffb4ab",
-                        "holographic-purple": "#a855f7",
-                        "background": "#0b1326",
-                        "primary-fixed": "#e2dfff",
-                        "glass-surface": "rgba(15, 23, 42, 0.6)",
-                        "on-background": "#dae2fd",
-                        "on-primary-container": "#dad7ff",
-                        "primary-fixed-dim": "#c3c0ff",
-                        "on-secondary-container": "#00515d",
-                        "on-primary-fixed-variant": "#3323cc",
-                        "surface-container-high": "#222a3d",
-                        "surface-variant": "#2d3449",
-                        "on-tertiary-container": "#ebd2ff",
-                        "on-tertiary-fixed": "#2c0051",
-                        "on-surface-variant": "#c7c4d8",
-                        "on-surface": "#dae2fd",
-                        "on-error": "#690005",
-                        "on-error-container": "#ffdad6",
-                        "primary-container": "#4f46e5",
-                        "inverse-primary": "#4d44e3",
-                        "surface-container": "#171f33",
-                        "on-secondary-fixed": "#001f25",
-                        "inverse-surface": "#dae2fd",
-                        "tertiary": "#ddb8ff",
-                        "glass-border-light": "rgba(248, 250, 252, 0.15)",
-                        "error-container": "#93000a",
-                        "tertiary-fixed-dim": "#ddb8ff",
-                        "on-tertiary-fixed-variant": "#6800b4"
+                    fontFamily: {
+                        sans: ['Quicksand', 'sans-serif'],
+                        display: ['Fredoka', 'sans-serif'],
                     },
-                    "borderRadius": {
-                        "DEFAULT": "0.25rem",
-                        "lg": "0.5rem",
-                        "xl": "0.75rem",
-                        "full": "9999px"
-                    },
-                    "spacing": {
-                        "inner-padding": "1.25rem",
-                        "grid-margin": "2rem",
-                        "gutter": "1.5rem",
-                        "section-gap": "8rem"
-                    },
-                    "fontFamily": {
-                        "body-md": ["Geist"],
-                        "headline-lg-mobile": ["Geist"],
-                        "display-hero": ["Geist"],
-                        "headline-lg": ["Geist"],
-                        "label-tech": ["JetBrains Mono"]
-                    },
-                    "fontSize": {
-                        "body-md": ["16px", {"lineHeight": "1.6", "fontWeight": "400"}],
-                        "headline-lg-mobile": ["32px", {"lineHeight": "1.2", "fontWeight": "800"}],
-                        "display-hero": ["72px", {"lineHeight": "1.1", "letterSpacing": "-0.04em", "fontWeight": "900"}],
-                        "headline-lg": ["48px", {"lineHeight": "1.2", "letterSpacing": "-0.02em", "fontWeight": "800"}],
-                        "label-tech": ["12px", {"lineHeight": "1.0", "letterSpacing": "0.1em", "fontWeight": "500"}]
+                    colors: {
+                        pelenger: {
+                            50: '#fdf2f8',
+                            100: '#fce7f3',
+                            200: '#fbcfe8',
+                            300: '#f9a8d4',
+                            400: '#f472b6',
+                            500: '#ec4899',
+                            600: '#db2777',
+                            700: '#be185d',
+                            primary: '#6366f1',
+                            secondary: '#a855f7',
+                            accent: '#f43f5e',
+                            dark: '#0f172a'
+                        }
                     }
-                },
-            },
+                }
+            }
         }
     </script>
-<style>
+
+    <style>
         body {
-            background-color: #0b1326;
-            color: #dae2fd;
+            font-family: 'Quicksand', sans-serif;
+            background: linear-gradient(135deg, #f5f3ff 0%, #fdf2f8 50%, #ecfdf5 100%);
+            background-attachment: fixed;
         }
-        .material-symbols-outlined {
-            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        
+        .title-gradient {
+            background: linear-gradient(to right, #6366f1, #a855f7, #ec4899);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
         }
+
         .glass-card {
-            background: rgba(15, 23, 42, 0.6);
+            background: rgba(255, 255, 255, 0.75);
             backdrop-filter: blur(12px);
-            border: 1px solid rgba(248, 250, 252, 0.15);
+            -webkit-backdrop-filter: blur(12px);
+            border: 1px solid rgba(255, 255, 255, 0.4);
         }
-        .neon-glow-cyan {
-            box-shadow: 0 0 20px rgba(34, 211, 238, 0.2);
+
+        .glass-dark {
+            background: rgba(15, 23, 42, 0.85);
+            backdrop-filter: blur(16px);
+            -webkit-backdrop-filter: blur(16px);
+            border: 1px solid rgba(255, 255, 255, 0.1);
         }
-        .laser-progress {
-            background: linear-gradient(90deg, transparent, #5de6ff, transparent);
+
+        .pulse-soft {
+            animation: softPulse 3s infinite ease-in-out;
+        }
+
+        @keyframes softPulse {
+            0%, 100% { transform: scale(1); }
+            50% { transform: scale(1.03); }
+        }
+
+        /* Custom Scrollbar */
+        ::-webkit-scrollbar {
+            width: 8px;
+        }
+        ::-webkit-scrollbar-track {
+            background: rgba(243, 244, 246, 0.5);
+        }
+        ::-webkit-scrollbar-thumb {
+            background: #a855f7;
+            border-radius: 999px;
         }
     </style>
-<style>
-    body {
-      min-height: max(884px, 100dvh);
-    }
-  </style>
-  </head>
-<body class="font-body-md overflow-x-hidden">
-<!-- Header Navigation -->
-<header class="bg-glass-surface backdrop-blur-xl border-b border-glass-border-light docked full-width top-0 sticky z-50 flex justify-between items-center px-grid-margin py-4 w-full">
-<div class="font-headline-lg-mobile text-headline-lg-mobile font-black text-on-surface dark:text-on-background tracking-tight">EDULEGACY</div>
-<div class="hidden md:flex gap-8 items-center">
-<a class="font-label-tech text-label-tech uppercase text-secondary font-bold" href="#">Nexus</a>
-<a class="font-label-tech text-label-tech uppercase text-on-surface-variant hover:scale-105 transition-transform duration-200" href="#">Academy</a>
-<a class="font-label-tech text-label-tech uppercase text-on-surface-variant hover:scale-105 transition-transform duration-200" href="#">Archive</a>
-</div>
-<div class="flex items-center gap-4">
-<span class="material-symbols-outlined text-primary" data-icon="menu">menu</span>
-</div>
-</header>
-<main>
-<!-- Section 1: Hero -->
-<section class="relative min-h-screen flex flex-col justify-center items-center px-grid-margin py-section-gap overflow-hidden">
-<!-- Background Image with Overlay -->
-<div class="absolute inset-0 z-0">
-<img class="w-full h-full object-cover opacity-30" data-alt="A futuristic high-tech educational laboratory featuring holographic displays of neural networks and complex geometry. The lighting is dominated by deep blues, cyans, and purples, creating an intellectual and advanced atmosphere. Students are subtly visible in the background, interacting with transparent digital interfaces in a minimalist, glass-dominated interior." src="https://lh3.googleusercontent.com/aida-public/AB6AXuDyG0InIlbK3zummphWkdZMnC4cgLAVUIgjQrPgOmDOaHqi8-y0tgZwub4RFcn73u-1_U0GtjQuk9oHUYd2qiZYMvKSdEPon9fKElNj2Ngf4qeUQOr5kyf0BxRlMa5VMhDZnT10KLESl7YyFXg3ZYjTfK8q8UxV3IabjBQapDHFm6oT2qdQo4OK3Twa-VuuOxzK4J4AB-BXBn_JUqFeC6mvoT3Et7fX6l-gymv8USdFNxMdd58PwV2qeSEZBbNaDSktqhRS_1DW_Duf"/>
-<div class="absolute inset-0 bg-gradient-to-b from-background via-transparent to-background"></div>
-</div>
-<div class="relative z-10 text-center max-w-4xl mx-auto">
-<div class="inline-block px-4 py-1 mb-6 glass-card rounded-full">
-<span class="font-label-tech text-label-tech text-secondary uppercase tracking-[0.2em]">Pioneer of Neural Education</span>
-</div>
-<h1 class="font-display-hero text-headline-lg-mobile md:text-display-hero mb-8 text-on-surface">
-                    Membangun Generasi,<br/>
-<span class="text-transparent bg-clip-text bg-gradient-to-r from-secondary to-holographic-purple">Menciptakan Warisan.</span>
-</h1>
-<p class="font-body-md text-body-md text-on-surface-variant mb-10 max-w-2xl mx-auto">
-                    Platform pendidikan masa depan yang menggabungkan kecerdasan buatan dengan potensi manusia untuk melahirkan inovator global.
+</head>
+<body class="min-h-screen text-slate-800 flex flex-col antialiased pb-12 overflow-x-hidden">
+
+    <!-- Header/Navigation -->
+    <nav class="sticky top-0 z-40 w-full px-4 py-3 glass-card shadow-sm">
+        <div class="max-w-6xl mx-auto flex justify-between items-center">
+            <div class="flex items-center gap-2 cursor-pointer" onclick="celebrateGroup()">
+                <div class="w-10 h-10 rounded-full bg-gradient-to-tr from-indigo-500 via-purple-500 to-pink-500 flex items-center justify-center text-white font-bold shadow-md">
+                    P
+                </div>
+                <span class="font-display font-bold text-xl md:text-2xl tracking-wide title-gradient">PELENGER</span>
+            </div>
+            <div class="flex items-center gap-4">
+                <span class="hidden md:inline-block px-3 py-1 bg-emerald-100 text-emerald-800 font-semibold text-xs rounded-full uppercase tracking-widest animate-pulse">
+                    Mahasiswa Baik Hati ✨
+                </span>
+                <button onclick="toggleAudio()" id="audio-toggle-btn" class="p-2.5 rounded-full bg-white text-indigo-600 hover:bg-indigo-50 shadow-md border border-indigo-100 transition-all active:scale-95 duration-200" title="Aktifkan Efek Suara">
+                    <i class="fa-solid fa-volume-xmark text-lg"></i>
+                </button>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <header class="relative px-4 pt-10 pb-8 overflow-hidden text-center max-w-4xl mx-auto w-full">
+        <!-- Abstract decorative bubbles -->
+        <div class="absolute -top-12 -left-12 w-32 h-32 bg-purple-300 rounded-full mix-blend-multiply filter blur-xl opacity-40 animate-blob"></div>
+        <div class="absolute -bottom-8 -right-12 w-36 h-36 bg-pink-300 rounded-full mix-blend-multiply filter blur-xl opacity-40 animate-blob"></div>
+        
+        <div class="relative z-10">
+            <span class="inline-flex items-center gap-1.5 px-4 py-1.5 rounded-full text-xs font-bold uppercase tracking-wider bg-indigo-50 text-indigo-600 border border-indigo-100 mb-4 shadow-sm">
+                <i class="fa-solid fa-graduation-cap"></i> Ikatan Persahabatan Sejati
+            </span>
+            <h1 class="font-display text-4xl sm:text-6xl font-extrabold tracking-tight mb-4">
+                The Legend of <br class="sm:hidden">
+                <span class="title-gradient">PELENGER</span>
+            </h1>
+            <p class="text-base sm:text-xl text-slate-600 max-w-2xl mx-auto font-medium leading-relaxed">
+                Kompilasi delapan mahasiswa luar biasa yang dipertemukan oleh takdir, disatukan oleh tawa, dan dikenal luas sebagai manusia paling baik hati di seantero kampus.
+            </p>
+            <div class="flex flex-wrap gap-3 justify-center mt-6">
+                <a href="#anggota-section" class="px-5 py-2.5 bg-gradient-to-r from-indigo-600 to-purple-600 text-white font-bold rounded-2xl shadow-lg hover:shadow-indigo-500/25 transition-all hover:-translate-y-0.5 active:scale-95">
+                    <i class="fa-solid fa-users mr-2"></i>Kenali Kami
+                </a>
+                <button onclick="triggerRoulette()" class="px-5 py-2.5 bg-white text-indigo-600 border-2 border-indigo-200 font-bold rounded-2xl shadow-sm hover:bg-indigo-50 transition-all hover:-translate-y-0.5 active:scale-95">
+                    <i class="fa-solid fa-star-of-david mr-2"></i>Uji Keberuntungan Kebaikan
+                </button>
+            </div>
+        </div>
+    </header>
+
+    <!-- Members Section -->
+    <section id="anggota-section" class="px-4 py-8 max-w-6xl mx-auto w-full scroll-mt-20">
+        <div class="text-center mb-8">
+            <h2 class="font-display text-2xl sm:text-4xl font-extrabold text-slate-800">
+                Pilar-Pilar <span class="text-indigo-600">Pelenger</span>
+            </h2>
+            <p class="text-slate-500 mt-1">Klik salah satu kartu untuk mengintip rahasia kebaikan dan keunikan mereka!</p>
+        </div>
+
+        <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6" id="members-grid">
+            <!-- Dynamic Member Cards will be rendered here via JS -->
+        </div>
+    </section>
+
+    <!-- Interactive Fun Section (Roulette & Kindness Generator) -->
+    <section class="px-4 py-12 max-w-4xl mx-auto w-full">
+        <div class="glass-card rounded-3xl p-6 sm:p-10 shadow-xl border border-white relative overflow-hidden">
+            <div class="absolute -right-16 -bottom-16 w-48 h-48 bg-purple-200 rounded-full opacity-30 blur-2xl pointer-events-none"></div>
+            
+            <div class="text-center mb-8">
+                <span class="text-3xl">🎰</span>
+                <h2 class="font-display text-2xl sm:text-3xl font-extrabold text-slate-800 mt-2">
+                    Siapa Paling Baik Hari Ini?
+                </h2>
+                <p class="text-slate-500 text-sm sm:text-base mt-1">
+                    Putar roda kebaikan untuk mengundi satu member Pelenger yang akan dinobatkan sebagai pembawa berkah hari ini!
                 </p>
-<div class="flex flex-col md:flex-row gap-4 justify-center">
-<button class="bg-gradient-to-r from-primary-container to-tertiary-container text-white px-8 py-4 rounded-xl font-bold shadow-neon-cyan-glow hover:scale-105 transition-all">
-                        Mulai Eksplorasi
-                    </button>
-<button class="glass-card border-secondary/50 text-secondary px-8 py-4 rounded-xl font-bold hover:bg-secondary/10 transition-all">
-                        Lihat Kurikulum
-                    </button>
-</div>
-</div>
-<!-- Floating Stats (Bento-lite) -->
-<div class="relative z-10 mt-20 grid grid-cols-2 md:grid-cols-4 gap-4 w-full max-w-5xl">
-<div class="glass-card p-6 rounded-2xl text-center border-glass-border-light">
-<div class="font-label-tech text-secondary mb-1">DATA NODES</div>
-<div class="font-display-hero text-headline-lg-mobile !text-[24px]">1.2k+</div>
-</div>
-<div class="glass-card p-6 rounded-2xl text-center border-glass-border-light">
-<div class="font-label-tech text-secondary mb-1">NEURAL PATHS</div>
-<div class="font-display-hero text-headline-lg-mobile !text-[24px]">850+</div>
-</div>
-<div class="glass-card p-6 rounded-2xl text-center border-glass-border-light">
-<div class="font-label-tech text-secondary mb-1">LEGACY SCORE</div>
-<div class="font-display-hero text-headline-lg-mobile !text-[24px]">A++</div>
-</div>
-<div class="glass-card p-6 rounded-2xl text-center border-glass-border-light">
-<div class="font-label-tech text-secondary mb-1">U-TIME</div>
-<div class="font-display-hero text-headline-lg-mobile !text-[24px]">99.9%</div>
-</div>
-</div>
-</section>
-<!-- Section 2: About (Incubator) -->
-<section class="px-grid-margin py-20 bg-surface-container-low">
-<div class="max-w-7xl mx-auto">
-<div class="flex flex-col md:flex-row gap-12 items-center mb-16">
-<div class="md:w-1/2">
-<h2 class="font-headline-lg text-headline-lg-mobile md:text-headline-lg text-on-surface mb-6">Sekolah Sebagai Inkubator Inovasi</h2>
-<p class="text-on-surface-variant font-body-md mb-8">
-                            Kami tidak hanya mengajar; kami memfasilitasi penemuan. EduLegacy dirancang sebagai ekosistem di mana ide-ide radikal diuji, dikembangkan, dan diwujudkan.
-                        </p>
-</div>
-<div class="md:w-1/2 grid grid-cols-2 gap-4">
-<!-- Feature Cards -->
-<div class="glass-card p-6 rounded-3xl border-glass-border-light hover:scale-105 transition-all">
-<span class="material-symbols-outlined text-secondary text-4xl mb-4" data-icon="psychology">psychology</span>
-<h3 class="font-bold text-on-surface mb-2">Karakter</h3>
-<p class="text-xs text-on-surface-variant">Integritas dalam setiap algoritma yang dibangun.</p>
-</div>
-<div class="glass-card p-6 rounded-3xl border-glass-border-light hover:scale-105 transition-all translate-y-8">
-<span class="material-symbols-outlined text-holographic-purple text-4xl mb-4" data-icon="memory">memory</span>
-<h3 class="font-bold text-on-surface mb-2">Teknologi</h3>
-<p class="text-xs text-on-surface-variant">Infrastruktur pembelajaran tingkat lanjut.</p>
-</div>
-<div class="glass-card p-6 rounded-3xl border-glass-border-light hover:scale-105 transition-all">
-<span class="material-symbols-outlined text-secondary text-4xl mb-4" data-icon="brush">brush</span>
-<h3 class="font-bold text-on-surface mb-2">Kreativitas</h3>
-<p class="text-xs text-on-surface-variant">Desain berpikir untuk solusi kompleks.</p>
-</div>
-<div class="glass-card p-6 rounded-3xl border-glass-border-light hover:scale-105 transition-all translate-y-8">
-<span class="material-symbols-outlined text-holographic-purple text-4xl mb-4" data-icon="public">public</span>
-<h3 class="font-bold text-on-surface mb-2">Kontribusi</h3>
-<p class="text-xs text-on-surface-variant">Dampak nyata bagi ekosistem global.</p>
-</div>
-</div>
-</div>
-</div>
-</section>
-<!-- Section 3: Future Learning (Bento Grid) -->
-<section class="px-grid-margin py-section-gap">
-<div class="max-w-7xl mx-auto">
-<div class="text-center mb-16">
-<h2 class="font-headline-lg text-headline-lg-mobile md:text-headline-lg mb-4">Gerbang Masa Depan</h2>
-<p class="text-on-surface-variant">Empat pilar utama dalam kurikulum adaptif kami.</p>
-</div>
-<div class="grid grid-cols-1 md:grid-cols-12 gap-6 h-auto md:h-[600px]">
-<div class="md:col-span-8 glass-card rounded-[2rem] p-8 flex flex-col justify-end relative overflow-hidden group">
-<img class="absolute inset-0 w-full h-full object-cover opacity-20 group-hover:scale-110 transition-transform duration-700" data-alt="A macro shot of a sophisticated circuit board glowing with cyan and neon-violet light pulses. The aesthetic is industrial yet futuristic, symbolizing deep technical education and high-end computing power. Fine details of microprocessors and pathways are highlighted by shimmering light rays." src="https://lh3.googleusercontent.com/aida-public/AB6AXuDXYwGD0nW64CtRAEqL3O-_X-NOM6t7XL9HVqupLytS_Ehyvb6jxSi8nQBaxJlZAr3JcV7ZrPqCmsJo7WnockV_0YjomDtq3QjQDu-f25THqy3MmRaHrJRBZXFmKHPxx-G_sm_zRMyDxpXBUVDqdGsqC7UpsLp1v77zGVe0cMqIZ0mx3NeTqiqT3lyrFK8zA_VDbuwwecAly0B0EtHccJVuKWWW_1TWYyJgrk0XrBF4j8YPwsYKMZo4gUE-l397rQ26m4afGahw8glT"/>
-<div class="relative z-10">
-<span class="px-3 py-1 bg-secondary/20 text-secondary text-[10px] rounded-full font-label-tech mb-4 inline-block">ADVANCED MODULE</span>
-<h3 class="font-headline-lg-mobile text-white mb-2">Coding Academy</h3>
-<p class="text-on-surface-variant max-w-md">Menguasai bahasa mesin untuk membangun realitas baru melalui arsitektur software masa depan.</p>
-</div>
-</div>
-<div class="md:col-span-4 glass-card rounded-[2rem] p-8 border-holographic-purple/30 flex flex-col items-center justify-center text-center">
-<span class="material-symbols-outlined text-6xl text-holographic-purple mb-6" data-icon="biotech" style="font-variation-settings: 'FILL' 1;">biotech</span>
-<h3 class="font-bold text-2xl mb-2">Virtual Lab</h3>
-<p class="text-sm text-on-surface-variant">Eksperimen fisika dan biologi tanpa batas dalam simulasi haptic 4D.</p>
-</div>
-<div class="md:col-span-4 glass-card rounded-[2rem] p-8 border-secondary/30 flex flex-col justify-between">
-<h3 class="font-bold text-2xl mb-4">AI Mentor</h3>
-<p class="text-sm text-on-surface-variant mb-6">Asisten belajar personal yang menyesuaikan ritme materi dengan profil neuro-kognitif Anda.</p>
-<div class="w-full h-1 bg-surface-container-highest rounded-full overflow-hidden">
-<div class="h-full w-2/3 bg-secondary shadow-neon-cyan-glow"></div>
-</div>
-</div>
-<div class="md:col-span-8 glass-card rounded-[2rem] p-8 flex items-center gap-8 border-glass-border-light">
-<div class="hidden md:block w-32 h-32 rounded-full border-2 border-dashed border-secondary p-2">
-<div class="w-full h-full rounded-full bg-surface-container-high flex items-center justify-center">
-<span class="material-symbols-outlined text-secondary" data-icon="hub">hub</span>
-</div>
-</div>
-<div>
-<h3 class="font-bold text-2xl mb-2">Hybrid Learning</h3>
-<p class="text-sm text-on-surface-variant">Sinergi antara interaksi fisik di kampus dengan kolaborasi digital global secara real-time.</p>
-</div>
-</div>
-</div>
-</div>
-</section>
-<!-- Section 4: Legacy Timeline -->
-<section class="px-grid-margin py-20 bg-surface-container-lowest">
-<div class="max-w-4xl mx-auto">
-<h2 class="font-headline-lg text-headline-lg-mobile text-center mb-16">Jejak Prestasi</h2>
-<div class="relative">
-<!-- Vertical Line -->
-<div class="absolute left-1/2 -translate-x-1/2 w-0.5 h-full bg-gradient-to-b from-secondary via-holographic-purple to-transparent opacity-30"></div>
-<!-- Timeline Items -->
-<div class="space-y-24 relative">
-<div class="flex flex-col md:flex-row items-center gap-8 md:gap-0">
-<div class="md:w-1/2 md:pr-12 text-right order-2 md:order-1">
-<h4 class="font-label-tech text-secondary mb-2">Q3 2023</h4>
-<h3 class="font-bold text-xl mb-2">EcoFlow Tech</h3>
-<p class="text-sm text-on-surface-variant">Siswa angkatan Alpha berhasil meluncurkan sistem manajemen air berbasis AI untuk daerah pesisir.</p>
-</div>
-<div class="relative z-10 w-8 h-8 rounded-full bg-secondary shadow-[0_0_15px_#5de6ff] border-4 border-background order-1 md:order-2"></div>
-<div class="md:w-1/2 md:pl-12 order-3"></div>
-</div>
-<div class="flex flex-col md:flex-row items-center gap-8 md:gap-0">
-<div class="md:w-1/2 md:pr-12 order-2 md:order-1"></div>
-<div class="relative z-10 w-8 h-8 rounded-full bg-holographic-purple shadow-[0_0_15px_#a855f7] border-4 border-background order-1 md:order-2"></div>
-<div class="md:w-1/2 md:pl-12 order-3">
-<h4 class="font-label-tech text-holographic-purple mb-2">Q1 2024</h4>
-<h3 class="font-bold text-xl mb-2">AI for Biodiversity</h3>
-<p class="text-sm text-on-surface-variant">Aplikasi pemantauan fauna endemik yang kini digunakan oleh 12 taman nasional di Indonesia.</p>
-</div>
-</div>
-</div>
-</div>
-</div>
-</section>
-<!-- Section 5: Portfolio Showcase (2x2 Grid) -->
-<section class="px-grid-margin py-section-gap">
-<div class="max-w-7xl mx-auto">
-<div class="flex justify-between items-end mb-12">
-<div>
-<h2 class="font-headline-lg text-headline-lg-mobile mb-2">Karya Digital</h2>
-<p class="text-on-surface-variant">Prototipe masa depan hasil karya talenta muda kami.</p>
-</div>
-<button class="font-label-tech text-secondary flex items-center gap-2 hover:gap-4 transition-all">
-                        LIHAT SEMUA <span class="material-symbols-outlined">arrow_forward</span>
-</button>
-</div>
-<div class="grid grid-cols-1 md:grid-cols-2 gap-8">
-<!-- Project 1 -->
-<div class="relative group rounded-3xl overflow-hidden aspect-video cursor-pointer">
-<img class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105" data-alt="A clean, futuristic laboratory environment with a robotic arm precisely assembling a complex mechanical heart. The scene is lit with soft clinical white light and sharp blue accents, showcasing high-precision engineering and a professional research atmosphere. Shallow depth of field focuses on the metallic textures and glowing status lights." src="https://lh3.googleusercontent.com/aida-public/AB6AXuA2JMIAHwY1U-cfqD2PYZxbBfDETYYQgi66GXCwD0cr8XFmpDQ3VIMuLIZuk-LLcLdhBwhXEKOdsjLsCuKkBB0OQW7eVr9rxZSknyZJ6dUGbHFgP9U1kkv8JL3Q96SfmgW4ekU0R1jfRubT1eYBN7Urwufx0UivWWf1ouW0ubV64TrVFv34R2N_WQEnTRHmU9A8nDbwhcFMx2sjdPopykdoWfj1GFF346zEPTQhdfhZGwg2680KqT6FnbpWrKCDmDbCB5RZJiaiQ7_d"/>
-<div class="absolute inset-0 bg-gradient-to-t from-background/90 to-transparent flex flex-col justify-end p-8 translate-y-4 group-hover:translate-y-0 transition-transform">
-<span class="text-[10px] font-label-tech text-secondary mb-2">ROBOTICS &amp; BIOMEDICAL</span>
-<h3 class="text-2xl font-bold mb-2">Synthetica Core</h3>
-<p class="text-sm text-on-surface-variant opacity-0 group-hover:opacity-100 transition-opacity">Pengembangan jantung buatan berbasis material biokompatibel untuk masa depan medis.</p>
-</div>
-</div>
-<!-- Project 2 -->
-<div class="relative group rounded-3xl overflow-hidden aspect-video cursor-pointer">
-<img class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105" data-alt="A sophisticated data visualization dashboard showing real-time global weather patterns and energy consumption across a futuristic smart city map. The UI is clean, using a palette of translucent cyans, vibrant oranges, and dark obsidian backgrounds. Digital holograms of wind turbines and solar panels float above the 3D terrain grid." src="https://lh3.googleusercontent.com/aida-public/AB6AXuDx_uvmhaHWF9flcel_6kTdlYaoLJsSOvznXH_oRN5XAcnOdLKn4nbB_COyUzcWmSMfdGyve2c8YV8rDRldZasQfHSBfAUaQ57FGbbiayR3ElUbhT3JsnP7JTTPL5xwMTuCbpXskJZIARc8MvguQScsYjBHmDLL6OrJleFyVbwUVVULP_OEr-8yOdM7iVgXARre6RY3vjKDENTaOgAX12jOeUKI0Nynaqou7taKsJk3KbeDlmFdWjgN40p_M0f04d3ceMVzfCuDiV7W"/>
-<div class="absolute inset-0 bg-gradient-to-t from-background/90 to-transparent flex flex-col justify-end p-8 translate-y-4 group-hover:translate-y-0 transition-transform">
-<span class="text-[10px] font-label-tech text-holographic-purple mb-2">SMART CITY ARCHITECTURE</span>
-<h3 class="text-2xl font-bold mb-2">Neo-Jakarta Grid</h3>
-<p class="text-sm text-on-surface-variant opacity-0 group-hover:opacity-100 transition-opacity">Manajemen energi pintar yang mampu mengurangi jejak karbon perkotaan hingga 40%.</p>
-</div>
-</div>
-<!-- Project 3 -->
-<div class="relative group rounded-3xl overflow-hidden aspect-video cursor-pointer">
-<img class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105" data-alt="A vast, glowing digital library in a virtual reality space, where books are represented by floating pillars of data and light. A student wearing VR goggles interacts with a stream of data floating in the air. The colors are dominated by ethereal blues and soft purples, creating a sense of infinite knowledge and peaceful exploration." src="https://lh3.googleusercontent.com/aida-public/AB6AXuC35vQUY_AIU1utdlB7yiRBo53vZPN1Y2gDk1X9bNbararyQ1cVjP6XrDq-iusk3QEgeYE9-LDcncvY2sczpTtN_FIftDxeQYrntUcH7SdIp4t7e2GWBeFK3JiVuOHuDqXoYsYis9OeDT3fDUtTsmuHNKG5VI9xiHixQexM540NsRqvvg8a3ov-69Ojx18zwqXE1cM2ALp-XYy87IeoVC_NN1x7v5tXYcO7OS3az1HeYx1mGKxDIY6KIZ8oM7p7gek1IxrnaV_1wywp"/>
-<div class="absolute inset-0 bg-gradient-to-t from-background/90 to-transparent flex flex-col justify-end p-8 translate-y-4 group-hover:translate-y-0 transition-transform">
-<span class="text-[10px] font-label-tech text-secondary mb-2">VIRTUAL LEARNING</span>
-<h3 class="text-2xl font-bold mb-2">Omni-Archive VR</h3>
-<p class="text-sm text-on-surface-variant opacity-0 group-hover:opacity-100 transition-opacity">Repositori pengetahuan dunia yang dapat diakses melalui simulasi imersif tanpa batas.</p>
-</div>
-</div>
-<!-- Project 4 -->
-<div class="relative group rounded-3xl overflow-hidden aspect-video cursor-pointer">
-<img class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105" data-alt="A futuristic neural interface helmet resting on a sleek, dark surface. The device glows with subtle purple internal lights, surrounded by floating holographic data streams indicating brainwave activity. The background is a minimalist, dark studio setup with soft ambient lighting, emphasizing the intellectual and high-tech nature of the product." src="https://lh3.googleusercontent.com/aida-public/AB6AXuCHJcqHPW7LhpnWbghWCtOoyHjaiZlk_ej_ajDr0kZGuFgHPSbHYvAYBYzGZtJman8siEk72xGFXwcOYEVkBR4JRpPfYTdhtok6WuSckIVNqGgEVOEOxkexnBgYet267X9-WzjK1z9xsAM8jkW_aGWlyfoIoBxeZ8uNX__QsFPP1Ey7pt38gmVtVrMvJnqmAMSXgqN9xVkd2tQ1ULOAmaudZYBdHoGpDBBkuTCmgMlXOQuU4Bj5ovPkq9bRnCV98dsALw_bAVVzP4w6"/>
-<div class="absolute inset-0 bg-gradient-to-t from-background/90 to-transparent flex flex-col justify-end p-8 translate-y-4 group-hover:translate-y-0 transition-transform">
-<span class="text-[10px] font-label-tech text-holographic-purple mb-2">BCI TECHNOLOGY</span>
-<h3 class="text-2xl font-bold mb-2">Neural Bridge X</h3>
-<p class="text-sm text-on-surface-variant opacity-0 group-hover:opacity-100 transition-opacity">Antarmuka otak-komputer untuk mempermudah komunikasi bagi penyandang disabilitas motorik.</p>
-</div>
-</div>
-</div>
-</div>
-</section>
-<!-- Section 6: Contact Form -->
-<section class="px-grid-margin py-section-gap relative overflow-hidden">
-<!-- Neon background blur -->
-<div class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[600px] bg-secondary/10 blur-[120px] rounded-full pointer-events-none"></div>
-<div class="max-w-xl mx-auto relative z-10">
-<div class="glass-card p-10 rounded-[2.5rem] border-secondary/20 shadow-neon-cyan-glow">
-<h2 class="font-headline-lg-mobile text-center mb-4">Hubungkan Visi Anda</h2>
-<p class="text-center text-on-surface-variant text-sm mb-10">Daftarkan institusi atau diri Anda untuk menjadi bagian dari ekosistem EduLegacy.</p>
-<form class="space-y-6">
-<div>
-<label class="font-label-tech text-[10px] text-secondary uppercase block mb-2">Identitas Lengkap</label>
-<input class="w-full bg-surface-container-low border border-glass-border-light rounded-xl px-4 py-3 text-on-surface focus:ring-2 focus:ring-secondary/50 focus:border-secondary outline-none transition-all" placeholder="Nama atau Institusi" type="text"/>
-</div>
-<div>
-<label class="font-label-tech text-[10px] text-secondary uppercase block mb-2">Jalur Komunikasi</label>
-<input class="w-full bg-surface-container-low border border-glass-border-light rounded-xl px-4 py-3 text-on-surface focus:ring-2 focus:ring-secondary/50 focus:border-secondary outline-none transition-all" placeholder="Alamat Email Korporat" type="email"/>
-</div>
-<div>
-<label class="font-label-tech text-[10px] text-secondary uppercase block mb-2">Deklarasi Minat</label>
-<textarea class="w-full bg-surface-container-low border border-glass-border-light rounded-xl px-4 py-3 text-on-surface focus:ring-2 focus:ring-secondary/50 focus:border-secondary outline-none transition-all" placeholder="Bagaimana Anda ingin berkolaborasi?" rows="4"></textarea>
-</div>
-<button class="w-full bg-secondary text-on-secondary font-bold py-4 rounded-xl hover:shadow-[0_0_30px_#5de6ff] transition-all">
-                            Inisiasi Koneksi
+            </div>
+
+            <!-- Roulette Wheel Visualization -->
+            <div class="flex flex-col items-center justify-center">
+                <div class="relative w-48 h-48 sm:w-56 sm:h-56 mb-8 flex items-center justify-center">
+                    <div id="roulette-wheel" class="w-full h-full rounded-full border-4 border-indigo-500 flex items-center justify-center relative transition-transform duration-[3000ms] ease-out bg-gradient-to-tr from-slate-900 to-indigo-950 shadow-2xl">
+                        <!-- Wheel Center -->
+                        <div class="w-12 h-12 rounded-full bg-white border-4 border-indigo-500 z-10 flex items-center justify-center shadow-md">
+                            <span class="text-indigo-600 text-xs font-bold">✨</span>
+                        </div>
+                        <!-- Inner details of wheel representing members -->
+                        <div class="absolute inset-0 flex items-center justify-center text-indigo-400 opacity-60">
+                            <i class="fa-solid fa-asterisk text-4xl animate-spin-slow"></i>
+                        </div>
+                    </div>
+                    <!-- Pointer indicator -->
+                    <div class="absolute -top-3 left-1/2 -translate-x-1/2 w-0 h-0 border-l-[12px] border-l-transparent border-r-[12px] border-r-transparent border-t-[20px] border-t-indigo-600 drop-shadow-md z-20"></div>
+                </div>
+
+                <div class="text-center w-full max-w-md min-h-[140px] flex flex-col justify-center items-center px-4">
+                    <div id="roulette-result" class="hidden animate-bounce-short">
+                        <div class="inline-block px-3 py-1 bg-gradient-to-r from-pink-500 to-indigo-500 text-white font-bold text-xs rounded-full uppercase tracking-wider mb-2">
+                            👑 Sang Juara Kebaikan
+                        </div>
+                        <h3 id="result-name" class="font-display text-2xl sm:text-3xl font-bold text-indigo-600 mb-1">...</h3>
+                        <p id="result-quote" class="text-slate-600 italic text-sm sm:text-base px-2">"..."</p>
+                    </div>
+                    <div id="roulette-placeholder" class="text-slate-400 italic">
+                        "Klik tombol 'Putar Sekarang' di bawah untuk memulai undian!"
+                    </div>
+                </div>
+
+                <button id="spin-btn" onclick="triggerRoulette()" class="mt-6 px-8 py-3.5 bg-indigo-600 hover:bg-indigo-700 text-white font-bold rounded-2xl shadow-lg shadow-indigo-500/30 transition-all hover:scale-105 active:scale-95 flex items-center gap-2">
+                    <i class="fa-solid fa-arrows-spin text-lg" id="spin-icon"></i> Putar Sekarang!
+                </button>
+            </div>
+        </div>
+    </section>
+
+    <!-- Guestbook / Board of Kindness Section -->
+    <section class="px-4 py-8 max-w-4xl mx-auto w-full">
+        <div class="glass-card rounded-3xl p-6 sm:p-10 shadow-xl border border-white">
+            <div class="flex flex-col md:flex-row gap-8 items-start">
+                
+                <!-- Left Column: Form -->
+                <div class="w-full md:w-1/2">
+                    <div class="flex items-center gap-2 mb-4">
+                        <span class="text-2xl">✍️</span>
+                        <h2 class="font-display text-2xl font-bold text-slate-800">Coretan Pelenger</h2>
+                    </div>
+                    <p class="text-slate-500 text-sm mb-6">
+                        Tinggalkan pesan, salam manis, candaan, atau terima kasihmu untuk seluruh anak Pelenger di sini!
+                    </p>
+
+                    <form id="guestbook-form" onsubmit="handlePostMessage(event)" class="space-y-4">
+                        <div>
+                            <label class="block text-xs font-bold uppercase tracking-wider text-slate-500 mb-1.5" for="sender-name">Namamu / Anonim</label>
+                            <input type="text" id="sender-name" placeholder="Misal: Teman Seperjuangan" required class="w-full px-4 py-2.5 rounded-xl border border-slate-200 bg-white/70 focus:outline-none focus:ring-2 focus:ring-indigo-400 transition-all text-sm">
+                        </div>
+                        <div>
+                            <label class="block text-xs font-bold uppercase tracking-wider text-slate-500 mb-1.5" for="sender-message">Pesan / Kesan Baik</label>
+                            <textarea id="sender-message" rows="3" placeholder="Tuliskan pesan super hangat di sini..." required class="w-full px-4 py-2.5 rounded-xl border border-slate-200 bg-white/70 focus:outline-none focus:ring-2 focus:ring-indigo-400 transition-all text-sm resize-none"></textarea>
+                        </div>
+                        <button type="submit" class="w-full py-3 bg-gradient-to-r from-purple-600 to-indigo-600 hover:from-purple-700 hover:to-indigo-700 text-white font-bold rounded-xl transition-all shadow-md active:scale-[0.98] flex items-center justify-center gap-2">
+                            <i class="fa-solid fa-paper-plane"></i> Kirim Pesan
                         </button>
-</form>
-</div>
-</div>
-</section>
-</main>
-<!-- Footer -->
-<footer class="bg-surface-dim border-t border-outline-variant/30 w-full relative bottom-0 flex flex-col items-center justify-center gap-4 py-12 px-grid-margin w-full text-center">
-<div class="font-label-tech text-on-surface-variant mb-4">© 2024 EDULEGACY NEURAL INTERFACE</div>
-<div class="flex flex-wrap justify-center gap-8 mb-8">
-<a class="font-body-md text-body-md text-on-surface-variant hover:text-secondary transition-all" href="#">Privacy Protocol</a>
-<a class="font-body-md text-body-md text-on-surface-variant hover:text-secondary transition-all" href="#">System Status</a>
-<a class="font-body-md text-body-md text-on-surface-variant hover:text-secondary transition-all" href="#">Research Terms</a>
-<a class="font-body-md text-body-md text-on-surface-variant hover:text-secondary transition-all" href="#">Contact</a>
-</div>
-<div class="flex gap-4">
-<div class="w-10 h-10 rounded-lg glass-card flex items-center justify-center hover:text-secondary transition-all cursor-pointer">
-<span class="material-symbols-outlined" data-icon="terminal">terminal</span>
-</div>
-<div class="w-10 h-10 rounded-lg glass-card flex items-center justify-center hover:text-secondary transition-all cursor-pointer">
-<span class="material-symbols-outlined" data-icon="share">share</span>
-</div>
-</div>
-</footer>
-<!-- Bottom Mobile Nav -->
-<nav class="md:hidden bg-glass-surface backdrop-blur-lg border-t border-glass-border-light fixed bottom-0 w-full z-50 rounded-t-xl flex justify-around items-center w-full px-4 pb-safe pt-2">
-<div class="flex flex-col items-center justify-center bg-secondary-container/20 text-secondary rounded-xl p-2 shadow-neon-cyan-glow">
-<span class="material-symbols-outlined" data-icon="hub" style="font-variation-settings: 'FILL' 1;">hub</span>
-<span class="font-label-tech text-label-tech uppercase mt-1">Nexus</span>
-</div>
-<div class="flex flex-col items-center justify-center text-outline p-2 hover:text-primary transition-colors">
-<span class="material-symbols-outlined" data-icon="school">school</span>
-<span class="font-label-tech text-label-tech uppercase mt-1">Academy</span>
-</div>
-<div class="flex flex-col items-center justify-center text-outline p-2 hover:text-primary transition-colors">
-<span class="material-symbols-outlined" data-icon="database">database</span>
-<span class="font-label-tech text-label-tech uppercase mt-1">Archive</span>
-</div>
-<div class="flex flex-col items-center justify-center text-outline p-2 hover:text-primary transition-colors">
-<span class="material-symbols-outlined" data-icon="account_circle">account_circle</span>
-<span class="font-label-tech text-label-tech uppercase mt-1">Profile</span>
-</div>
-</nav>
-</body></html>
+                    </form>
+                </div>
+
+                <!-- Right Column: Messages List -->
+                <div class="w-full md:w-1/2 flex flex-col h-full self-stretch min-h-[300px]">
+                    <div class="flex justify-between items-center mb-4">
+                        <h3 class="font-bold text-slate-700 flex items-center gap-2">
+                            <i class="fa-solid fa-comments text-indigo-500"></i> Papan Pesan Terbaru
+                        </h3>
+                        <button onclick="clearMessages()" class="text-xs text-rose-500 font-bold hover:underline">Hapus Semua</button>
+                    </div>
+
+                    <div id="messages-container" class="flex-1 overflow-y-auto pr-1 space-y-3 max-h-[320px]">
+                        <!-- Messages will be populated dynamically -->
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="mt-auto px-4 pt-12 text-center text-slate-500">
+        <p class="font-display font-bold text-indigo-600 text-lg">PELENGER © 2026</p>
+        <p class="text-xs mt-1">Dibuat dengan cinta, tawa, dan rasa kebersamaan tiada tara untuk para Mahasiswa Baik Hati.</p>
+        <div class="flex justify-center gap-4 mt-4 text-slate-400 text-sm">
+            <span><i class="fa-solid fa-heart text-rose-500 animate-pulse"></i> Solidaritas</span>
+            <span>•</span>
+            <span><i class="fa-solid fa-graduation-cap text-indigo-500"></i> Kesuksesan</span>
+            <span>•</span>
+            <span><i class="fa-solid fa-face-smile text-amber-500"></i> Kebahagiaan</span>
+        </div>
+    </footer>
+
+    <!-- Interactive Custom Member Detail Modal -->
+    <div id="detail-modal" class="fixed inset-0 z-50 flex items-center justify-center p-4 bg-slate-900/60 opacity-0 pointer-events-none transition-all duration-300">
+        <div class="glass-dark text-white rounded-3xl max-w-md w-full p-6 relative transform scale-95 transition-all duration-300 shadow-2xl" id="modal-content">
+            <!-- Close Button -->
+            <button onclick="closeModal()" class="absolute top-4 right-4 w-8 h-8 rounded-full bg-white/10 hover:bg-white/20 flex items-center justify-center transition-all">
+                <i class="fa-solid fa-xmark text-white"></i>
+            </button>
+            
+            <!-- Modal Body populated dynamically -->
+            <div id="modal-body" class="text-center pt-2">
+                <!-- Dynamically populated content -->
+            </div>
+        </div>
+    </div>
+
+    <!-- Custom Toast Notification System -->
+    <div id="toast-container" class="fixed bottom-4 right-4 z-50 space-y-2 pointer-events-none max-w-sm w-full"></div>
+
+
+    <script>
+        // Sound effects controller
+        let audioEnabled = false;
+        let synth = null;
+
+        function initSynth() {
+            if (!synth) {
+                // Multi-voice synthesizer for pleasant polyphonic tones
+                synth = new Tone.PolySynth(Tone.Synth, {
+                    oscillator: { type: "sine" },
+                    envelope: { attack: 0.05, decay: 0.1, sustain: 0.3, release: 0.5 }
+                }).toDestination();
+                synth.volume.value = -12; // Moderate volume
+            }
+        }
+
+        function toggleAudio() {
+            audioEnabled = !audioEnabled;
+            const btn = document.getElementById('audio-toggle-btn');
+            
+            if (audioEnabled) {
+                // Start Audio Context if needed
+                Tone.start();
+                initSynth();
+                btn.innerHTML = '<i class="fa-solid fa-volume-high text-lg"></i>';
+                btn.classList.remove('bg-white', 'text-indigo-600', 'border-indigo-100');
+                btn.classList.add('bg-indigo-600', 'text-white', 'border-transparent');
+                showToast("🔊 Efek Suara Diaktifkan!", "success");
+                playHarmonicTone();
+            } else {
+                btn.innerHTML = '<i class="fa-solid fa-volume-xmark text-lg"></i>';
+                btn.classList.remove('bg-indigo-600', 'text-white', 'border-transparent');
+                btn.classList.add('bg-white', 'text-indigo-600', 'border-indigo-100');
+                showToast("🔇 Efek Suara Dimatikan", "info");
+            }
+        }
+
+        function playTone(note = "C5", duration = "8n") {
+            if (audioEnabled && synth) {
+                try {
+                    synth.triggerAttackRelease(note, duration);
+                } catch(e) {}
+            }
+        }
+
+        function playHarmonicTone() {
+            if (audioEnabled && synth) {
+                try {
+                    const now = Tone.now();
+                    synth.triggerAttackRelease("C5", "8n", now);
+                    synth.triggerAttackRelease("E5", "8n", now + 0.1);
+                    synth.triggerAttackRelease("G5", "8n", now + 0.2);
+                    synth.triggerAttackRelease("C6", "4n", now + 0.3);
+                } catch(e) {}
+            }
+        }
+
+        // Custom Toast Notification
+        function showToast(message, type = "success") {
+            const container = document.getElementById('toast-container');
+            const toast = document.createElement('div');
+            
+            let icon = 'fa-check-circle';
+            let color = 'bg-emerald-600';
+            if (type === 'info') {
+                icon = 'fa-info-circle';
+                color = 'bg-blue-600';
+            } else if (type === 'pink') {
+                icon = 'fa-heart';
+                color = 'bg-pink-600';
+            }
+
+            toast.className = `flex items-center gap-3 px-4 py-3 rounded-2xl text-white shadow-xl ${color} transform translate-y-2 opacity-0 transition-all duration-300 pointer-events-auto`;
+            toast.innerHTML = `
+                <i class="fa-solid ${icon} text-lg"></i>
+                <span class="font-medium text-sm">${message}</span>
+            `;
+
+            container.appendChild(toast);
+            
+            // Trigger animation
+            setTimeout(() => {
+                toast.classList.remove('translate-y-2', 'opacity-0');
+            }, 50);
+
+            // Remove toast after 3 seconds
+            setTimeout(() => {
+                toast.classList.add('opacity-0', 'translate-y-[-10px]');
+                setTimeout(() => toast.remove(), 300);
+            }, 3000);
+        }
+
+        // Pelenger Members Database (Updated to 4 official members)
+        const members = [
+            {
+                id: "zahira_nabila",
+                name: "Zahira Nabila",
+                fullName: "Zahira Nabila",
+                role: "The Peace Supporter",
+                avatar: "https://api.dicebear.com/7.x/adventurer/svg?seed=ZahiraNabila",
+                color: "from-pink-400 to-indigo-500",
+                badge: "Paling Sabar & Bijak",
+                quote: "Senyuman dan kedamaian hati adalah bahasa kebaikan universal. Mari tebar kebahagiaan hari ini!",
+                details: "Gabungan indah dari kelembutan Zahira dan kebijaksanaan Nabila. Ia adalah pilar kedamaian kelompok yang selalu menjadi pendengar terbaik serta penenang di kala tugas kuliah melanda."
+            },
+            {
+                id: "masyta_pasya",
+                name: "Masyta Pasya",
+                fullName: "Masyta Pasya",
+                role: "The Cheerful Helper",
+                avatar: "https://api.dicebear.com/7.x/adventurer/svg?seed=MasytaPasya",
+                color: "from-amber-400 to-teal-500",
+                badge: "Paling Ceria & Rajin",
+                quote: "Hidup itu terlalu pendek untuk dilewatkan tanpa tertawa, mari saling membantu meringankan beban!",
+                details: "Kombinasi energi humoris nan gembira dari Masyta serta sifat penolong rajin dari Pasya. Selalu siap membantu menerangkan materi kuliah sulit sambil melontarkan candaan segar."
+            },
+            {
+                id: "raisya_putri",
+                name: "Raisya Putri",
+                fullName: "Raisya Putri",
+                role: "The Creative Caretaker",
+                avatar: "https://api.dicebear.com/7.x/adventurer/svg?seed=RaisyaPutri",
+                color: "from-cyan-400 to-fuchsia-500",
+                badge: "Paling Perhatian & Estetik",
+                quote: "Kebaikan terkecil yang kita lakukan bisa berdampak sangat besar jika dihiasi ketulusan dan kreativitas.",
+                details: "Sinergi indah antara perhatian hangat Raisya dan jiwa artistik Putri. Selalu peka ketika teman-temannya sedang butuh dukungan serta jago mendesain momen kebersamaan yang sangat estetik."
+            },
+            {
+                id: "kela_alfabi",
+                name: "Kela Alfabi",
+                fullName: "Kela Alfabi",
+                role: "The Loyal Energizer",
+                avatar: "https://api.dicebear.com/7.x/adventurer/svg?seed=KelaAlfabi",
+                color: "from-red-400 to-amber-600",
+                badge: "Garda Terdepan & Gokil",
+                quote: "Nikmati setiap petualangan seru perkuliahan kita dengan kesetiaan dan keseruan tanpa batas!",
+                details: "Kombinasi tangguh kesetiaan Kela sebagai tameng pelindung kelompok dan energi meluap-luap gokil dari Alfabi. Menghidupkan suasana kumpul dan selalu siap membela sahabat kapan saja."
+            }
+        ];
+
+        // Render Members Function
+        function renderMembers() {
+            const grid = document.getElementById('members-grid');
+            grid.innerHTML = '';
+
+            members.forEach((member) => {
+                const card = document.createElement('div');
+                card.className = "group relative cursor-pointer transform hover:-translate-y-2 transition-all duration-300";
+                card.onclick = () => {
+                    playTone("E5", "8n");
+                    openModal(member.id);
+                };
+
+                card.innerHTML = `
+                    <div class="glass-card rounded-3xl p-5 shadow-md hover:shadow-xl border border-white flex flex-col items-center text-center overflow-hidden h-full relative">
+                        <!-- Card Border Color Aura -->
+                        <div class="absolute inset-x-0 top-0 h-2 bg-gradient-to-r ${member.color}"></div>
+                        
+                        <!-- Profile Image -->
+                        <div class="w-24 h-24 rounded-2xl bg-gradient-to-tr ${member.color} p-1 mb-4 shadow-inner relative group-hover:scale-105 transition-all">
+                            <img src="${member.avatar}" alt="${member.name}" class="w-full h-full rounded-xl bg-white object-cover" onerror="this.src='https://placehold.co/150/f472b6/ffffff?text=${member.name}'">
+                        </div>
+
+                        <!-- Badge -->
+                        <span class="px-2.5 py-1 text-xs font-bold rounded-full bg-slate-100 text-slate-700 mb-2 border border-slate-200 uppercase tracking-wide">
+                            ${member.badge}
+                        </span>
+
+                        <!-- Name & Info -->
+                        <h3 class="font-display font-bold text-xl text-slate-800">${member.name}</h3>
+                        <p class="text-xs text-indigo-600 font-bold tracking-widest uppercase mb-3">${member.role}</p>
+                        
+                        <p class="text-xs text-slate-500 italic mt-auto line-clamp-2">
+                            "${member.quote}"
+                        </p>
+
+                        <!-- Subtle Hover Indicator -->
+                        <span class="absolute bottom-2 right-2 text-[10px] text-slate-400 opacity-0 group-hover:opacity-100 transition-opacity">
+                            Lihat Detail <i class="fa-solid fa-arrow-right"></i>
+                        </span>
+                    </div>
+                `;
+                grid.appendChild(card);
+            });
+        }
+
+        // Modal Controls
+        function openModal(memberId) {
+            const member = members.find(m => m.id === memberId);
+            if (!member) return;
+
+            const modal = document.getElementById('detail-modal');
+            const content = document.getElementById('modal-content');
+            const body = document.getElementById('modal-body');
+
+            body.innerHTML = `
+                <!-- Modal Header Icon/Badge -->
+                <div class="inline-flex items-center justify-center w-28 h-28 rounded-3xl bg-gradient-to-tr ${member.color} p-1 mx-auto mb-4 shadow-lg">
+                    <img src="${member.avatar}" alt="${member.name}" class="w-full h-full rounded-2xl bg-slate-900 object-cover">
+                </div>
+                
+                <span class="inline-block px-3 py-1 bg-white/10 text-pink-300 font-bold text-xs rounded-full uppercase tracking-wider mb-2">
+                    🎖️ ${member.badge}
+                </span>
+
+                <h3 class="font-display text-3xl font-bold mb-1">${member.fullName}</h3>
+                <p class="text-indigo-400 font-bold tracking-widest text-xs uppercase mb-4">${member.role}</p>
+                
+                <!-- Divider -->
+                <div class="h-[1px] w-2/3 bg-white/20 mx-auto mb-4"></div>
+
+                <div class="text-slate-200 text-sm space-y-3 px-2 mb-6 text-left leading-relaxed">
+                    <p class="bg-white/5 p-3 rounded-2xl border border-white/10 italic text-center">
+                        "${member.quote}"
+                    </p>
+                    <div>
+                        <span class="font-bold text-indigo-400 block text-xs uppercase tracking-wide mb-1">Kenapa sangat baik hati:</span>
+                        <p>${member.details}</p>
+                    </div>
+                </div>
+
+                <button onclick="closeModal()" class="w-full py-2.5 bg-gradient-to-r ${member.color} text-white font-bold rounded-xl shadow-lg transition-all active:scale-95">
+                    Keren Banget! ✨
+                </button>
+            `;
+
+            // Display Modal with animation
+            modal.classList.remove('pointer-events-none', 'opacity-0');
+            content.classList.remove('scale-95');
+            content.classList.add('scale-100');
+        }
+
+        function closeModal() {
+            playTone("C5", "8n");
+            const modal = document.getElementById('detail-modal');
+            const content = document.getElementById('modal-content');
+
+            modal.classList.add('pointer-events-none', 'opacity-0');
+            content.classList.remove('scale-100');
+            content.classList.add('scale-95');
+        }
+
+        // Close modal on escape key or clicking backdrop
+        window.addEventListener('keydown', (e) => {
+            if (e.key === 'Escape') closeModal();
+        });
+        document.getElementById('detail-modal').addEventListener('click', (e) => {
+            if (e.target === document.getElementById('detail-modal')) closeModal();
+        });
+
+
+        // LocalStorage Guestbook Logic
+        const STORAGE_KEY = 'pelenger_guestbook';
+        
+        const defaultMessages = [
+            { id: 1, name: "Pak Dosen", message: "Pelenger adalah contoh nyata kolaborasi mahasiswa teladan. Pertahankan kebaikan kalian!", time: "Baru saja" },
+            { id: 2, name: "Kating 2023", message: "Kompak terus ya dek! Salut banget sama kebaikan kelompok kalian.", time: "1 jam lalu" }
+        ];
+
+        function getMessages() {
+            const stored = localStorage.getItem(STORAGE_KEY);
+            return stored ? JSON.parse(stored) : defaultMessages;
+        }
+
+        function saveMessages(messages) {
+            localStorage.setItem(STORAGE_KEY, JSON.stringify(messages));
+        }
+
+        function renderMessages() {
+            const container = document.getElementById('messages-container');
+            container.innerHTML = '';
+            const messages = getMessages();
+
+            if (messages.length === 0) {
+                container.innerHTML = `
+                    <div class="text-center py-8 text-slate-400 italic text-sm">
+                        Belum ada coretan. Jadilah yang pertama mengirim pesan!
+                    </div>
+                `;
+                return;
+            }
+
+            // Render from newest to oldest
+            [...messages].reverse().forEach((msg) => {
+                const card = document.createElement('div');
+                card.className = "p-3.5 bg-white/60 rounded-2xl border border-slate-100 shadow-sm flex flex-col relative group transition-all hover:bg-white";
+                card.innerHTML = `
+                    <div class="flex justify-between items-start mb-1">
+                        <span class="font-bold text-slate-800 text-sm flex items-center gap-1.5">
+                            <span class="w-2 h-2 rounded-full bg-indigo-500"></span> ${msg.name}
+                        </span>
+                        <span class="text-[10px] text-slate-400">${msg.time || "Baru saja"}</span>
+                    </div>
+                    <p class="text-xs text-slate-600 leading-relaxed">${msg.message}</p>
+                `;
+                container.appendChild(card);
+            });
+        }
+
+        function handlePostMessage(event) {
+            event.preventDefault();
+            playTone("G5", "8n");
+
+            const nameInput = document.getElementById('sender-name');
+            const messageInput = document.getElementById('sender-message');
+
+            const name = nameInput.value.trim() || "Anonim";
+            const message = messageInput.value.trim();
+
+            if (!message) return;
+
+            const messages = getMessages();
+            const newMessage = {
+                id: Date.now(),
+                name: name,
+                message: message,
+                time: "Baru saja"
+            };
+
+            messages.push(newMessage);
+            saveMessages(messages);
+            renderMessages();
+
+            // Reset Form and feedback
+            nameInput.value = '';
+            messageInput.value = '';
+            showToast("✨ Pesanmu berhasil ditempel di papan kebaikan!", "pink");
+            triggerMiniConfetti();
+        }
+
+        function clearMessages() {
+            playTone("C4", "8n");
+            if (confirm("Apakah kamu yakin ingin menghapus semua pesan di papan coretan?")) {
+                saveMessages([]);
+                renderMessages();
+                showToast("🗑️ Papan pesan telah dibersihkan.", "info");
+            }
+        }
+
+
+        // Confetti Celebrations
+        function celebrateGroup() {
+            playHarmonicTone();
+            confetti({
+                particleCount: 150,
+                spread: 80,
+                origin: { y: 0.6 },
+                colors: ['#6366f1', '#a855f7', '#ec4899', '#10b981', '#f59e0b']
+            });
+            showToast("🎉 Hiduplah Pelenger! Solid Selamanya!", "success");
+        }
+
+        function triggerMiniConfetti() {
+            confetti({
+                particleCount: 50,
+                spread: 40,
+                origin: { y: 0.8 },
+                colors: ['#6366f1', '#a855f7', '#ec4899']
+            });
+        }
+
+        // Roulette Wheel Animation Logic
+        let isSpinning = false;
+        let currentRotation = 0;
+
+        function triggerRoulette() {
+            if (isSpinning) return;
+
+            isSpinning = true;
+            playTone("A4", "16n");
+            
+            // UI elements
+            const wheel = document.getElementById('roulette-wheel');
+            const spinBtn = document.getElementById('spin-btn');
+            const spinIcon = document.getElementById('spin-icon');
+            const resultDiv = document.getElementById('roulette-result');
+            const placeholder = document.getElementById('roulette-placeholder');
+
+            // Sound acceleration simulation
+            let soundInterval;
+            if (audioEnabled) {
+                let speed = 100;
+                const playBeep = () => {
+                    playTone("A5", "32n");
+                    if (speed < 500) {
+                        speed += 40;
+                        soundInterval = setTimeout(playBeep, speed);
+                    }
+                };
+                soundInterval = setTimeout(playBeep, speed);
+            }
+
+            // Animate spin button
+            spinBtn.disabled = true;
+            spinBtn.classList.add('opacity-50', 'cursor-not-allowed');
+            spinIcon.classList.add('animate-spin');
+            
+            placeholder.classList.add('hidden');
+            resultDiv.classList.add('hidden');
+
+            // Select a random winner
+            const randomIndex = Math.floor(Math.random() * members.length);
+            const winner = members[randomIndex];
+
+            // Calculate rotation details (at least 5 full rotations + index fraction)
+            const segmentDegrees = 360 / members.length;
+            const extraDegrees = 360 * 5 + (randomIndex * segmentDegrees);
+            currentRotation += extraDegrees;
+
+            wheel.style.transform = `rotate(${currentRotation}deg)`;
+
+            // Transition finishes after 3000ms
+            setTimeout(() => {
+                isSpinning = false;
+                spinBtn.disabled = false;
+                spinBtn.classList.remove('opacity-50', 'cursor-not-allowed');
+                spinIcon.classList.remove('animate-spin');
+                clearTimeout(soundInterval);
+
+                // Play winning melody
+                if (audioEnabled) {
+                    playHarmonicTone();
+                }
+
+                // Render Result
+                document.getElementById('result-name').innerText = winner.fullName;
+                document.getElementById('result-quote').innerText = `"${winner.quote}"`;
+                
+                resultDiv.classList.remove('hidden');
+                
+                // Explode colorful confetti
+                confetti({
+                    particleCount: 100,
+                    spread: 70,
+                    origin: { y: 0.75 }
+                });
+
+                showToast(`🏆 Juara hari ini: ${winner.name}!`, "pink");
+            }, 3000);
+        }
+
+        // Page Onload initialization
+        window.onload = function() {
+            renderMembers();
+            renderMessages();
+            
+            // Warm welcome toast
+            setTimeout(() => {
+                showToast("👋 Halo! Selamat datang di markas Pelenger!", "info");
+            }, 1000);
+        };
+    </script>
+</body>
+</html>
