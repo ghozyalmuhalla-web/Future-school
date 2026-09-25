@@ -16,7 +16,6 @@
     </style>
 </head>
 <body class="bg-slate-50 text-slate-800 min-h-screen flex flex-col justify-between selection:bg-emerald-500 selection:text-white" x-data="learningApp()">
-
     <header class="sticky top-0 z-50 bg-white/80 backdrop-blur-md border-b border-slate-100 shadow-sm">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-20 flex items-center justify-between">
             <div class="flex items-center space-x-3 cursor-pointer" @click="currentTab = 'home'">
@@ -35,7 +34,6 @@
                 <button @click="currentTab = 'posters'" :class="currentTab === 'posters' ? 'bg-white text-emerald-600 shadow-sm font-semibold' : 'text-slate-600 hover:text-emerald-600 font-medium'" class="px-5 py-2 rounded-full text-sm transition-all duration-200">Galeri Infografis</button>
                 <button @click="currentTab = 'quiz'" :class="currentTab === 'quiz' ? 'bg-white text-emerald-600 shadow-sm font-semibold' : 'text-slate-600 hover:text-emerald-600 font-medium'" class="px-5 py-2 rounded-full text-sm transition-all duration-200">Kuis Mini 🎯</button>
             </nav>
-
             <div class="flex items-center space-x-3">
                 <span class="hidden sm:inline-flex items-center px-3 py-1 rounded-full text-xs font-semibold bg-emerald-50 text-emerald-600 border border-emerald-200">
                     <span class="w-2 h-2 rounded-full bg-emerald-500 mr-1.5 animate-pulse"></span> PAI Interaktif
@@ -54,7 +52,6 @@
             <button @click="currentTab = 'quiz'; mobileMenuOpen = false" class="block w-full text-left px-4 py-2 rounded-lg text-sm font-medium" :class="currentTab === 'quiz' ? 'bg-emerald-50 text-emerald-600' : 'text-slate-600'">Kuis Mini 🎯</button>
         </div>
     </header>
-
     <main class="flex-grow">
         
         <div x-show="currentTab === 'home'" class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
@@ -108,7 +105,6 @@
                     </div>
                 </div>
             </div>
-
             <!-- Features Grid -->
             <div class="mb-16">
                 <div class="text-center max-w-2xl mx-auto mb-12 space-y-3">
@@ -140,14 +136,12 @@
                 </div>
             </div>
         </div>
-
         <div x-show="currentTab === 'topics'" class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
             <div class="text-center max-w-2xl mx-auto mb-12 space-y-3">
                 <span class="text-xs font-bold uppercase text-emerald-600 tracking-wider">Modul Belajar PAI</span>
                 <h2 class="text-3xl font-bold text-slate-900">Pilih Materi Pembelajaran Islam</h2>
                 <p class="text-slate-600 text-sm">Pilih salah satu topik di bawah ini untuk melihat ringkasan infografis dan kartu hafalan interaktif.</p>
             </div>
-
             <!-- Topic Selector Buttons -->
             <div class="flex flex-wrap justify-center gap-3 mb-12">
                 <template x-for="topic in topics" :key="topic.id">
@@ -159,7 +153,6 @@
                     </button>
                 </template>
             </div>
-
             <!-- Active Topic Display Container -->
             <div class="space-y-12" x-data="topicViewer()">
                 
@@ -207,7 +200,6 @@
                         </div>
                     </div>
                 </div>
-
                 <!-- Flashcard Interactive Section -->
                 <div class="space-y-6">
                     <div class="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4">
@@ -219,7 +211,6 @@
                             <span>💡 Tips: Kartu dapat dibolak-balik kapanpun</span>
                         </div>
                     </div>
-
                     <!-- Flashcards Grid -->
                     <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
                         <template x-for="(card, index) in currentTopicData.flashcards" :key="index">
@@ -240,7 +231,6 @@
                                             <span class="text-[10px] uppercase font-bold text-slate-400 tracking-wider">Sisi Depan</span>
                                         </div>
                                     </div>
-
                                     <!-- Back Side -->
                                     <div class="absolute inset-0 w-full h-full bg-gradient-to-br from-emerald-600 to-teal-700 text-white rounded-3xl p-6 flex flex-col justify-between backface-hidden rotate-y-180">
                                         <div class="flex items-center justify-between">
@@ -254,23 +244,19 @@
                                             <span class="text-[10px] uppercase font-bold text-emerald-200 tracking-wider">Klik untuk Kembali</span>
                                         </div>
                                     </div>
-
                                 </div>
                             </div>
                         </template>
                     </div>
                 </div>
-
             </div>
         </div>
-
         <div x-show="currentTab === 'posters'" class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
             <div class="text-center max-w-2xl mx-auto mb-12 space-y-3">
                 <span class="text-xs font-bold uppercase text-emerald-600 tracking-wider">Galeri Visual</span>
                 <h2 class="text-3xl font-bold text-slate-900">Infografis & Poster Edukasi Islam</h2>
                 <p class="text-slate-600 text-sm">Koleksi poster visual seputar akidah, akhlak mulia, adab islami, serta kepedulian lingkungan hidup.</p>
             </div>
-
             <!-- Filter Categories -->
             <div class="flex flex-wrap justify-center gap-2 mb-10">
                 <button @click="posterFilter = 'all'" :class="posterFilter === 'all' ? 'bg-emerald-600 text-white' : 'bg-white text-slate-600 border border-slate-200'" class="px-5 py-2 rounded-full text-xs font-semibold transition-all">Semua Poster</button>
@@ -278,7 +264,6 @@
                 <button @click="posterFilter = 'akhlak'" :class="posterFilter === 'akhlak' ? 'bg-emerald-600 text-white' : 'bg-white text-slate-600 border border-slate-200'" class="px-5 py-2 rounded-full text-xs font-semibold transition-all">Akhlak & Adab</button>
                 <button @click="posterFilter = 'alam'" :class="posterFilter === 'alam' ? 'bg-emerald-600 text-white' : 'bg-white text-slate-600 border border-slate-200'" class="px-5 py-2 rounded-full text-xs font-semibold transition-all">Kelestarian Alam</button>
             </div>
-
             <!-- Poster Grid -->
             <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
                 <template x-for="poster in filteredPosters" :key="poster.id">
@@ -309,7 +294,6 @@
                 </template>
             </div>
         </div>
-
         <div x-show="currentTab === 'quiz'" class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
             <div class="bg-white rounded-3xl p-8 border border-slate-100 shadow-sm space-y-8" x-data="quizApp()">
                 
@@ -318,7 +302,6 @@
                     <h2 class="text-2xl sm:text-3xl font-extrabold text-slate-900">Kuis Mini Pilihan Ganda</h2>
                     <p class="text-slate-500 text-sm">Uji pemahamanmu seputar akidah, akhlak, dan sejarah Islam dengan menjawab soal di bawah ini.</p>
                 </div>
-
                 <!-- Quiz Active State -->
                 <template x-if="!quizFinished">
                     <div class="space-y-6">
@@ -326,7 +309,6 @@
                             <span>Soal <span class="text-emerald-600 font-bold" x-text="currentIndex + 1"></span> dari <span x-text="questions.length"></span></span>
                             <span>Skor Sementara: <span class="text-emerald-600 font-bold" x-text="score"></span></span>
                         </div>
-
                         <div class="space-y-4">
                             <h3 class="text-lg sm:text-xl font-bold text-slate-900" x-text="questions[currentIndex].question"></h3>
                             
@@ -343,7 +325,6 @@
                                 </template>
                             </div>
                         </div>
-
                         <template x-if="selectedOption !== null">
                             <div class="pt-4 flex justify-end">
                                 <button @click="nextQuestion" class="px-6 py-3 bg-emerald-600 hover:bg-emerald-700 text-white font-semibold text-xs rounded-xl shadow-md transition-all">
@@ -353,7 +334,6 @@
                         </template>
                     </div>
                 </template>
-
                 <!-- Quiz Finished State -->
                 <template x-if="quizFinished">
                     <div class="text-center space-y-6 py-8">
@@ -373,12 +353,9 @@
                         </button>
                     </div>
                 </template>
-
             </div>
         </div>
-
     </main>
-
     <div x-show="modalOpen" class="fixed inset-0 z-50 flex items-center justify-center p-4 bg-slate-900/60 backdrop-blur-sm" x-transition.opacity>
         <div @click.away="modalOpen = false" class="bg-white rounded-3xl max-w-2xl w-full p-8 space-y-6 shadow-2xl relative">
             <div class="flex items-center justify-between pb-4 border-b border-slate-100">
@@ -415,7 +392,6 @@
             </div>
         </div>
     </div>
-
     <footer class="bg-white border-t border-slate-100 py-8 mt-16">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex flex-col sm:flex-row items-center justify-between gap-4 text-center sm:text-left">
             <div class="flex items-center space-x-2">
@@ -425,7 +401,6 @@
             <p class="text-xs text-slate-500">Mendukung metode pembelajaran agama Islam modern, bersih, interaktif, dan penuh nilai keteladanan.</p>
         </div>
     </footer>
-
     <script>
         function learningApp() {
             return {
@@ -435,13 +410,11 @@
                 modalOpen: false,
                 activePoster: {},
                 posterFilter: 'all',
-
                 topics: [
                     { id: 'iman', name: 'Rukun Iman & Akidah', icon: '🤲', category: 'Akidah Islam' },
                     { id: 'sejarah', name: 'Kisah Teladan & Sejarah', icon: '📜', category: 'Sejarah Peradaban' },
                     { id: 'akhlak', name: 'Akhlak & Pelestarian Alam', icon: '🌿', category: 'Akhlak & Lingkungan' }
                 ],
-
                 posters: [
                     { id: 1, title: 'Hakikat 6 Rukun Iman', subtitle: 'Pilar Pondasi Keyakinan Seorang Muslim', tag: 'akidah', icon: '🤲', description: 'Infografis lengkap tentang urutan Rukun Iman mulai dari Iman kepada Allah hingga Qada dan Qadar.', readTime: '3 Menit Baca' },
                     { id: 2, title: 'Sifat Wajib & Jaiz Allah SWT', subtitle: 'Mengenal Sifat Kesempurnaan Sang Pencipta', tag: 'akidah', icon: '✨', description: 'Penjelasan ringkas 20 sifat wajib Allah SWT beserta sifat mustahil dan sifat jaiz-Nya.', readTime: '4 Menit Baca' },
@@ -450,19 +423,16 @@
                     { id: 5, title: 'Sifat Utama Rasulullah (Sidiq, Amanah, Tabligh, Fathanah)', subtitle: 'Teladan Utama Akhlak Karimah', tag: 'akhlak', icon: '⭐', description: 'Empat sifat mulia para rasul yang wajib diteladani dalam kehidupan sehari-hari oleh setiap pelajar.', readTime: '3 Menit Baca' },
                     { id: 6, title: 'Toleransi & Ukhuwah Islamiyah', subtitle: 'Menjaga Persaudaraan Sesama Manusia', tag: 'akhlak', icon: '🤝', description: 'Infografis tentang pentingnya menghargai perbedaan, tolong-menolong dalam kebaikan, dan menjaga kerukunan.', readTime: '2 Menit Baca' }
                 ],
-
                 get filteredPosters() {
                     if (this.posterFilter === 'all') return this.posters;
                     return this.posters.filter(p => p.tag === this.posterFilter);
                 },
-
                 openPosterModal(poster) {
                     this.activePoster = poster;
                     this.modalOpen = true;
                 }
             }
         }
-
         function topicViewer() {
             return {
                 topicData: {
@@ -533,20 +503,17 @@
                         ]
                     }
                 },
-
                 get currentTopicData() {
                     return this.topicData[this.selectedTopicId] || this.topicData.iman;
                 }
             }
         }
-
         function quizApp() {
             return {
                 currentIndex: 0,
                 selectedOption: null,
                 score: 0,
                 quizFinished: false,
-
                 questions: [
                     {
                         question: 'Berapakah jumlah rukun iman yang wajib diyakini oleh setiap muslim?',
@@ -574,7 +541,6 @@
                         correct: 1
                     }
                 ],
-
                 selectOption(index) {
                     if (this.selectedOption !== null) return;
                     this.selectedOption = index;
@@ -582,7 +548,6 @@
                         this.score += 10;
                     }
                 },
-
                 nextQuestion() {
                     if (this.currentIndex < this.questions.length - 1) {
                         this.currentIndex++;
@@ -591,7 +556,6 @@
                         this.quizFinished = true;
                     }
                 },
-
                 resetQuiz() {
                     this.currentIndex = 0;
                     this.selectedOption = null;
@@ -603,3 +567,4 @@
     </script>
 </body>
 </html>
+sempurnakan next js 
