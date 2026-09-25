@@ -3,751 +3,478 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>PELENGER - Mahasiswa Baik Hati</title>
-    
-    <!-- Google Fonts -->
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Fredoka:wght@300..700&family=Quicksand:wght@300..700&display=swap" rel="stylesheet">
-    
-    <!-- Tailwind CSS -->
+    <title>RuangVisual - Media Pembelajaran Interaktif</title>
     <script src="https://cdn.tailwindcss.com"></script>
-    
-    <!-- FontAwesome Icons -->
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    
-    <!-- Tone.js for Beautiful UI Sounds -->
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/tone/14.8.49/Tone.js"></script>
-    
-    <!-- Canvas Confetti for Celebration effects -->
-    <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.6.0/dist/confetti.browser.min.js"></script>
-
-    <!-- Tailwind Config for Palette -->
-    <script>
-        tailwind.config = {
-            theme: {
-                extend: {
-                    fontFamily: {
-                        sans: ['Quicksand', 'sans-serif'],
-                        display: ['Fredoka', 'sans-serif'],
-                    },
-                    colors: {
-                        pelenger: {
-                            50: '#fdf2f8',
-                            100: '#fce7f3',
-                            200: '#fbcfe8',
-                            300: '#f9a8d4',
-                            400: '#f472b6',
-                            500: '#ec4899',
-                            600: '#db2777',
-                            700: '#be185d',
-                            primary: '#6366f1',
-                            secondary: '#a855f7',
-                            accent: '#f43f5e',
-                            dark: '#0f172a'
-                        }
-                    }
-                }
-            }
-        }
-    </script>
-
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <script defer src="https://cdn.jsdelivr.net/npm/alpinejs@3.x.x/dist/cdn.min.js"></script>
     <style>
-        body {
-            font-family: 'Quicksand', sans-serif;
-            background: linear-gradient(135deg, #f5f3ff 0%, #fdf2f8 50%, #ecfdf5 100%);
-            background-attachment: fixed;
-        }
-        
-        .title-gradient {
-            background: linear-gradient(to right, #6366f1, #a855f7, #ec4899);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-        }
-
-        .glass-card {
-            background: rgba(255, 255, 255, 0.75);
-            backdrop-filter: blur(12px);
-            -webkit-backdrop-filter: blur(12px);
-            border: 1px solid rgba(255, 255, 255, 0.4);
-        }
-
-        .glass-dark {
-            background: rgba(15, 23, 42, 0.85);
-            backdrop-filter: blur(16px);
-            -webkit-backdrop-filter: blur(16px);
-            border: 1px solid rgba(255, 255, 255, 0.1);
-        }
-
-        .pulse-soft {
-            animation: softPulse 3s infinite ease-in-out;
-        }
-
-        @keyframes softPulse {
-            0%, 100% { transform: scale(1); }
-            50% { transform: scale(1.03); }
-        }
-
-        /* Custom Scrollbar */
-        ::-webkit-scrollbar {
-            width: 8px;
-        }
-        ::-webkit-scrollbar-track {
-            background: rgba(243, 244, 246, 0.5);
-        }
-        ::-webkit-scrollbar-thumb {
-            background: #a855f7;
-            border-radius: 999px;
-        }
+        body { font-family: 'Plus Jakarta Sans', sans-serif; }
+        .perspective-1000 { perspective: 1000px; }
+        .transform-style-3d { transform-style: preserve-3d; }
+        .backface-hidden { backface-visibility: hidden; }
+        .rotate-y-180 { transform: rotateY(180deg); }
     </style>
 </head>
-<body class="min-h-screen text-slate-800 flex flex-col antialiased pb-12 overflow-x-hidden">
+<body class="bg-slate-50 text-slate-800 min-h-screen flex flex-col justify-between selection:bg-indigo-500 selection:text-white" x-data="learningApp()">
 
-    <!-- Header/Navigation -->
-    <nav class="sticky top-0 z-40 w-full px-4 py-3 glass-card shadow-sm">
-        <div class="max-w-6xl mx-auto flex justify-between items-center">
-            <div class="flex items-center gap-2 cursor-pointer" onclick="celebrateGroup()">
-                <div class="w-10 h-10 rounded-full bg-gradient-to-tr from-indigo-500 via-purple-500 to-pink-500 flex items-center justify-center text-white font-bold shadow-md">
-                    P
+    <header class="sticky top-0 z-50 bg-white/80 backdrop-blur-md border-b border-slate-100 shadow-sm">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-20 flex items-center justify-between">
+            <div class="flex items-center space-x-3 cursor-pointer" @click="currentTab = 'home'">
+                <div class="w-10 h-10 rounded-xl bg-gradient-to-tr from-indigo-600 to-violet-500 flex items-center justify-center text-white shadow-md shadow-indigo-500/20 font-bold text-xl">
+                    RV
                 </div>
-                <span class="font-display font-bold text-xl md:text-2xl tracking-wide title-gradient">PELENGER</span>
+                <div>
+                    <span class="text-xl font-extrabold bg-gradient-to-r from-indigo-600 to-violet-600 bg-clip-text text-transparent">RuangVisual</span>
+                    <span class="block text-xs font-medium text-slate-400">Media Pembelajaran Interaktif</span>
+                </div>
             </div>
-            <div class="flex items-center gap-4">
-                <span class="hidden md:inline-block px-3 py-1 bg-emerald-100 text-emerald-800 font-semibold text-xs rounded-full uppercase tracking-widest animate-pulse">
-                    Mahasiswa Baik Hati ✨
+            
+            <nav class="hidden md:flex items-center space-x-1 bg-slate-100/80 p-1.5 rounded-full border border-slate-200/60">
+                <button @click="currentTab = 'home'" :class="currentTab === 'home' ? 'bg-white text-indigo-600 shadow-sm font-semibold' : 'text-slate-600 hover:text-indigo-600 font-medium'" class="px-5 py-2 rounded-full text-sm transition-all duration-200">Beranda</button>
+                <button @click="currentTab = 'topics'" :class="currentTab === 'topics' ? 'bg-white text-indigo-600 shadow-sm font-semibold' : 'text-slate-600 hover:text-indigo-600 font-medium'" class="px-5 py-2 rounded-full text-sm transition-all duration-200">Topik & Flashcard</button>
+                <button @click="currentTab = 'posters'" :class="currentTab === 'posters' ? 'bg-white text-indigo-600 shadow-sm font-semibold' : 'text-slate-600 hover:text-indigo-600 font-medium'" class="px-5 py-2 rounded-full text-sm transition-all duration-200">Galeri Poster & Infografis</button>
+            </nav>
+
+            <div class="flex items-center space-x-3">
+                <span class="hidden sm:inline-flex items-center px-3 py-1 rounded-full text-xs font-semibold bg-emerald-50 text-emerald-600 border border-emerald-200">
+                    <span class="w-2 h-2 rounded-full bg-emerald-500 mr-1.5 animate-pulse"></span> Mode Aktif
                 </span>
-                <button onclick="toggleAudio()" id="audio-toggle-btn" class="p-2.5 rounded-full bg-white text-indigo-600 hover:bg-indigo-50 shadow-md border border-indigo-100 transition-all active:scale-95 duration-200" title="Aktifkan Efek Suara">
-                    <i class="fa-solid fa-volume-xmark text-lg"></i>
+                <!-- Mobile Menu Button -->
+                <button @click="mobileMenuOpen = !mobileMenuOpen" class="md:hidden p-2 rounded-lg text-slate-600 hover:bg-slate-100 focus:outline-none">
+                    <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"></path></svg>
                 </button>
             </div>
         </div>
-    </nav>
-
-    <!-- Hero Section -->
-    <header class="relative px-4 pt-10 pb-8 overflow-hidden text-center max-w-4xl mx-auto w-full">
-        <!-- Abstract decorative bubbles -->
-        <div class="absolute -top-12 -left-12 w-32 h-32 bg-purple-300 rounded-full mix-blend-multiply filter blur-xl opacity-40 animate-blob"></div>
-        <div class="absolute -bottom-8 -right-12 w-36 h-36 bg-pink-300 rounded-full mix-blend-multiply filter blur-xl opacity-40 animate-blob"></div>
-        
-        <div class="relative z-10">
-            <span class="inline-flex items-center gap-1.5 px-4 py-1.5 rounded-full text-xs font-bold uppercase tracking-wider bg-indigo-50 text-indigo-600 border border-indigo-100 mb-4 shadow-sm">
-                <i class="fa-solid fa-graduation-cap"></i> Ikatan Persahabatan Sejati
-            </span>
-            <h1 class="font-display text-4xl sm:text-6xl font-extrabold tracking-tight mb-4">
-                The Legend of <br class="sm:hidden">
-                <span class="title-gradient">PELENGER</span>
-            </h1>
-            <p class="text-base sm:text-xl text-slate-600 max-w-2xl mx-auto font-medium leading-relaxed">
-                Kompilasi delapan mahasiswa luar biasa yang dipertemukan oleh takdir, disatukan oleh tawa, dan dikenal luas sebagai manusia paling baik hati di seantero kampus.
-            </p>
-            <div class="flex flex-wrap gap-3 justify-center mt-6">
-                <a href="#anggota-section" class="px-5 py-2.5 bg-gradient-to-r from-indigo-600 to-purple-600 text-white font-bold rounded-2xl shadow-lg hover:shadow-indigo-500/25 transition-all hover:-translate-y-0.5 active:scale-95">
-                    <i class="fa-solid fa-users mr-2"></i>Kenali Kami
-                </a>
-                <button onclick="triggerRoulette()" class="px-5 py-2.5 bg-white text-indigo-600 border-2 border-indigo-200 font-bold rounded-2xl shadow-sm hover:bg-indigo-50 transition-all hover:-translate-y-0.5 active:scale-95">
-                    <i class="fa-solid fa-star-of-david mr-2"></i>Uji Keberuntungan Kebaikan
-                </button>
-            </div>
+        <!-- Mobile Navigation Menu -->
+        <div x-show="mobileMenuOpen" x-transition class="md:hidden bg-white border-b border-slate-100 px-4 pt-2 pb-4 space-y-2">
+            <button @click="currentTab = 'home'; mobileMenuOpen = false" class="block w-full text-left px-4 py-2 rounded-lg text-sm font-medium" :class="currentTab === 'home' ? 'bg-indigo-50 text-indigo-600' : 'text-slate-600'">Beranda</button>
+            <button @click="currentTab = 'topics'; mobileMenuOpen = false" class="block w-full text-left px-4 py-2 rounded-lg text-sm font-medium" :class="currentTab === 'topics' ? 'bg-indigo-50 text-indigo-600' : 'text-slate-600'">Topik & Flashcard</button>
+            <button @click="currentTab = 'posters'; mobileMenuOpen = false" class="block w-full text-left px-4 py-2 rounded-lg text-sm font-medium" :class="currentTab === 'posters' ? 'bg-indigo-50 text-indigo-600' : 'text-slate-600'">Galeri Poster & Infografis</button>
         </div>
     </header>
 
-    <!-- Members Section -->
-    <section id="anggota-section" class="px-4 py-8 max-w-6xl mx-auto w-full scroll-mt-20">
-        <div class="text-center mb-8">
-            <h2 class="font-display text-2xl sm:text-4xl font-extrabold text-slate-800">
-                Pilar-Pilar <span class="text-indigo-600">Pelenger</span>
-            </h2>
-            <p class="text-slate-500 mt-1">Klik salah satu kartu untuk mengintip rahasia kebaikan dan keunikan mereka!</p>
-        </div>
-
-        <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6" id="members-grid">
-            <!-- Dynamic Member Cards will be rendered here via JS -->
-        </div>
-    </section>
-
-    <!-- Interactive Fun Section (Roulette & Kindness Generator) -->
-    <section class="px-4 py-12 max-w-4xl mx-auto w-full">
-        <div class="glass-card rounded-3xl p-6 sm:p-10 shadow-xl border border-white relative overflow-hidden">
-            <div class="absolute -right-16 -bottom-16 w-48 h-48 bg-purple-200 rounded-full opacity-30 blur-2xl pointer-events-none"></div>
-            
-            <div class="text-center mb-8">
-                <span class="text-3xl">🎰</span>
-                <h2 class="font-display text-2xl sm:text-3xl font-extrabold text-slate-800 mt-2">
-                    Siapa Paling Baik Hari Ini?
-                </h2>
-                <p class="text-slate-500 text-sm sm:text-base mt-1">
-                    Putar roda kebaikan untuk mengundi satu member Pelenger yang akan dinobatkan sebagai pembawa berkah hari ini!
-                </p>
+    <main class="flex-grow">
+        
+        <!-- ================= HOME TAB ================= -->
+        <div x-show="currentTab === 'home'" class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
+            <!-- Hero Section -->
+            <div class="grid grid-cols-1 lg:grid-cols-12 gap-12 items-center mb-16">
+                <div class="lg:col-span-7 space-y-6">
+                    <div class="inline-flex items-center space-x-2 px-3.5 py-1.5 rounded-full bg-indigo-50 border border-indigo-100 text-indigo-600 text-xs font-bold uppercase tracking-wider">
+                        <span>✨ Belajar Lebih Seru & Visual</span>
+                    </div>
+                    <h1 class="text-4xl sm:text-5xl lg:text-6xl font-extrabold text-slate-900 tracking-tight leading-tight">
+                        Eksplorasi Ilmu Pengetahuan Lewat <span class="bg-gradient-to-r from-indigo-600 via-violet-600 to-pink-600 bg-clip-text text-transparent">Media Visual Interaktif</span>
+                    </h1>
+                    <p class="text-lg text-slate-600 leading-relaxed max-w-2xl">
+                        Tingkatkan pemahaman belajar anak dan siswa melalui ilustrasi modern, infografis mendalam, peta konsep interaktif, serta flashcard kilat yang menyenangkan.
+                    </p>
+                    <div class="flex flex-wrap gap-4 pt-4">
+                        <button @click="currentTab = 'topics'" class="px-8 py-4 bg-indigo-600 hover:bg-indigo-700 text-white font-semibold rounded-2xl shadow-lg shadow-indigo-500/25 transition-all duration-200 transform hover:-translate-y-0.5">
+                            Mulai Belajar Sekarang 🚀
+                        </button>
+                        <button @click="currentTab = 'posters'" class="px-8 py-4 bg-white hover:bg-slate-50 text-slate-700 font-semibold rounded-2xl border border-slate-200 shadow-sm transition-all duration-200">
+                            Lihat Galeri Poster 🖼️
+                        </button>
+                    </div>
+                </div>
+                <div class="lg:col-span-5 relative">
+                    <div class="absolute -inset-1 bg-gradient-to-r from-indigo-500 to-violet-600 rounded-3xl blur-xl opacity-20 animate-pulse"></div>
+                    <div class="relative bg-white rounded-3xl p-6 border border-slate-100 shadow-xl space-y-6">
+                        <div class="flex items-center justify-between pb-4 border-b border-slate-100">
+                            <span class="text-xs font-bold uppercase text-slate-400 tracking-wider">Preview Flashcard Kilat</span>
+                            <span class="px-2.5 py-1 bg-amber-50 text-amber-600 rounded-full text-xs font-bold">Interaktif</span>
+                        </div>
+                        <div class="bg-gradient-to-br from-indigo-500 to-violet-600 rounded-2xl p-6 text-white text-center space-y-4 shadow-md">
+                            <div class="text-4xl">🪐</div>
+                            <h3 class="text-xl font-bold">Planet Terbesar di Tata Surya</h3>
+                            <p class="text-xs text-indigo-100 bg-white/10 py-1.5 px-3 rounded-full inline-block">Klik Topik untuk Membuka Semua Kartu</p>
+                        </div>
+                        <div class="grid grid-cols-3 gap-3 text-center">
+                            <div class="p-3 bg-slate-50 rounded-xl border border-slate-100">
+                                <span class="block text-xl font-bold text-indigo-600">3+</span>
+                                <span class="text-[10px] text-slate-500 font-semibold uppercase">Topik Utama</span>
+                            </div>
+                            <div class="p-3 bg-slate-50 rounded-xl border border-slate-100">
+                                <span class="block text-xl font-bold text-violet-600">12+</span>
+                                <span class="text-[10px] text-slate-500 font-semibold uppercase">Flashcard</span>
+                            </div>
+                            <div class="p-3 bg-slate-50 rounded-xl border border-slate-100">
+                                <span class="block text-xl font-bold text-pink-600">6+</span>
+                                <span class="text-[10px] text-slate-500 font-semibold uppercase">Infografis</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
             </div>
 
-            <!-- Roulette Wheel Visualization -->
-            <div class="flex flex-col items-center justify-center">
-                <div class="relative w-48 h-48 sm:w-56 sm:h-56 mb-8 flex items-center justify-center">
-                    <div id="roulette-wheel" class="w-full h-full rounded-full border-4 border-indigo-500 flex items-center justify-center relative transition-transform duration-[3000ms] ease-out bg-gradient-to-tr from-slate-900 to-indigo-950 shadow-2xl">
-                        <!-- Wheel Center -->
-                        <div class="w-12 h-12 rounded-full bg-white border-4 border-indigo-500 z-10 flex items-center justify-center shadow-md">
-                            <span class="text-indigo-600 text-xs font-bold">✨</span>
+            <!-- Features Grid -->
+            <div class="mb-16">
+                <div class="text-center max-w-2xl mx-auto mb-12 space-y-3">
+                    <h2 class="text-3xl font-bold text-slate-900">Keunggulan Media Pembelajaran Visual</h2>
+                    <p class="text-slate-600 text-sm">Dirancang khusus untuk mengoptimalkan daya ingat dan pemikiran analitis visual peserta didik.</p>
+                </div>
+                <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+                    <div class="bg-white p-8 rounded-3xl border border-slate-100 shadow-sm hover:shadow-md transition-all space-y-4 group">
+                        <div class="w-14 h-14 rounded-2xl bg-indigo-50 text-indigo-600 flex items-center justify-center text-2xl group-hover:scale-110 transition-transform">
+                            🎨
                         </div>
-                        <!-- Inner details of wheel representing members -->
-                        <div class="absolute inset-0 flex items-center justify-center text-indigo-400 opacity-60">
-                            <i class="fa-solid fa-asterisk text-4xl animate-spin-slow"></i>
+                        <h3 class="text-xl font-bold text-slate-900">Ilustrasi Semi-Flat Modern</h3>
+                        <p class="text-slate-600 text-sm leading-relaxed">Visual grafis yang bersih, warna cerah berenergi, serta representasi objek yang mudah dicerna oleh otak siswa.</p>
+                    </div>
+                    <div class="bg-white p-8 rounded-3xl border border-slate-100 shadow-sm hover:shadow-md transition-all space-y-4 group">
+                        <div class="w-14 h-14 rounded-2xl bg-violet-50 text-violet-600 flex items-center justify-center text-2xl group-hover:scale-110 transition-transform">
+                            🎴
+                        </div>
+                        <h3 class="text-xl font-bold text-slate-900">Flashcard Interaktif</h3>
+                        <p class="text-slate-600 text-sm leading-relaxed">Metode belajar aktif dengan sistem kartu bolak-balik (flip card) untuk menguji pemahaman konsep secara cepat dan menyenangkan.</p>
+                    </div>
+                    <div class="bg-white p-8 rounded-3xl border border-slate-100 shadow-sm hover:shadow-md transition-all space-y-4 group">
+                        <div class="w-14 h-14 rounded-2xl bg-pink-50 text-pink-600 flex items-center justify-center text-2xl group-hover:scale-110 transition-transform">
+                            📊
+                        </div>
+                        <h3 class="text-xl font-bold text-slate-900">Infografis & Poster Edukasi</h3>
+                        <p class="text-slate-600 text-sm leading-relaxed">Ringkasan materi komprehensif dalam bentuk poster digital yang informatif dan siap digunakan untuk bahan ajar kelas.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- ================= TOPICS & FLASHCARD TAB ================= -->
+        <div x-show="currentTab === 'topics'" class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
+            <div class="text-center max-w-2xl mx-auto mb-12 space-y-3">
+                <span class="text-xs font-bold uppercase text-indigo-600 tracking-wider">Modul Belajar</span>
+                <h2 class="text-3xl font-bold text-slate-900">Pilih Topik Pembelajaran Visual</h2>
+                <p class="text-slate-600 text-sm">Pilih salah satu topik di bawah ini untuk memulai sesi belajar dengan infografis dan flashcard interaktif.</p>
+            </div>
+
+            <!-- Topic Selector Buttons -->
+            <div class="flex flex-wrap justify-center gap-3 mb-12">
+                <template x-for="topic in topics" :key="topic.id">
+                    <button @click="selectedTopicId = topic.id; activeFilter = 'all'" 
+                        :class="selectedTopicId === topic.id ? 'bg-indigo-600 text-white shadow-md shadow-indigo-500/20' : 'bg-white text-slate-600 border border-slate-200 hover:bg-slate-50'"
+                        class="px-6 py-3 rounded-2xl font-semibold text-sm transition-all duration-200 flex items-center space-x-2">
+                        <span x-text="topic.icon"></span>
+                        <span x-text="topic.name"></span>
+                    </button>
+                </template>
+            </div>
+
+            <!-- Active Topic Display Container -->
+            <div class="space-y-12" x-data="topicViewer()">
+                
+                <!-- Topic Header Card & Infographic Summary -->
+                <div class="bg-white rounded-3xl p-8 border border-slate-100 shadow-sm">
+                    <div class="grid grid-cols-1 lg:grid-cols-12 gap-8 items-center">
+                        <div class="lg:col-span-5 space-y-4">
+                            <span class="px-3 py-1 rounded-full text-xs font-bold bg-indigo-50 text-indigo-600" x-text="currentTopicData.category"></span>
+                            <h3 class="text-3xl font-extrabold text-slate-900" x-text="currentTopicData.title"></h3>
+                            <p class="text-slate-600 text-sm leading-relaxed" x-text="currentTopicData.description"></p>
+                            <div class="p-4 bg-slate-50 rounded-2xl border border-slate-100 space-y-2">
+                                <span class="text-xs font-bold uppercase text-slate-400">Poin Utama Infografis:</span>
+                                <ul class="space-y-1.5 text-xs text-slate-700 font-medium">
+                                    <template x-for="point in currentTopicData.highlights">
+                                        <li class="flex items-center space-x-2">
+                                            <span class="w-1.5 h-1.5 rounded-full bg-indigo-600"></span>
+                                            <span x-text="point"></span>
+                                        </li>
+                                    </template>
+                                </ul>
+                            </div>
+                        </div>
+                        <div class="lg:col-span-7">
+                            <div class="bg-gradient-to-br from-indigo-500 via-violet-600 to-indigo-700 rounded-3xl p-8 text-white relative overflow-hidden shadow-xl">
+                                <div class="absolute -right-10 -bottom-10 w-48 h-48 bg-white/10 rounded-full blur-2xl"></div>
+                                <div class="relative z-10 space-y-6">
+                                    <div class="flex items-center justify-between">
+                                        <span class="text-xs font-bold uppercase tracking-wider bg-white/20 px-3 py-1 rounded-full">Visualisasi Infografis</span>
+                                        <span class="text-3xl" x-text="currentTopicData.icon"></span>
+                                    </div>
+                                    <div class="space-y-2">
+                                        <h4 class="text-2xl font-bold" x-text="currentTopicData.visualTitle"></h4>
+                                        <p class="text-indigo-100 text-sm leading-relaxed" x-text="currentTopicData.visualDesc"></p>
+                                    </div>
+                                    <div class="grid grid-cols-2 sm:grid-cols-3 gap-3 pt-2">
+                                        <template x-for="stat in currentTopicData.stats">
+                                            <div class="bg-white/10 backdrop-blur-md p-3 rounded-2xl border border-white/10">
+                                                <span class="block text-lg font-extrabold" x-text="stat.value"></span>
+                                                <span class="text-[10px] text-indigo-200" x-text="stat.label"></span>
+                                            </div>
+                                        </template>
+                                    </div>
+                                </div>
+                            </div>
                         </div>
                     </div>
-                    <!-- Pointer indicator -->
-                    <div class="absolute -top-3 left-1/2 -translate-x-1/2 w-0 h-0 border-l-[12px] border-l-transparent border-r-[12px] border-r-transparent border-t-[20px] border-t-indigo-600 drop-shadow-md z-20"></div>
                 </div>
 
-                <div class="text-center w-full max-w-md min-h-[140px] flex flex-col justify-center items-center px-4">
-                    <div id="roulette-result" class="hidden animate-bounce-short">
-                        <div class="inline-block px-3 py-1 bg-gradient-to-r from-pink-500 to-indigo-500 text-white font-bold text-xs rounded-full uppercase tracking-wider mb-2">
-                            👑 Sang Juara Kebaikan
+                <!-- Flashcard Interactive Section -->
+                <div class="space-y-6">
+                    <div class="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4">
+                        <div>
+                            <h3 class="text-2xl font-bold text-slate-900">Flashcard Kilat Interaktif</h3>
+                            <p class="text-slate-500 text-sm">Klik kartu di bawah untuk membalik dan melihat penjelasan materi!</p>
                         </div>
-                        <h3 id="result-name" class="font-display text-2xl sm:text-3xl font-bold text-indigo-600 mb-1">...</h3>
-                        <p id="result-quote" class="text-slate-600 italic text-sm sm:text-base px-2">"..."</p>
+                        <div class="inline-flex items-center space-x-2 text-xs font-semibold text-slate-500 bg-white px-4 py-2 rounded-2xl border border-slate-200 shadow-sm">
+                            <span>💡 Tips: Kartu bisa diklik berkali-kali</span>
+                        </div>
                     </div>
-                    <div id="roulette-placeholder" class="text-slate-400 italic">
-                        "Klik tombol 'Putar Sekarang' di bawah untuk memulai undian!"
+
+                    <!-- Flashcards Grid -->
+                    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+                        <template x-for="(card, index) in currentTopicData.flashcards" :key="index">
+                            <div class="h-64 cursor-pointer perspective-1000" @click="card.flipped = !card.flipped">
+                                <div class="relative w-full h-full duration-500 transform-style-3d shadow-sm hover:shadow-md rounded-3xl" :class="card.flipped ? 'rotate-y-180' : ''">
+                                    
+                                    <!-- Front Side -->
+                                    <div class="absolute inset-0 w-full h-full bg-white border border-slate-100 rounded-3xl p-6 flex flex-col justify-between backface-hidden">
+                                        <div class="flex items-center justify-between">
+                                            <span class="w-8 h-8 rounded-full bg-indigo-50 text-indigo-600 flex items-center justify-center text-xs font-bold" x-text="index + 1"></span>
+                                            <span class="text-2xl" x-text="card.icon"></span>
+                                        </div>
+                                        <div class="space-y-2 text-center my-auto">
+                                            <h4 class="text-lg font-bold text-slate-900" x-text="card.frontTitle"></h4>
+                                            <span class="inline-block text-xs font-semibold text-indigo-600 bg-indigo-50 px-3 py-1 rounded-full">Klik untuk Balik Kartu 🔄</span>
+                                        </div>
+                                        <div class="text-center">
+                                            <span class="text-[10px] uppercase font-bold text-slate-400 tracking-wider">Sisi Depan</span>
+                                        </div>
+                                    </div>
+
+                                    <!-- Back Side -->
+                                    <div class="absolute inset-0 w-full h-full bg-gradient-to-br from-indigo-600 to-violet-600 text-white rounded-3xl p-6 flex flex-col justify-between backface-hidden rotate-y-180">
+                                        <div class="flex items-center justify-between">
+                                            <span class="text-xs font-bold uppercase tracking-wider text-indigo-200">Penjelasan Materi</span>
+                                            <span class="text-2xl">✨</span>
+                                        </div>
+                                        <div class="space-y-2 my-auto">
+                                            <p class="text-sm leading-relaxed text-indigo-50 font-medium" x-text="card.backDesc"></p>
+                                        </div>
+                                        <div class="text-center">
+                                            <span class="text-[10px] uppercase font-bold text-indigo-200 tracking-wider">Klik untuk Kembali</span>
+                                        </div>
+                                    </div>
+
+                                </div>
+                            </div>
+                        </template>
                     </div>
                 </div>
 
-                <button id="spin-btn" onclick="triggerRoulette()" class="mt-6 px-8 py-3.5 bg-indigo-600 hover:bg-indigo-700 text-white font-bold rounded-2xl shadow-lg shadow-indigo-500/30 transition-all hover:scale-105 active:scale-95 flex items-center gap-2">
-                    <i class="fa-solid fa-arrows-spin text-lg" id="spin-icon"></i> Putar Sekarang!
+            </div>
+        </div>
+
+        <!-- ================= POSTER GALLERY TAB ================= -->
+        <div x-show="currentTab === 'posters'" class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
+            <div class="text-center max-w-2xl mx-auto mb-12 space-y-3">
+                <span class="text-xs font-bold uppercase text-indigo-600 tracking-wider">Galeri Visual</span>
+                <h2 class="text-3xl font-bold text-slate-900">Poster Edukasi & Infografis</h2>
+                <p class="text-slate-600 text-sm">Koleksi poster visual siap pakai yang merangkum topik-topik sains penting secara kreatif dan estetis.</p>
+            </div>
+
+            <!-- Filter Categories -->
+            <div class="flex flex-wrap justify-center gap-2 mb-10">
+                <button @click="posterFilter = 'all'" :class="posterFilter === 'all' ? 'bg-indigo-600 text-white' : 'bg-white text-slate-600 border border-slate-200'" class="px-5 py-2 rounded-full text-xs font-semibold transition-all">Semua Poster</button>
+                <button @click="posterFilter = 'sains'" :class="posterFilter === 'sains' ? 'bg-indigo-600 text-white' : 'bg-white text-slate-600 border border-slate-200'" class="px-5 py-2 rounded-full text-xs font-semibold transition-all">Sains & Alam</button>
+                <button @click="posterFilter = 'biologi'" :class="posterFilter === 'biologi' ? 'bg-indigo-600 text-white' : 'bg-white text-slate-600 border border-slate-200'" class="px-5 py-2 rounded-full text-xs font-semibold transition-all">Biologi & Tumbuhan</button>
+                <button @click="posterFilter = 'fisika'" :class="posterFilter === 'fisika' ? 'bg-indigo-600 text-white' : 'bg-white text-slate-600 border border-slate-200'" class="px-5 py-2 rounded-full text-xs font-semibold transition-all">Fisika & Energi</button>
+            </div>
+
+            <!-- Poster Grid -->
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+                <template x-for="poster in filteredPosters" :key="poster.id">
+                    <div class="bg-white rounded-3xl border border-slate-100 shadow-sm hover:shadow-lg transition-all overflow-hidden flex flex-col justify-between group">
+                        <div class="relative h-56 bg-gradient-to-tr from-slate-900 to-indigo-950 p-6 flex flex-col justify-between overflow-hidden">
+                            <div class="absolute inset-0 opacity-20 bg-[radial-gradient(#ffffff_1px,transparent_1px)] [background-size:16px_16px]"></div>
+                            <div class="absolute -right-8 -top-8 w-32 h-32 bg-indigo-500/30 rounded-full blur-xl group-hover:scale-150 transition-transform duration-500"></div>
+                            
+                            <div class="flex items-center justify-between relative z-10">
+                                <span class="px-3 py-1 bg-white/10 backdrop-blur-md rounded-full text-[10px] font-bold text-white uppercase tracking-wider" x-text="poster.tag"></span>
+                                <span class="text-3xl" x-text="poster.icon"></span>
+                            </div>
+                            <div class="relative z-10 space-y-1">
+                                <h3 class="text-xl font-bold text-white" x-text="poster.title"></h3>
+                                <p class="text-xs text-indigo-200" x-text="poster.subtitle"></p>
+                            </div>
+                        </div>
+                        <div class="p-6 space-y-4 flex-grow flex flex-col justify-between">
+                            <p class="text-xs text-slate-600 leading-relaxed" x-text="poster.description"></p>
+                            <div class="flex items-center justify-between pt-4 border-t border-slate-100">
+                                <span class="text-xs font-semibold text-slate-400" x-text="poster.readTime"></span>
+                                <button @click="openPosterModal(poster)" class="px-4 py-2 bg-indigo-50 hover:bg-indigo-100 text-indigo-600 font-semibold rounded-xl text-xs transition-colors">
+                                    Perbesar Poster 🔍
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </template>
+            </div>
+        </div>
+
+    </main>
+
+    <!-- Poster Detail Modal -->
+    <div x-show="modalOpen" class="fixed inset-0 z-50 flex items-center justify-center p-4 bg-slate-900/60 backdrop-blur-sm" x-transition.opacity>
+        <div @click.away="modalOpen = false" class="bg-white rounded-3xl max-w-2xl w-full p-8 space-y-6 shadow-2xl relative">
+            <div class="flex items-center justify-between pb-4 border-b border-slate-100">
+                <div class="flex items-center space-x-3">
+                    <span class="text-3xl" x-text="activePoster.icon"></span>
+                    <div>
+                        <h3 class="text-xl font-bold text-slate-900" x-text="activePoster.title"></h3>
+                        <span class="text-xs font-semibold text-indigo-600 uppercase tracking-wider" x-text="activePoster.tag"></span>
+                    </div>
+                </div>
+                <button @click="modalOpen = false" class="p-2 rounded-xl text-slate-400 hover:bg-slate-100 hover:text-slate-600">
+                    ✕
                 </button>
             </div>
-        </div>
-    </section>
-
-    <!-- Guestbook / Board of Kindness Section -->
-    <section class="px-4 py-8 max-w-4xl mx-auto w-full">
-        <div class="glass-card rounded-3xl p-6 sm:p-10 shadow-xl border border-white">
-            <div class="flex flex-col md:flex-row gap-8 items-start">
-                
-                <!-- Left Column: Form -->
-                <div class="w-full md:w-1/2">
-                    <div class="flex items-center gap-2 mb-4">
-                        <span class="text-2xl">✍️</span>
-                        <h2 class="font-display text-2xl font-bold text-slate-800">Coretan Pelenger</h2>
-                    </div>
-                    <p class="text-slate-500 text-sm mb-6">
-                        Tinggalkan pesan, salam manis, candaan, atau terima kasihmu untuk seluruh anak Pelenger di sini!
-                    </p>
-
-                    <form id="guestbook-form" onsubmit="handlePostMessage(event)" class="space-y-4">
-                        <div>
-                            <label class="block text-xs font-bold uppercase tracking-wider text-slate-500 mb-1.5" for="sender-name">Namamu / Anonim</label>
-                            <input type="text" id="sender-name" placeholder="Misal: Teman Seperjuangan" required class="w-full px-4 py-2.5 rounded-xl border border-slate-200 bg-white/70 focus:outline-none focus:ring-2 focus:ring-indigo-400 transition-all text-sm">
-                        </div>
-                        <div>
-                            <label class="block text-xs font-bold uppercase tracking-wider text-slate-500 mb-1.5" for="sender-message">Pesan / Kesan Baik</label>
-                            <textarea id="sender-message" rows="3" placeholder="Tuliskan pesan super hangat di sini..." required class="w-full px-4 py-2.5 rounded-xl border border-slate-200 bg-white/70 focus:outline-none focus:ring-2 focus:ring-indigo-400 transition-all text-sm resize-none"></textarea>
-                        </div>
-                        <button type="submit" class="w-full py-3 bg-gradient-to-r from-purple-600 to-indigo-600 hover:from-purple-700 hover:to-indigo-700 text-white font-bold rounded-xl transition-all shadow-md active:scale-[0.98] flex items-center justify-center gap-2">
-                            <i class="fa-solid fa-paper-plane"></i> Kirim Pesan
-                        </button>
-                    </form>
+            <div class="space-y-4">
+                <div class="bg-indigo-50 p-6 rounded-2xl border border-indigo-100 text-center space-y-2">
+                    <span class="text-4xl">🌟</span>
+                    <h4 class="text-lg font-bold text-indigo-900" x-text="activePoster.subtitle"></h4>
+                    <p class="text-xs text-indigo-700 leading-relaxed" x-text="activePoster.description"></p>
                 </div>
-
-                <!-- Right Column: Messages List -->
-                <div class="w-full md:w-1/2 flex flex-col h-full self-stretch min-h-[300px]">
-                    <div class="flex justify-between items-center mb-4">
-                        <h3 class="font-bold text-slate-700 flex items-center gap-2">
-                            <i class="fa-solid fa-comments text-indigo-500"></i> Papan Pesan Terbaru
-                        </h3>
-                        <button onclick="clearMessages()" class="text-xs text-rose-500 font-bold hover:underline">Hapus Semua</button>
-                    </div>
-
-                    <div id="messages-container" class="flex-1 overflow-y-auto pr-1 space-y-3 max-h-[320px]">
-                        <!-- Messages will be populated dynamically -->
+                <div class="space-y-2">
+                    <h5 class="text-xs font-bold uppercase text-slate-400 tracking-wider">Rincian Materi Poster:</h5>
+                    <div class="p-4 bg-slate-50 rounded-2xl border border-slate-100 text-xs text-slate-700 space-y-2">
+                        <p>• Poster ini dirancang khusus untuk pembelajaran visual tingkat sekolah dasar & menengah.</p>
+                        <p>• Membantu siswa mengenali pola, struktur, serta konsep dasar dengan cepat tanpa teks berlebih.</p>
+                        <p>• Dapat digunakan guru sebagai media peraga presentasi digital interaktif di kelas.</p>
                     </div>
                 </div>
-
             </div>
-        </div>
-    </section>
-
-    <!-- Footer -->
-    <footer class="mt-auto px-4 pt-12 text-center text-slate-500">
-        <p class="font-display font-bold text-indigo-600 text-lg">PELENGER © 2026</p>
-        <p class="text-xs mt-1">Dibuat dengan cinta, tawa, dan rasa kebersamaan tiada tara untuk para Mahasiswa Baik Hati.</p>
-        <div class="flex justify-center gap-4 mt-4 text-slate-400 text-sm">
-            <span><i class="fa-solid fa-heart text-rose-500 animate-pulse"></i> Solidaritas</span>
-            <span>•</span>
-            <span><i class="fa-solid fa-graduation-cap text-indigo-500"></i> Kesuksesan</span>
-            <span>•</span>
-            <span><i class="fa-solid fa-face-smile text-amber-500"></i> Kebahagiaan</span>
-        </div>
-    </footer>
-
-    <!-- Interactive Custom Member Detail Modal -->
-    <div id="detail-modal" class="fixed inset-0 z-50 flex items-center justify-center p-4 bg-slate-900/60 opacity-0 pointer-events-none transition-all duration-300">
-        <div class="glass-dark text-white rounded-3xl max-w-md w-full p-6 relative transform scale-95 transition-all duration-300 shadow-2xl" id="modal-content">
-            <!-- Close Button -->
-            <button onclick="closeModal()" class="absolute top-4 right-4 w-8 h-8 rounded-full bg-white/10 hover:bg-white/20 flex items-center justify-center transition-all">
-                <i class="fa-solid fa-xmark text-white"></i>
-            </button>
-            
-            <!-- Modal Body populated dynamically -->
-            <div id="modal-body" class="text-center pt-2">
-                <!-- Dynamically populated content -->
+            <div class="flex justify-end pt-4 border-t border-slate-100">
+                <button @click="modalOpen = false" class="px-6 py-2.5 bg-indigo-600 text-white font-semibold rounded-xl text-xs hover:bg-indigo-700 shadow-md">
+                    Tutup Tampilan
+                </button>
             </div>
         </div>
     </div>
 
-    <!-- Custom Toast Notification System -->
-    <div id="toast-container" class="fixed bottom-4 right-4 z-50 space-y-2 pointer-events-none max-w-sm w-full"></div>
-
+    <!-- Footer -->
+    <footer class="bg-white border-t border-slate-100 py-8 mt-16">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex flex-col sm:flex-row items-center justify-between gap-4 text-center sm:text-left">
+            <div class="flex items-center space-x-2">
+                <div class="w-7 h-7 rounded-lg bg-indigo-600 flex items-center justify-center text-white font-bold text-xs">RV</div>
+                <span class="text-sm font-bold text-slate-800">RuangVisual - Media Pembelajaran Interaktif</span>
+            </div>
+            <p class="text-xs text-slate-500">Mendukung metode pembelajaran visual modern, bersih, dan menyenangkan untuk siswa.</p>
+        </div>
+    </footer>
 
     <script>
-        // Sound effects controller
-        let audioEnabled = false;
-        let synth = null;
+        function learningApp() {
+            return {
+                currentTab: 'home',
+                mobileMenuOpen: false,
+                selectedTopicId: 'solar',
+                modalOpen: false,
+                activePoster: {},
+                posterFilter: 'all',
 
-        function initSynth() {
-            if (!synth) {
-                // Multi-voice synthesizer for pleasant polyphonic tones
-                synth = new Tone.PolySynth(Tone.Synth, {
-                    oscillator: { type: "sine" },
-                    envelope: { attack: 0.05, decay: 0.1, sustain: 0.3, release: 0.5 }
-                }).toDestination();
-                synth.volume.value = -12; // Moderate volume
-            }
-        }
+                topics: [
+                    { id: 'solar', name: 'Tata Surya', icon: '🪐', category: 'Astronomi & Sains' },
+                    { id: 'water', name: 'Siklus Air', icon: '💧', category: 'Ilmu Bumi & Lingkungan' },
+                    { id: 'plant', name: 'Anatomi Tumbuhan', icon: '🌿', category: 'Biologi & Botani' }
+                ],
 
-        function toggleAudio() {
-            audioEnabled = !audioEnabled;
-            const btn = document.getElementById('audio-toggle-btn');
-            
-            if (audioEnabled) {
-                // Start Audio Context if needed
-                Tone.start();
-                initSynth();
-                btn.innerHTML = '<i class="fa-solid fa-volume-high text-lg"></i>';
-                btn.classList.remove('bg-white', 'text-indigo-600', 'border-indigo-100');
-                btn.classList.add('bg-indigo-600', 'text-white', 'border-transparent');
-                showToast("🔊 Efek Suara Diaktifkan!", "success");
-                playHarmonicTone();
-            } else {
-                btn.innerHTML = '<i class="fa-solid fa-volume-xmark text-lg"></i>';
-                btn.classList.remove('bg-indigo-600', 'text-white', 'border-transparent');
-                btn.classList.add('bg-white', 'text-indigo-600', 'border-indigo-100');
-                showToast("🔇 Efek Suara Dimatikan", "info");
-            }
-        }
+                posters: [
+                    { id: 1, title: 'Sistem Tata Surya', subtitle: 'Mengenal 8 Planet Utama & Orbitnya', tag: 'sains', icon: '🪐', description: 'Poster infografis lengkap mengenai urutan planet dari Matahari, ukuran relatif, serta karakteristik unik setiap planet di galaksi.', readTime: '3 Menit Baca' },
+                    { id: 2, title: 'Siklus Hidrologi (Air)', subtitle: 'Evaporasi, Kondensasi, Presipitasi', tag: 'sains', icon: '🌧️', description: 'Visualisasi proses perjalanan air di bumi mulai dari penguapan air laut hingga turun kembali sebagai hujan ke daratan.', readTime: '2 Menit Baca' },
+                    { id: 3, title: 'Struktur Bagian Tumbuhan', subtitle: 'Akar, Batang, Daun, & Bunga', tag: 'biologi', icon: '🌱', description: 'Infografis anatomi lengkap tumbuhan berpembuluh dan fungsi penting setiap organ bagi kelangsungan hidup tanaman.', readTime: '4 Menit Baca' },
+                    { id: 4, title: 'Lapisan Atmosfer Bumi', subtitle: 'Troposfer hingga Eksosfer', tag: 'sains', icon: '🌍', description: 'Peta visual lapisan udara yang melindungi bumi dari radiasi kosmik serta tempat terjadinya berbagai fenomena cuaca.', readTime: '3 Menit Baca' },
+                    { id: 5, title: 'Fotosintesis Alami', subtitle: 'Energi Matahari Menjadi Oksigen', tag: 'biologi', icon: '🍃', description: 'Poster edukasi proses tumbuhan mengubah karbondioksida dan air menjadi glukosa berkat bantuan klorofil dan cahaya matahari.', readTime: '3 Menit Baca' },
+                    { id: 6, title: 'Sumber Energi Terbarukan', subtitle: 'Matahari, Angin, & Air', tag: 'fisika', icon: '⚡', description: 'Pengenalan energi ramah lingkungan pengganti bahan bakar fosil demi menjaga kelestarian masa depan bumi.', readTime: '2 Menit Baca' }
+                ],
 
-        function playTone(note = "C5", duration = "8n") {
-            if (audioEnabled && synth) {
-                try {
-                    synth.triggerAttackRelease(note, duration);
-                } catch(e) {}
-            }
-        }
+                get filteredPosters() {
+                    if (this.posterFilter === 'all') return this.posters;
+                    return this.posters.filter(p => p.tag === this.posterFilter);
+                },
 
-        function playHarmonicTone() {
-            if (audioEnabled && synth) {
-                try {
-                    const now = Tone.now();
-                    synth.triggerAttackRelease("C5", "8n", now);
-                    synth.triggerAttackRelease("E5", "8n", now + 0.1);
-                    synth.triggerAttackRelease("G5", "8n", now + 0.2);
-                    synth.triggerAttackRelease("C6", "4n", now + 0.3);
-                } catch(e) {}
-            }
-        }
-
-        // Custom Toast Notification
-        function showToast(message, type = "success") {
-            const container = document.getElementById('toast-container');
-            const toast = document.createElement('div');
-            
-            let icon = 'fa-check-circle';
-            let color = 'bg-emerald-600';
-            if (type === 'info') {
-                icon = 'fa-info-circle';
-                color = 'bg-blue-600';
-            } else if (type === 'pink') {
-                icon = 'fa-heart';
-                color = 'bg-pink-600';
-            }
-
-            toast.className = `flex items-center gap-3 px-4 py-3 rounded-2xl text-white shadow-xl ${color} transform translate-y-2 opacity-0 transition-all duration-300 pointer-events-auto`;
-            toast.innerHTML = `
-                <i class="fa-solid ${icon} text-lg"></i>
-                <span class="font-medium text-sm">${message}</span>
-            `;
-
-            container.appendChild(toast);
-            
-            // Trigger animation
-            setTimeout(() => {
-                toast.classList.remove('translate-y-2', 'opacity-0');
-            }, 50);
-
-            // Remove toast after 3 seconds
-            setTimeout(() => {
-                toast.classList.add('opacity-0', 'translate-y-[-10px]');
-                setTimeout(() => toast.remove(), 300);
-            }, 3000);
-        }
-
-        // Pelenger Members Database (Updated to 4 official members)
-        const members = [
-            {
-                id: "zahira_nabila",
-                name: "Zahira Nabila",
-                fullName: "Zahira Nabila",
-                role: "The Peace Supporter",
-                avatar: "https://api.dicebear.com/7.x/adventurer/svg?seed=ZahiraNabila",
-                color: "from-pink-400 to-indigo-500",
-                badge: "Paling Sabar & Bijak",
-                quote: "Senyuman dan kedamaian hati adalah bahasa kebaikan universal. Mari tebar kebahagiaan hari ini!",
-                details: "Gabungan indah dari kelembutan Zahira dan kebijaksanaan Nabila. Ia adalah pilar kedamaian kelompok yang selalu menjadi pendengar terbaik serta penenang di kala tugas kuliah melanda."
-            },
-            {
-                id: "masyta_pasya",
-                name: "Masyta Pasya",
-                fullName: "Masyta Pasya",
-                role: "The Cheerful Helper",
-                avatar: "https://api.dicebear.com/7.x/adventurer/svg?seed=MasytaPasya",
-                color: "from-amber-400 to-teal-500",
-                badge: "Paling Ceria & Rajin",
-                quote: "Hidup itu terlalu pendek untuk dilewatkan tanpa tertawa, mari saling membantu meringankan beban!",
-                details: "Kombinasi energi humoris nan gembira dari Masyta serta sifat penolong rajin dari Pasya. Selalu siap membantu menerangkan materi kuliah sulit sambil melontarkan candaan segar."
-            },
-            {
-                id: "raisya_putri",
-                name: "Raisya Putri",
-                fullName: "Raisya Putri",
-                role: "The Creative Caretaker",
-                avatar: "https://api.dicebear.com/7.x/adventurer/svg?seed=RaisyaPutri",
-                color: "from-cyan-400 to-fuchsia-500",
-                badge: "Paling Perhatian & Estetik",
-                quote: "Kebaikan terkecil yang kita lakukan bisa berdampak sangat besar jika dihiasi ketulusan dan kreativitas.",
-                details: "Sinergi indah antara perhatian hangat Raisya dan jiwa artistik Putri. Selalu peka ketika teman-temannya sedang butuh dukungan serta jago mendesain momen kebersamaan yang sangat estetik."
-            },
-            {
-                id: "kela_alfabi",
-                name: "Kela Alfabi",
-                fullName: "Kela Alfabi",
-                role: "The Loyal Energizer",
-                avatar: "https://api.dicebear.com/7.x/adventurer/svg?seed=KelaAlfabi",
-                color: "from-red-400 to-amber-600",
-                badge: "Garda Terdepan & Gokil",
-                quote: "Nikmati setiap petualangan seru perkuliahan kita dengan kesetiaan dan keseruan tanpa batas!",
-                details: "Kombinasi tangguh kesetiaan Kela sebagai tameng pelindung kelompok dan energi meluap-luap gokil dari Alfabi. Menghidupkan suasana kumpul dan selalu siap membela sahabat kapan saja."
-            }
-        ];
-
-        // Render Members Function
-        function renderMembers() {
-            const grid = document.getElementById('members-grid');
-            grid.innerHTML = '';
-
-            members.forEach((member) => {
-                const card = document.createElement('div');
-                card.className = "group relative cursor-pointer transform hover:-translate-y-2 transition-all duration-300";
-                card.onclick = () => {
-                    playTone("E5", "8n");
-                    openModal(member.id);
-                };
-
-                card.innerHTML = `
-                    <div class="glass-card rounded-3xl p-5 shadow-md hover:shadow-xl border border-white flex flex-col items-center text-center overflow-hidden h-full relative">
-                        <!-- Card Border Color Aura -->
-                        <div class="absolute inset-x-0 top-0 h-2 bg-gradient-to-r ${member.color}"></div>
-                        
-                        <!-- Profile Image -->
-                        <div class="w-24 h-24 rounded-2xl bg-gradient-to-tr ${member.color} p-1 mb-4 shadow-inner relative group-hover:scale-105 transition-all">
-                            <img src="${member.avatar}" alt="${member.name}" class="w-full h-full rounded-xl bg-white object-cover" onerror="this.src='https://placehold.co/150/f472b6/ffffff?text=${member.name}'">
-                        </div>
-
-                        <!-- Badge -->
-                        <span class="px-2.5 py-1 text-xs font-bold rounded-full bg-slate-100 text-slate-700 mb-2 border border-slate-200 uppercase tracking-wide">
-                            ${member.badge}
-                        </span>
-
-                        <!-- Name & Info -->
-                        <h3 class="font-display font-bold text-xl text-slate-800">${member.name}</h3>
-                        <p class="text-xs text-indigo-600 font-bold tracking-widest uppercase mb-3">${member.role}</p>
-                        
-                        <p class="text-xs text-slate-500 italic mt-auto line-clamp-2">
-                            "${member.quote}"
-                        </p>
-
-                        <!-- Subtle Hover Indicator -->
-                        <span class="absolute bottom-2 right-2 text-[10px] text-slate-400 opacity-0 group-hover:opacity-100 transition-opacity">
-                            Lihat Detail <i class="fa-solid fa-arrow-right"></i>
-                        </span>
-                    </div>
-                `;
-                grid.appendChild(card);
-            });
-        }
-
-        // Modal Controls
-        function openModal(memberId) {
-            const member = members.find(m => m.id === memberId);
-            if (!member) return;
-
-            const modal = document.getElementById('detail-modal');
-            const content = document.getElementById('modal-content');
-            const body = document.getElementById('modal-body');
-
-            body.innerHTML = `
-                <!-- Modal Header Icon/Badge -->
-                <div class="inline-flex items-center justify-center w-28 h-28 rounded-3xl bg-gradient-to-tr ${member.color} p-1 mx-auto mb-4 shadow-lg">
-                    <img src="${member.avatar}" alt="${member.name}" class="w-full h-full rounded-2xl bg-slate-900 object-cover">
-                </div>
-                
-                <span class="inline-block px-3 py-1 bg-white/10 text-pink-300 font-bold text-xs rounded-full uppercase tracking-wider mb-2">
-                    🎖️ ${member.badge}
-                </span>
-
-                <h3 class="font-display text-3xl font-bold mb-1">${member.fullName}</h3>
-                <p class="text-indigo-400 font-bold tracking-widest text-xs uppercase mb-4">${member.role}</p>
-                
-                <!-- Divider -->
-                <div class="h-[1px] w-2/3 bg-white/20 mx-auto mb-4"></div>
-
-                <div class="text-slate-200 text-sm space-y-3 px-2 mb-6 text-left leading-relaxed">
-                    <p class="bg-white/5 p-3 rounded-2xl border border-white/10 italic text-center">
-                        "${member.quote}"
-                    </p>
-                    <div>
-                        <span class="font-bold text-indigo-400 block text-xs uppercase tracking-wide mb-1">Kenapa sangat baik hati:</span>
-                        <p>${member.details}</p>
-                    </div>
-                </div>
-
-                <button onclick="closeModal()" class="w-full py-2.5 bg-gradient-to-r ${member.color} text-white font-bold rounded-xl shadow-lg transition-all active:scale-95">
-                    Keren Banget! ✨
-                </button>
-            `;
-
-            // Display Modal with animation
-            modal.classList.remove('pointer-events-none', 'opacity-0');
-            content.classList.remove('scale-95');
-            content.classList.add('scale-100');
-        }
-
-        function closeModal() {
-            playTone("C5", "8n");
-            const modal = document.getElementById('detail-modal');
-            const content = document.getElementById('modal-content');
-
-            modal.classList.add('pointer-events-none', 'opacity-0');
-            content.classList.remove('scale-100');
-            content.classList.add('scale-95');
-        }
-
-        // Close modal on escape key or clicking backdrop
-        window.addEventListener('keydown', (e) => {
-            if (e.key === 'Escape') closeModal();
-        });
-        document.getElementById('detail-modal').addEventListener('click', (e) => {
-            if (e.target === document.getElementById('detail-modal')) closeModal();
-        });
-
-
-        // LocalStorage Guestbook Logic
-        const STORAGE_KEY = 'pelenger_guestbook';
-        
-        const defaultMessages = [
-            { id: 1, name: "Pak Dosen", message: "Pelenger adalah contoh nyata kolaborasi mahasiswa teladan. Pertahankan kebaikan kalian!", time: "Baru saja" },
-            { id: 2, name: "Kating 2023", message: "Kompak terus ya dek! Salut banget sama kebaikan kelompok kalian.", time: "1 jam lalu" }
-        ];
-
-        function getMessages() {
-            const stored = localStorage.getItem(STORAGE_KEY);
-            return stored ? JSON.parse(stored) : defaultMessages;
-        }
-
-        function saveMessages(messages) {
-            localStorage.setItem(STORAGE_KEY, JSON.stringify(messages));
-        }
-
-        function renderMessages() {
-            const container = document.getElementById('messages-container');
-            container.innerHTML = '';
-            const messages = getMessages();
-
-            if (messages.length === 0) {
-                container.innerHTML = `
-                    <div class="text-center py-8 text-slate-400 italic text-sm">
-                        Belum ada coretan. Jadilah yang pertama mengirim pesan!
-                    </div>
-                `;
-                return;
-            }
-
-            // Render from newest to oldest
-            [...messages].reverse().forEach((msg) => {
-                const card = document.createElement('div');
-                card.className = "p-3.5 bg-white/60 rounded-2xl border border-slate-100 shadow-sm flex flex-col relative group transition-all hover:bg-white";
-                card.innerHTML = `
-                    <div class="flex justify-between items-start mb-1">
-                        <span class="font-bold text-slate-800 text-sm flex items-center gap-1.5">
-                            <span class="w-2 h-2 rounded-full bg-indigo-500"></span> ${msg.name}
-                        </span>
-                        <span class="text-[10px] text-slate-400">${msg.time || "Baru saja"}</span>
-                    </div>
-                    <p class="text-xs text-slate-600 leading-relaxed">${msg.message}</p>
-                `;
-                container.appendChild(card);
-            });
-        }
-
-        function handlePostMessage(event) {
-            event.preventDefault();
-            playTone("G5", "8n");
-
-            const nameInput = document.getElementById('sender-name');
-            const messageInput = document.getElementById('sender-message');
-
-            const name = nameInput.value.trim() || "Anonim";
-            const message = messageInput.value.trim();
-
-            if (!message) return;
-
-            const messages = getMessages();
-            const newMessage = {
-                id: Date.now(),
-                name: name,
-                message: message,
-                time: "Baru saja"
-            };
-
-            messages.push(newMessage);
-            saveMessages(messages);
-            renderMessages();
-
-            // Reset Form and feedback
-            nameInput.value = '';
-            messageInput.value = '';
-            showToast("✨ Pesanmu berhasil ditempel di papan kebaikan!", "pink");
-            triggerMiniConfetti();
-        }
-
-        function clearMessages() {
-            playTone("C4", "8n");
-            if (confirm("Apakah kamu yakin ingin menghapus semua pesan di papan coretan?")) {
-                saveMessages([]);
-                renderMessages();
-                showToast("🗑️ Papan pesan telah dibersihkan.", "info");
-            }
-        }
-
-
-        // Confetti Celebrations
-        function celebrateGroup() {
-            playHarmonicTone();
-            confetti({
-                particleCount: 150,
-                spread: 80,
-                origin: { y: 0.6 },
-                colors: ['#6366f1', '#a855f7', '#ec4899', '#10b981', '#f59e0b']
-            });
-            showToast("🎉 Hiduplah Pelenger! Solid Selamanya!", "success");
-        }
-
-        function triggerMiniConfetti() {
-            confetti({
-                particleCount: 50,
-                spread: 40,
-                origin: { y: 0.8 },
-                colors: ['#6366f1', '#a855f7', '#ec4899']
-            });
-        }
-
-        // Roulette Wheel Animation Logic
-        let isSpinning = false;
-        let currentRotation = 0;
-
-        function triggerRoulette() {
-            if (isSpinning) return;
-
-            isSpinning = true;
-            playTone("A4", "16n");
-            
-            // UI elements
-            const wheel = document.getElementById('roulette-wheel');
-            const spinBtn = document.getElementById('spin-btn');
-            const spinIcon = document.getElementById('spin-icon');
-            const resultDiv = document.getElementById('roulette-result');
-            const placeholder = document.getElementById('roulette-placeholder');
-
-            // Sound acceleration simulation
-            let soundInterval;
-            if (audioEnabled) {
-                let speed = 100;
-                const playBeep = () => {
-                    playTone("A5", "32n");
-                    if (speed < 500) {
-                        speed += 40;
-                        soundInterval = setTimeout(playBeep, speed);
-                    }
-                };
-                soundInterval = setTimeout(playBeep, speed);
-            }
-
-            // Animate spin button
-            spinBtn.disabled = true;
-            spinBtn.classList.add('opacity-50', 'cursor-not-allowed');
-            spinIcon.classList.add('animate-spin');
-            
-            placeholder.classList.add('hidden');
-            resultDiv.classList.add('hidden');
-
-            // Select a random winner
-            const randomIndex = Math.floor(Math.random() * members.length);
-            const winner = members[randomIndex];
-
-            // Calculate rotation details (at least 5 full rotations + index fraction)
-            const segmentDegrees = 360 / members.length;
-            const extraDegrees = 360 * 5 + (randomIndex * segmentDegrees);
-            currentRotation += extraDegrees;
-
-            wheel.style.transform = `rotate(${currentRotation}deg)`;
-
-            // Transition finishes after 3000ms
-            setTimeout(() => {
-                isSpinning = false;
-                spinBtn.disabled = false;
-                spinBtn.classList.remove('opacity-50', 'cursor-not-allowed');
-                spinIcon.classList.remove('animate-spin');
-                clearTimeout(soundInterval);
-
-                // Play winning melody
-                if (audioEnabled) {
-                    playHarmonicTone();
+                openPosterModal(poster) {
+                    this.activePoster = poster;
+                    this.modalOpen = true;
                 }
-
-                // Render Result
-                document.getElementById('result-name').innerText = winner.fullName;
-                document.getElementById('result-quote').innerText = `"${winner.quote}"`;
-                
-                resultDiv.classList.remove('hidden');
-                
-                // Explode colorful confetti
-                confetti({
-                    particleCount: 100,
-                    spread: 70,
-                    origin: { y: 0.75 }
-                });
-
-                showToast(`🏆 Juara hari ini: ${winner.name}!`, "pink");
-            }, 3000);
+            }
         }
 
-        // Page Onload initialization
-        window.onload = function() {
-            renderMembers();
-            renderMessages();
-            
-            // Warm welcome toast
-            setTimeout(() => {
-                showToast("👋 Halo! Selamat datang di markas Pelenger!", "info");
-            }, 1000);
-        };
+        function topicViewer() {
+            return {
+                topicData: {
+                    solar: {
+                        category: 'Astronomi & Sains',
+                        title: 'Tata Surya & Karakteristik Planet',
+                        icon: '🪐',
+                        description: 'Tata surya terdiri dari Matahari sebagai pusat dan berbagai benda langit yang mengitarinya termasuk 8 planet utama.',
+                        visualTitle: 'Pusat Gravitasi & Planet',
+                        visualDesc: 'Matahari mendominasi 99.8% massa tata surya, menciptakan gaya gravitasi kuat yang menahan seluruh planet tetap berada di orbitnya.',
+                        highlights: ['Matahari adalah bintang induk', 'Dibagi menjadi planet luar dan dalam', 'Jarak dihitung menggunakan Satuan Astronomi (SA)'],
+                        stats: [
+                            { value: '8 Planet', label: 'Jumlah Utama' },
+                            { value: '4.6 Miliar', label: 'Usia Tata Surya' },
+                            { value: '150 Juta KM', label: 'Jarak Bumi-Matahari' }
+                        ],
+                        flashcards: [
+                            { icon: '☀️', frontTitle: 'Matahari', backDesc: 'Pusat tata surya berupa bola gas panas raksasa yang menghasilkan energi cahaya dan panas melalui reaksi fusi nuklir.', flipped: false },
+                            { icon: '🔴', frontTitle: 'Merkurius', backDesc: 'Planet terdekat dari Matahari dengan permukaan dipenuhi kawah akibat hantaman asteroid serta suhu ekstrem.', flipped: false },
+                            { icon: '⭐', frontTitle: 'Venus', backDesc: 'Planet paling panas di tata surya akibat efek rumah kaca yang sangat kuat dari atmosfer karbon dioksidanya.', flipped: false },
+                            { icon: '🌍', frontTitle: 'Bumi', backDesc: 'Satu-satunya planet yang diketahui memiliki air berwujud cair dan kaya akan oksigen penunjang kehidupan.', flipped: false },
+                            { icon: '🟠', frontTitle: 'Mars', backDesc: 'Dikenal sebagai Planet Merah karena kandungan besi oksida (karat) yang melimpah di permukaan tanahnya.', flipped: false },
+                            { icon: '🪐', frontTitle: 'Jupiter', backDesc: 'Planet raksasa gas terbesar di tata surya yang memiliki badai raksasa ikonik bernama Bintik Merah Raksasa.', flipped: false }
+                        ]
+                    },
+                    water: {
+                        category: 'Ilmu Bumi & Lingkungan',
+                        title: 'Siklus Hidrologi (Siklus Air)',
+                        icon: '💧',
+                        description: 'Jumlah air di bumi relatif tetap karena mengalami perputaran siklus alami secara terus-menerus tanpa henti.',
+                        visualTitle: 'Sirkulasi Air Global',
+                        visualDesc: 'Air mengalami perubahan wujud dari cair menjadi gas di atmosfer, lalu mengembun menjadi awan, dan kembali turun ke bumi sebagai presipitasi.',
+                        highlights: ['Didorong oleh energi panas matahari', 'Menjaga ketersediaan air bersih di daratan', 'Melibatkan proses evaporasi dan kondensasi'],
+                        stats: [
+                            { value: '71%', label: 'Permukaan Bumi' },
+                            { value: '97.5% Air', label: 'Berwujud Laut Asin' },
+                            { value: '3 Tahap', label: 'Proses Utama' }
+                        ],
+                        flashcards: [
+                            { icon: '☀️', frontTitle: 'Evaporasi & Transpirasi', backDesc: 'Penguapan air dari permukaan laut, danau, serta pelepasan uap air dari jaringan daun tumbuhan.', flipped: false },
+                            { icon: '☁️', frontTitle: 'Kondensasi', backDesc: 'Proses perubahan uap air di udara dingin menjadi titik-titik air atau kristal es membentuk awan.', flipped: false },
+                            { icon: '🌧️', frontTitle: 'Presipitasi', backDesc: 'Jatuhnya titik-titik air dari awan ke permukaan bumi dalam bentuk hujan, salju, atau es batu.', flipped: false },
+                            { icon: '💧', frontTitle: 'Infiltrasi & Perkolasi', backDesc: 'Penyerapan air hujan ke dalam pori-pori tanah hingga menjadi air tanah atau sumber mata air.', flipped: false },
+                            { icon: '🌊', frontTitle: 'Run-off (Limpasan)', backDesc: 'Aliran air di atas permukaan tanah menuju sungai, danau, hingga kembali bermuara ke laut.', flipped: false },
+                            { icon: '♻️', frontTitle: 'Siklus Berkelanjutan', backDesc: 'Proses berulang secara terus-menerus yang menjaga keseimbangan ekosistem hidrologi bumi.', flipped: false }
+                        ]
+                    },
+                    plant: {
+                        category: 'Biologi & Botani',
+                        title: 'Anatomi & Struktur Tumbuhan',
+                        icon: '🌿',
+                        description: 'Tumbuhan memiliki organ utama seperti akar, batang, dan daun yang bekerja sama untuk kelangsungan hidup dan fotosintesis.',
+                        visualTitle: 'Organ Utama Tumbuhan',
+                        visualDesc: 'Setiap bagian tanaman memiliki fungsi khusus mulai dari penyerapan nutrisi di dalam tanah hingga pembuatan makanan di daun.',
+                        highlights: ['Akar menyerap air dan mineral', 'Batang menyalurkan zat makanan', 'Daun tempat dapur utama fotosintesis'],
+                        stats: [
+                            { value: '3 Organ', label: 'Vegetatif Utama' },
+                            { value: 'Klorofil', label: 'Zat Hijau Daun' },
+                            { value: 'Oksigen', label: 'Hasil Sampingan' }
+                        ],
+                        flashcards: [
+                            { icon: '🌱', frontTitle: 'Akar Tumbuhan', backDesc: 'Bagian tanaman di dalam tanah yang berfungsi menyerap air serta mineral hara serta memperkokoh berdirinya tanaman.', flipped: false },
+                            { icon: '🪵', frontTitle: 'Batang Tanaman', backDesc: 'Saluran transportasi utama pengangkut air dari akar ke daun (xilem) serta hasil fotosintesis ke seluruh tubuh (floem).', flipped: false },
+                            { icon: '🍃', frontTitle: 'Daun & Klorofil', backDesc: 'Tempat berlangsungnya fotosintesis menggunakan bantuan cahaya matahari, karbon dioksida, dan zat hijau daun.', flipped: false },
+                            { icon: '🌸', frontTitle: 'Bunga', backDesc: 'Organ reproduksi tumbuhan yang menghasilkan alat kelamin jantan dan betina untuk proses penyerbukan.', flipped: false },
+                            { icon: '🍎', frontTitle: 'Buah & Biji', backDesc: 'Hasil pembuahan bunga yang membungkus biji sebagai alat perkembangbiakan generasi tanaman berikutnya.', flipped: false },
+                            { icon: '☀️', frontTitle: 'Stomata', backDesc: 'Pori-pori kecil di permukaan daun sebagai jalur keluar masuknya gas pernapasan tumbuhan.', flipped: false }
+                        ]
+                    }
+                },
+
+                get currentTopicData() {
+                    return this.topicData[this.selectedTopicId] || this.topicData.solar;
+                }
+            }
+        }
     </script>
 </body>
 </html>
