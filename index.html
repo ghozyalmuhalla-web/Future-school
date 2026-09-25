@@ -1,570 +1,375 @@
 <!DOCTYPE html>
-<html lang="id">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>NurVisual - Media Pembelajaran PAI Interaktif</title>
-    <script src="https://cdn.tailwindcss.com"></script>
-    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
-    <script defer src="https://cdn.jsdelivr.net/npm/alpinejs@3.x.x/dist/cdn.min.js"></script>
-    <style>
-        body { font-family: 'Plus Jakarta Sans', sans-serif; }
-        .perspective-1000 { perspective: 1000px; }
-        .transform-style-3d { transform-style: preserve-3d; }
-        .backface-hidden { backface-visibility: hidden; }
-        .rotate-y-180 { transform: rotateY(180deg); }
-    </style>
-</head>
-<body class="bg-slate-50 text-slate-800 min-h-screen flex flex-col justify-between selection:bg-emerald-500 selection:text-white" x-data="learningApp()">
-    <header class="sticky top-0 z-50 bg-white/80 backdrop-blur-md border-b border-slate-100 shadow-sm">
-        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-20 flex items-center justify-between">
-            <div class="flex items-center space-x-3 cursor-pointer" @click="currentTab = 'home'">
-                <div class="w-10 h-10 rounded-xl bg-gradient-to-tr from-emerald-600 to-teal-500 flex items-center justify-center text-white shadow-md shadow-emerald-500/20 font-bold text-xl">
-                    NV
-                </div>
-                <div>
-                    <span class="text-xl font-extrabold bg-gradient-to-r from-emerald-600 to-teal-600 bg-clip-text text-transparent">NurVisual</span>
-                    <span class="block text-xs font-medium text-slate-400">Pendidikan Agama Islam Interaktif</span>
-                </div>
-            </div>
-            
-            <nav class="hidden md:flex items-center space-x-1 bg-slate-100/80 p-1.5 rounded-full border border-slate-200/60">
-                <button @click="currentTab = 'home'" :class="currentTab === 'home' ? 'bg-white text-emerald-600 shadow-sm font-semibold' : 'text-slate-600 hover:text-emerald-600 font-medium'" class="px-5 py-2 rounded-full text-sm transition-all duration-200">Beranda</button>
-                <button @click="currentTab = 'topics'" :class="currentTab === 'topics' ? 'bg-white text-emerald-600 shadow-sm font-semibold' : 'text-slate-600 hover:text-emerald-600 font-medium'" class="px-5 py-2 rounded-full text-sm transition-all duration-200">Modul & Flashcard</button>
-                <button @click="currentTab = 'posters'" :class="currentTab === 'posters' ? 'bg-white text-emerald-600 shadow-sm font-semibold' : 'text-slate-600 hover:text-emerald-600 font-medium'" class="px-5 py-2 rounded-full text-sm transition-all duration-200">Galeri Infografis</button>
-                <button @click="currentTab = 'quiz'" :class="currentTab === 'quiz' ? 'bg-white text-emerald-600 shadow-sm font-semibold' : 'text-slate-600 hover:text-emerald-600 font-medium'" class="px-5 py-2 rounded-full text-sm transition-all duration-200">Kuis Mini 🎯</button>
-            </nav>
-            <div class="flex items-center space-x-3">
-                <span class="hidden sm:inline-flex items-center px-3 py-1 rounded-full text-xs font-semibold bg-emerald-50 text-emerald-600 border border-emerald-200">
-                    <span class="w-2 h-2 rounded-full bg-emerald-500 mr-1.5 animate-pulse"></span> PAI Interaktif
-                </span>
-                <!-- Mobile Menu Button -->
-                <button @click="mobileMenuOpen = !mobileMenuOpen" class="md:hidden p-2 rounded-lg text-slate-600 hover:bg-slate-100 focus:outline-none">
-                    <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"></path></svg>
-                </button>
-            </div>
-        </div>
-        <!-- Mobile Navigation Menu -->
-        <div x-show="mobileMenuOpen" x-transition class="md:hidden bg-white border-b border-slate-100 px-4 pt-2 pb-4 space-y-2">
-            <button @click="currentTab = 'home'; mobileMenuOpen = false" class="block w-full text-left px-4 py-2 rounded-lg text-sm font-medium" :class="currentTab === 'home' ? 'bg-emerald-50 text-emerald-600' : 'text-slate-600'">Beranda</button>
-            <button @click="currentTab = 'topics'; mobileMenuOpen = false" class="block w-full text-left px-4 py-2 rounded-lg text-sm font-medium" :class="currentTab === 'topics' ? 'bg-emerald-50 text-emerald-600' : 'text-slate-600'">Modul & Flashcard</button>
-            <button @click="currentTab = 'posters'; mobileMenuOpen = false" class="block w-full text-left px-4 py-2 rounded-lg text-sm font-medium" :class="currentTab === 'posters' ? 'bg-emerald-50 text-emerald-600' : 'text-slate-600'">Galeri Infografis</button>
-            <button @click="currentTab = 'quiz'; mobileMenuOpen = false" class="block w-full text-left px-4 py-2 rounded-lg text-sm font-medium" :class="currentTab === 'quiz' ? 'bg-emerald-50 text-emerald-600' : 'text-slate-600'">Kuis Mini 🎯</button>
-        </div>
-    </header>
-    <main class="flex-grow">
-        
-        <div x-show="currentTab === 'home'" class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
-            <!-- Hero Section -->
-            <div class="grid grid-cols-1 lg:grid-cols-12 gap-12 items-center mb-16">
-                <div class="lg:col-span-7 space-y-6">
-                    <div class="inline-flex items-center space-x-2 px-3.5 py-1.5 rounded-full bg-emerald-50 border border-emerald-100 text-emerald-700 text-xs font-bold uppercase tracking-wider">
-                        <span>✨ Belajar Agama Lebih Menyenangkan & Bermakna</span>
-                    </div>
-                    <h1 class="text-4xl sm:text-5xl lg:text-6xl font-extrabold text-slate-900 tracking-tight leading-tight">
-                        Eksplorasi Nilai-Nilai Islam Lewat <span class="bg-gradient-to-r from-emerald-600 via-teal-600 to-cyan-600 bg-clip-text text-transparent">Media Visual Modern</span>
-                    </h1>
-                    <p class="text-lg text-slate-600 leading-relaxed max-w-2xl">
-                        Mendalami Rukun Iman, Kisah Teladan Rasul & Sahabat, Akhlak Terpuji, serta Pelestarian Alam dengan pendekatan visual interaktif yang segar dan mudah dipahami.
-                    </p>
-                    <div class="flex flex-wrap gap-4 pt-4">
-                        <button @click="currentTab = 'topics'" class="px-8 py-4 bg-emerald-600 hover:bg-emerald-700 text-white font-semibold rounded-2xl shadow-lg shadow-emerald-500/25 transition-all duration-200 transform hover:-translate-y-0.5">
-                            Mulai Belajar Materi 🕌
-                        </button>
-                        <button @click="currentTab = 'quiz'" class="px-8 py-4 bg-white hover:bg-slate-50 text-slate-700 font-semibold rounded-2xl border border-slate-200 shadow-sm transition-all duration-200">
-                            Uji Kemampuan (Kuis) 🎯
-                        </button>
-                    </div>
-                </div>
-                <div class="lg:col-span-5 relative">
-                    <div class="absolute -inset-1 bg-gradient-to-r from-emerald-500 to-teal-600 rounded-3xl blur-xl opacity-20 animate-pulse"></div>
-                    <div class="relative bg-white rounded-3xl p-6 border border-slate-100 shadow-xl space-y-6">
-                        <div class="flex items-center justify-between pb-4 border-b border-slate-100">
-                            <span class="text-xs font-bold uppercase text-slate-400 tracking-wider">Preview Flashcard PAI</span>
-                            <span class="px-2.5 py-1 bg-emerald-50 text-emerald-600 rounded-full text-xs font-bold">Interaktif</span>
-                        </div>
-                        <div class="bg-gradient-to-br from-emerald-600 to-teal-700 rounded-2xl p-6 text-white text-center space-y-4 shadow-md">
-                            <div class="text-4xl">📖</div>
-                            <h3 class="text-xl font-bold">Rukun Iman Pertama: Iman kepada Allah SWT</h3>
-                            <p class="text-xs text-emerald-100 bg-white/10 py-1.5 px-3 rounded-full inline-block">Klik Modul untuk Membuka Semua Kartu</p>
-                        </div>
-                        <div class="grid grid-cols-3 gap-3 text-center">
-                            <div class="p-3 bg-slate-50 rounded-xl border border-slate-100">
-                                <span class="block text-xl font-bold text-emerald-600">3+</span>
-                                <span class="text-[10px] text-slate-500 font-semibold uppercase">Modul Utama</span>
-                            </div>
-                            <div class="p-3 bg-slate-50 rounded-xl border border-slate-100">
-                                <span class="block text-xl font-bold text-teal-600">18+</span>
-                                <span class="text-[10px] text-slate-500 font-semibold uppercase">Flashcard</span>
-                            </div>
-                            <div class="p-3 bg-slate-50 rounded-xl border border-slate-100">
-                                <span class="block text-xl font-bold text-cyan-600">6+</span>
-                                <span class="text-[10px] text-slate-500 font-semibold uppercase">Infografis</span>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <!-- Features Grid -->
-            <div class="mb-16">
-                <div class="text-center max-w-2xl mx-auto mb-12 space-y-3">
-                    <h2 class="text-3xl font-bold text-slate-900">Pilar Pembelajaran Agama Islam</h2>
-                    <p class="text-slate-600 text-sm">Dirancang secara pedagogis untuk membangun pemahaman akidah, akhlak mulia, dan wawasan sejarah Islam.</p>
-                </div>
-                <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
-                    <div class="bg-white p-8 rounded-3xl border border-slate-100 shadow-sm hover:shadow-md transition-all space-y-4 group">
-                        <div class="w-14 h-14 rounded-2xl bg-emerald-50 text-emerald-600 flex items-center justify-center text-2xl group-hover:scale-110 transition-transform">
-                            🤲
-                        </div>
-                        <h3 class="text-xl font-bold text-slate-900">Rukun Iman & Akidah</h3>
-                        <p class="text-slate-600 text-sm leading-relaxed">Mendalami 6 rukun iman, sifat wajib bagi Allah SWT, serta asmaul husna secara mendalam dan kontekstual.</p>
-                    </div>
-                    <div class="bg-white p-8 rounded-3xl border border-slate-100 shadow-sm hover:shadow-md transition-all space-y-4 group">
-                        <div class="w-14 h-14 rounded-2xl bg-teal-50 text-teal-600 flex items-center justify-center text-2xl group-hover:scale-110 transition-transform">
-                            📜
-                        </div>
-                        <h3 class="text-xl font-bold text-slate-900">Kisah Teladan & Sejarah</h3>
-                        <p class="text-slate-600 text-sm leading-relaxed">Meneladani akhlak para Nabi, Rasul, dan sahabat terkemuka sebagai cerminan perilaku kehidupan sehari-hari.</p>
-                    </div>
-                    <div class="bg-white p-8 rounded-3xl border border-slate-100 shadow-sm hover:shadow-md transition-all space-y-4 group">
-                        <div class="w-14 h-14 rounded-2xl bg-cyan-50 text-cyan-600 flex items-center justify-center text-2xl group-hover:scale-110 transition-transform">
-                            🌿
-                        </div>
-                        <h3 class="text-xl font-bold text-slate-900">Akhlak & Pelestarian Alam</h3>
-                        <p class="text-slate-600 text-sm leading-relaxed">Membentuk karakter jujur, amanah, toleran, serta kesadaran ekologis menjaga bumi sebagai khalifah.</p>
-                    </div>
-                </div>
-            </div>
-        </div>
-        <div x-show="currentTab === 'topics'" class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
-            <div class="text-center max-w-2xl mx-auto mb-12 space-y-3">
-                <span class="text-xs font-bold uppercase text-emerald-600 tracking-wider">Modul Belajar PAI</span>
-                <h2 class="text-3xl font-bold text-slate-900">Pilih Materi Pembelajaran Islam</h2>
-                <p class="text-slate-600 text-sm">Pilih salah satu topik di bawah ini untuk melihat ringkasan infografis dan kartu hafalan interaktif.</p>
-            </div>
-            <!-- Topic Selector Buttons -->
-            <div class="flex flex-wrap justify-center gap-3 mb-12">
-                <template x-for="topic in topics" :key="topic.id">
-                    <button @click="selectedTopicId = topic.id" 
-                        :class="selectedTopicId === topic.id ? 'bg-emerald-600 text-white shadow-md shadow-emerald-500/20' : 'bg-white text-slate-600 border border-slate-200 hover:bg-slate-50'"
-                        class="px-6 py-3 rounded-2xl font-semibold text-sm transition-all duration-200 flex items-center space-x-2">
-                        <span x-text="topic.icon"></span>
-                        <span x-text="topic.name"></span>
-                    </button>
-                </template>
-            </div>
-            <!-- Active Topic Display Container -->
-            <div class="space-y-12" x-data="topicViewer()">
-                
-                <!-- Topic Header Card & Infographic Summary -->
-                <div class="bg-white rounded-3xl p-8 border border-slate-100 shadow-sm">
-                    <div class="grid grid-cols-1 lg:grid-cols-12 gap-8 items-center">
-                        <div class="lg:col-span-5 space-y-4">
-                            <span class="px-3 py-1 rounded-full text-xs font-bold bg-emerald-50 text-emerald-600" x-text="currentTopicData.category"></span>
-                            <h3 class="text-3xl font-extrabold text-slate-900" x-text="currentTopicData.title"></h3>
-                            <p class="text-slate-600 text-sm leading-relaxed" x-text="currentTopicData.description"></p>
-                            <div class="p-4 bg-slate-50 rounded-2xl border border-slate-100 space-y-2">
-                                <span class="text-xs font-bold uppercase text-slate-400">Poin Penting Pembelajaran:</span>
-                                <ul class="space-y-1.5 text-xs text-slate-700 font-medium">
-                                    <template x-for="point in currentTopicData.highlights">
-                                        <li class="flex items-center space-x-2">
-                                            <span class="w-1.5 h-1.5 rounded-full bg-emerald-600"></span>
-                                            <span x-text="point"></span>
-                                        </li>
-                                    </template>
-                                </ul>
-                            </div>
-                        </div>
-                        <div class="lg:col-span-7">
-                            <div class="bg-gradient-to-br from-emerald-600 via-teal-700 to-cyan-800 rounded-3xl p-8 text-white relative overflow-hidden shadow-xl">
-                                <div class="absolute -right-10 -bottom-10 w-48 h-48 bg-white/10 rounded-full blur-2xl"></div>
-                                <div class="relative z-10 space-y-6">
-                                    <div class="flex items-center justify-between">
-                                        <span class="text-xs font-bold uppercase tracking-wider bg-white/20 px-3 py-1 rounded-full">Ringkasan Konsep Utama</span>
-                                        <span class="text-3xl" x-text="currentTopicData.icon"></span>
-                                    </div>
-                                    <div class="space-y-2">
-                                        <h4 class="text-2xl font-bold" x-text="currentTopicData.visualTitle"></h4>
-                                        <p class="text-emerald-100 text-sm leading-relaxed" x-text="currentTopicData.visualDesc"></p>
-                                    </div>
-                                    <div class="grid grid-cols-2 sm:grid-cols-3 gap-3 pt-2">
-                                        <template x-for="stat in currentTopicData.stats">
-                                            <div class="bg-white/10 backdrop-blur-md p-3 rounded-2xl border border-white/10">
-                                                <span class="block text-lg font-extrabold" x-text="stat.value"></span>
-                                                <span class="text-[10px] text-emerald-200" x-text="stat.label"></span>
-                                            </div>
-                                        </template>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <!-- Flashcard Interactive Section -->
-                <div class="space-y-6">
-                    <div class="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4">
-                        <div>
-                            <h3 class="text-2xl font-bold text-slate-900">Flashcard Hafalan & Konsep</h3>
-                            <p class="text-slate-500 text-sm">Klik kartu di bawah untuk membalik dan melihat penjelasan lengkap materi!</p>
-                        </div>
-                        <div class="inline-flex items-center space-x-2 text-xs font-semibold text-slate-500 bg-white px-4 py-2 rounded-2xl border border-slate-200 shadow-sm">
-                            <span>💡 Tips: Kartu dapat dibolak-balik kapanpun</span>
-                        </div>
-                    </div>
-                    <!-- Flashcards Grid -->
-                    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-                        <template x-for="(card, index) in currentTopicData.flashcards" :key="index">
-                            <div class="h-64 cursor-pointer perspective-1000" @click="card.flipped = !card.flipped">
-                                <div class="relative w-full h-full duration-500 transform-style-3d shadow-sm hover:shadow-md rounded-3xl" :class="card.flipped ? 'rotate-y-180' : ''">
-                                    
-                                    <!-- Front Side -->
-                                    <div class="absolute inset-0 w-full h-full bg-white border border-slate-100 rounded-3xl p-6 flex flex-col justify-between backface-hidden">
-                                        <div class="flex items-center justify-between">
-                                            <span class="w-8 h-8 rounded-full bg-emerald-50 text-emerald-600 flex items-center justify-center text-xs font-bold" x-text="index + 1"></span>
-                                            <span class="text-2xl" x-text="card.icon"></span>
-                                        </div>
-                                        <div class="space-y-2 text-center my-auto">
-                                            <h4 class="text-lg font-bold text-slate-900" x-text="card.frontTitle"></h4>
-                                            <span class="inline-block text-xs font-semibold text-emerald-600 bg-emerald-50 px-3 py-1 rounded-full">Klik untuk Balik Kartu 🔄</span>
-                                        </div>
-                                        <div class="text-center">
-                                            <span class="text-[10px] uppercase font-bold text-slate-400 tracking-wider">Sisi Depan</span>
-                                        </div>
-                                    </div>
-                                    <!-- Back Side -->
-                                    <div class="absolute inset-0 w-full h-full bg-gradient-to-br from-emerald-600 to-teal-700 text-white rounded-3xl p-6 flex flex-col justify-between backface-hidden rotate-y-180">
-                                        <div class="flex items-center justify-between">
-                                            <span class="text-xs font-bold uppercase tracking-wider text-emerald-200">Penjelasan & Makna</span>
-                                            <span class="text-2xl">✨</span>
-                                        </div>
-                                        <div class="space-y-2 my-auto">
-                                            <p class="text-sm leading-relaxed text-emerald-50 font-medium" x-text="card.backDesc"></p>
-                                        </div>
-                                        <div class="text-center">
-                                            <span class="text-[10px] uppercase font-bold text-emerald-200 tracking-wider">Klik untuk Kembali</span>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </template>
-                    </div>
-                </div>
-            </div>
-        </div>
-        <div x-show="currentTab === 'posters'" class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
-            <div class="text-center max-w-2xl mx-auto mb-12 space-y-3">
-                <span class="text-xs font-bold uppercase text-emerald-600 tracking-wider">Galeri Visual</span>
-                <h2 class="text-3xl font-bold text-slate-900">Infografis & Poster Edukasi Islam</h2>
-                <p class="text-slate-600 text-sm">Koleksi poster visual seputar akidah, akhlak mulia, adab islami, serta kepedulian lingkungan hidup.</p>
-            </div>
-            <!-- Filter Categories -->
-            <div class="flex flex-wrap justify-center gap-2 mb-10">
-                <button @click="posterFilter = 'all'" :class="posterFilter === 'all' ? 'bg-emerald-600 text-white' : 'bg-white text-slate-600 border border-slate-200'" class="px-5 py-2 rounded-full text-xs font-semibold transition-all">Semua Poster</button>
-                <button @click="posterFilter = 'akidah'" :class="posterFilter === 'akidah' ? 'bg-emerald-600 text-white' : 'bg-white text-slate-600 border border-slate-200'" class="px-5 py-2 rounded-full text-xs font-semibold transition-all">Akidah & Ibadah</button>
-                <button @click="posterFilter = 'akhlak'" :class="posterFilter === 'akhlak' ? 'bg-emerald-600 text-white' : 'bg-white text-slate-600 border border-slate-200'" class="px-5 py-2 rounded-full text-xs font-semibold transition-all">Akhlak & Adab</button>
-                <button @click="posterFilter = 'alam'" :class="posterFilter === 'alam' ? 'bg-emerald-600 text-white' : 'bg-white text-slate-600 border border-slate-200'" class="px-5 py-2 rounded-full text-xs font-semibold transition-all">Kelestarian Alam</button>
-            </div>
-            <!-- Poster Grid -->
-            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-                <template x-for="poster in filteredPosters" :key="poster.id">
-                    <div class="bg-white rounded-3xl border border-slate-100 shadow-sm hover:shadow-lg transition-all overflow-hidden flex flex-col justify-between group">
-                        <div class="relative h-56 bg-gradient-to-tr from-slate-900 to-emerald-950 p-6 flex flex-col justify-between overflow-hidden">
-                            <div class="absolute inset-0 opacity-20 bg-[radial-gradient(#ffffff_1px,transparent_1px)] [background-size:16px_16px]"></div>
-                            <div class="absolute -right-8 -top-8 w-32 h-32 bg-emerald-500/30 rounded-full blur-xl group-hover:scale-150 transition-transform duration-500"></div>
-                            
-                            <div class="flex items-center justify-between relative z-10">
-                                <span class="px-3 py-1 bg-white/10 backdrop-blur-md rounded-full text-[10px] font-bold text-white uppercase tracking-wider" x-text="poster.tag"></span>
-                                <span class="text-3xl" x-text="poster.icon"></span>
-                            </div>
-                            <div class="relative z-10 space-y-1">
-                                <h3 class="text-xl font-bold text-white" x-text="poster.title"></h3>
-                                <p class="text-xs text-emerald-200" x-text="poster.subtitle"></p>
-                            </div>
-                        </div>
-                        <div class="p-6 space-y-4 flex-grow flex flex-col justify-between">
-                            <p class="text-xs text-slate-600 leading-relaxed" x-text="poster.description"></p>
-                            <div class="flex items-center justify-between pt-4 border-t border-slate-100">
-                                <span class="text-xs font-semibold text-slate-400" x-text="poster.readTime"></span>
-                                <button @click="openPosterModal(poster)" class="px-4 py-2 bg-emerald-50 hover:bg-emerald-100 text-emerald-600 font-semibold rounded-xl text-xs transition-colors">
-                                    Perbesar Poster 🔍
-                                </button>
-                            </div>
-                        </div>
-                    </div>
-                </template>
-            </div>
-        </div>
-        <div x-show="currentTab === 'quiz'" class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
-            <div class="bg-white rounded-3xl p-8 border border-slate-100 shadow-sm space-y-8" x-data="quizApp()">
-                
-                <div class="text-center space-y-2 pb-6 border-b border-slate-100">
-                    <span class="px-3 py-1 bg-emerald-50 text-emerald-600 rounded-full text-xs font-bold">Evaluasi PAI</span>
-                    <h2 class="text-2xl sm:text-3xl font-extrabold text-slate-900">Kuis Mini Pilihan Ganda</h2>
-                    <p class="text-slate-500 text-sm">Uji pemahamanmu seputar akidah, akhlak, dan sejarah Islam dengan menjawab soal di bawah ini.</p>
-                </div>
-                <!-- Quiz Active State -->
-                <template x-if="!quizFinished">
-                    <div class="space-y-6">
-                        <div class="flex items-center justify-between text-xs font-semibold text-slate-500 bg-slate-50 px-4 py-2.5 rounded-2xl">
-                            <span>Soal <span class="text-emerald-600 font-bold" x-text="currentIndex + 1"></span> dari <span x-text="questions.length"></span></span>
-                            <span>Skor Sementara: <span class="text-emerald-600 font-bold" x-text="score"></span></span>
-                        </div>
-                        <div class="space-y-4">
-                            <h3 class="text-lg sm:text-xl font-bold text-slate-900" x-text="questions[currentIndex].question"></h3>
-                            
-                            <div class="grid grid-cols-1 gap-3">
-                                <template x-for="(option, optIndex) in questions[currentIndex].options" :key="optIndex">
-                                    <button @click="selectOption(optIndex)"
-                                        :class="selectedOption === null ? 'bg-slate-50 hover:bg-emerald-50 hover:border-emerald-200 border-slate-200 text-slate-700' : (optIndex === questions[currentIndex].correct ? 'bg-emerald-100 border-emerald-500 text-emerald-900 font-semibold' : (selectedOption === optIndex ? 'bg-rose-100 border-rose-400 text-rose-900' : 'bg-slate-50 border-slate-200 text-slate-400 opacity-60'))"
-                                        class="p-4 rounded-2xl border text-left text-sm transition-all flex items-center justify-between">
-                                        <span x-text="option"></span>
-                                        <template x-if="selectedOption !== null">
-                                            <span x-text="optIndex === questions[currentIndex].correct ? '✅ Benar' : (selectedOption === optIndex ? '❌ Pilihanmu' : '')" class="text-xs font-bold"></span>
-                                        </template>
-                                    </button>
-                                </template>
-                            </div>
-                        </div>
-                        <template x-if="selectedOption !== null">
-                            <div class="pt-4 flex justify-end">
-                                <button @click="nextQuestion" class="px-6 py-3 bg-emerald-600 hover:bg-emerald-700 text-white font-semibold text-xs rounded-xl shadow-md transition-all">
-                                    <span x-text="currentIndex < questions.length - 1 ? 'Soal Berikutnya ➡️' : 'Lihat Hasil Kuis 🏆'"></span>
-                                </button>
-                            </div>
-                        </template>
-                    </div>
-                </template>
-                <!-- Quiz Finished State -->
-                <template x-if="quizFinished">
-                    <div class="text-center space-y-6 py-8">
-                        <div class="w-20 h-20 bg-emerald-50 text-emerald-600 rounded-3xl mx-auto flex items-center justify-center text-4xl shadow-inner">
-                            🏆
-                        </div>
-                        <div class="space-y-2">
-                            <h3 class="text-2xl font-bold text-slate-900">Alhamdulillah, Kuis Selesai!</h3>
-                            <p class="text-sm text-slate-600">Kamu telah menyelesaikan seluruh pertanyaan evaluasi Pendidikan Agama Islam.</p>
-                        </div>
-                        <div class="p-6 bg-slate-50 rounded-2xl border border-slate-100 max-w-sm mx-auto space-y-1">
-                            <span class="text-xs uppercase font-bold text-slate-400">Skor Akhir Kamu</span>
-                            <div class="text-4xl font-extrabold text-emerald-600" x-text="score + ' / ' + (questions.length * 10)"></div>
-                        </div>
-                        <button @click="resetQuiz" class="px-8 py-3.5 bg-emerald-600 hover:bg-emerald-700 text-white font-semibold text-xs rounded-xl shadow-md transition-all">
-                            Ulangi Kuis 🔄
-                        </button>
-                    </div>
-                </template>
-            </div>
-        </div>
-    </main>
-    <div x-show="modalOpen" class="fixed inset-0 z-50 flex items-center justify-center p-4 bg-slate-900/60 backdrop-blur-sm" x-transition.opacity>
-        <div @click.away="modalOpen = false" class="bg-white rounded-3xl max-w-2xl w-full p-8 space-y-6 shadow-2xl relative">
-            <div class="flex items-center justify-between pb-4 border-b border-slate-100">
-                <div class="flex items-center space-x-3">
-                    <span class="text-3xl" x-text="activePoster.icon"></span>
-                    <div>
-                        <h3 class="text-xl font-bold text-slate-900" x-text="activePoster.title"></h3>
-                        <span class="text-xs font-semibold text-emerald-600 uppercase tracking-wider" x-text="activePoster.tag"></span>
-                    </div>
-                </div>
-                <button @click="modalOpen = false" class="p-2 rounded-xl text-slate-400 hover:bg-slate-100 hover:text-slate-600">
-                    ✕
-                </button>
-            </div>
-            <div class="space-y-4">
-                <div class="bg-emerald-50 p-6 rounded-2xl border border-emerald-100 text-center space-y-2">
-                    <span class="text-4xl">🌟</span>
-                    <h4 class="text-lg font-bold text-emerald-900" x-text="activePoster.subtitle"></h4>
-                    <p class="text-xs text-emerald-800 leading-relaxed" x-text="activePoster.description"></p>
-                </div>
-                <div class="space-y-2">
-                    <h5 class="text-xs font-bold uppercase text-slate-400 tracking-wider">Rincian Materi Infografis:</h5>
-                    <div class="p-4 bg-slate-50 rounded-2xl border border-slate-100 text-xs text-slate-700 space-y-2">
-                        <p>• Dirancang untuk memperkuat pemahaman nilai-nilai spiritual, akhlak mulia, dan tanggung jawab sosial.</p>
-                        <p>• Menggabungkan ayat/hadis ringkas dengan implementasi praktis dalam kehidupan sehari-hari siswa.</p>
-                        <p>• Cocok digunakan guru sebagai media peraga presentasi interaktif di ruang kelas.</p>
-                    </div>
-                </div>
-            </div>
-            <div class="flex justify-end pt-4 border-t border-slate-100">
-                <button @click="modalOpen = false" class="px-6 py-2.5 bg-emerald-600 text-white font-semibold rounded-xl text-xs hover:bg-emerald-700 shadow-md">
-                    Tutup Tampilan
-                </button>
-            </div>
-        </div>
-    </div>
-    <footer class="bg-white border-t border-slate-100 py-8 mt-16">
-        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex flex-col sm:flex-row items-center justify-between gap-4 text-center sm:text-left">
-            <div class="flex items-center space-x-2">
-                <div class="w-7 h-7 rounded-lg bg-emerald-600 flex items-center justify-center text-white font-bold text-xs">NV</div>
-                <span class="text-sm font-bold text-slate-800">NurVisual - Media Pembelajaran PAI Interaktif</span>
-            </div>
-            <p class="text-xs text-slate-500">Mendukung metode pembelajaran agama Islam modern, bersih, interaktif, dan penuh nilai keteladanan.</p>
-        </div>
-    </footer>
-    <script>
-        function learningApp() {
-            return {
-                currentTab: 'home',
-                mobileMenuOpen: false,
-                selectedTopicId: 'iman',
-                modalOpen: false,
-                activePoster: {},
-                posterFilter: 'all',
-                topics: [
-                    { id: 'iman', name: 'Rukun Iman & Akidah', icon: '🤲', category: 'Akidah Islam' },
-                    { id: 'sejarah', name: 'Kisah Teladan & Sejarah', icon: '📜', category: 'Sejarah Peradaban' },
-                    { id: 'akhlak', name: 'Akhlak & Pelestarian Alam', icon: '🌿', category: 'Akhlak & Lingkungan' }
-                ],
-                posters: [
-                    { id: 1, title: 'Hakikat 6 Rukun Iman', subtitle: 'Pilar Pondasi Keyakinan Seorang Muslim', tag: 'akidah', icon: '🤲', description: 'Infografis lengkap tentang urutan Rukun Iman mulai dari Iman kepada Allah hingga Qada dan Qadar.', readTime: '3 Menit Baca' },
-                    { id: 2, title: 'Sifat Wajib & Jaiz Allah SWT', subtitle: 'Mengenal Sifat Kesempurnaan Sang Pencipta', tag: 'akidah', icon: '✨', description: 'Penjelasan ringkas 20 sifat wajib Allah SWT beserta sifat mustahil dan sifat jaiz-Nya.', readTime: '4 Menit Baca' },
-                    { id: 3, title: 'Kisah Teladan Nabi Ibrahim AS', subtitle: 'Keteguhan Tauhid Menghadapi Ujian', tag: 'akhlak', icon: '🔥', description: 'Pelajaran berharga dari keteguhan iman Nabi Ibrahim AS dalam menegakkan kalimat tauhid.', readTime: '3 Menit Baca' },
-                    { id: 4, title: 'Adab Berinteraksi dengan Alam', subtitle: 'Menjaga Bumi sebagai Amanah Khalifah', tag: 'alam', icon: '🌍', description: 'Poster edukasi larangan berbuat kerusakan di muka bumi serta anjuran menanam pohon dan menjaga kebersihan.', readTime: '2 Menit Baca' },
-                    { id: 5, title: 'Sifat Utama Rasulullah (Sidiq, Amanah, Tabligh, Fathanah)', subtitle: 'Teladan Utama Akhlak Karimah', tag: 'akhlak', icon: '⭐', description: 'Empat sifat mulia para rasul yang wajib diteladani dalam kehidupan sehari-hari oleh setiap pelajar.', readTime: '3 Menit Baca' },
-                    { id: 6, title: 'Toleransi & Ukhuwah Islamiyah', subtitle: 'Menjaga Persaudaraan Sesama Manusia', tag: 'akhlak', icon: '🤝', description: 'Infografis tentang pentingnya menghargai perbedaan, tolong-menolong dalam kebaikan, dan menjaga kerukunan.', readTime: '2 Menit Baca' }
-                ],
-                get filteredPosters() {
-                    if (this.posterFilter === 'all') return this.posters;
-                    return this.posters.filter(p => p.tag === this.posterFilter);
-                },
-                openPosterModal(poster) {
-                    this.activePoster = poster;
-                    this.modalOpen = true;
-                }
-            }
+
+<html lang="id"><head><meta charset="utf-8"/><meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover" name="viewport"/><meta content="mobile_tab" name="shell-type"/><link href="https://fonts.googleapis.com" rel="preconnect"/><link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/><link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&amp;display=swap" rel="stylesheet"/><link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/><script src="https://cdn.tailwindcss.com"></script><script id="tailwind-config">tailwind.config = { darkMode: "class", theme: { extend: { colors: { "on-tertiary-fixed-variant": "#653e00", "on-primary": "#ffffff", "outline": "#6d7a72", "primary": "#006948", "on-background": "#131b2e", "primary-fixed": "#85f8c4", "surface-container-lowest": "#ffffff", "error": "#ba1a1a", "surface-container": "#eaedff", "on-primary-fixed-variant": "#005137", "primary-fixed-dim": "#68dba9", "secondary-fixed-dim": "#6bd8cb", "on-primary-container": "#f5fff7", "on-tertiary": "#ffffff", "tertiary-container": "#a36700", "inverse-on-surface": "#eef0ff", "on-error": "#ffffff", "tertiary-fixed": "#ffddb8", "secondary-container": "#86f2e4", "outline-variant": "#bccac0", "on-tertiary-fixed": "#2a1700", "on-secondary-fixed": "#00201d", "inverse-primary": "#68dba9", "primary-container": "#00855d", "tertiary": "#825100", "on-secondary-fixed-variant": "#005049", "surface": "#faf8ff", "background": "#faf8ff", "secondary-fixed": "#89f5e7", "on-surface-variant": "#3d4a42", "surface-tint": "#006c4a", "on-primary-fixed": "#002114", "on-secondary-container": "#006f66", "surface-container-highest": "#dae2fd", "on-surface": "#131b2e", "surface-variant": "#dae2fd", "on-secondary": "#ffffff", "tertiary-fixed-dim": "#ffb95f", "surface-container-low": "#f2f3ff", "on-error-container": "#93000a", "on-tertiary-container": "#fffbff", "surface-dim": "#d2d9f4", "surface-bright": "#faf8ff", "secondary": "#006a61", "surface-container-high": "#e2e7ff", "inverse-surface": "#283044", "error-container": "#ffdad6" }, borderRadius: { "DEFAULT": "0.25rem", "lg": "0.5rem", "xl": "0.75rem", "full": "9999px" }, spacing: { "margin": "1rem", "gutter": "1rem", "space-lg": "1.5rem", "space-xs": "0.25rem", "space-sm": "0.5rem", "space-md": "1rem", "space-xl": "2rem" }, fontFamily: { "display-lg": ["Plus Jakarta Sans"], "headline-sm": ["Plus Jakarta Sans"], "label-md": ["Plus Jakarta Sans"], "title-md": ["Plus Jakarta Sans"], "body-sm": ["Plus Jakarta Sans"], "label-sm": ["Plus Jakarta Sans"], "label-lg": ["Plus Jakarta Sans"], "body-md": ["Plus Jakarta Sans"], "headline-md": ["Plus Jakarta Sans"], "body-lg": ["Plus Jakarta Sans"], "headline-lg": ["Plus Jakarta Sans"] }, fontSize: { "display-lg": ["36px", { lineHeight: "44px", letterSpacing: "-0.03em", fontWeight: "800" }], "headline-sm": ["18px", { lineHeight: "26px", letterSpacing: "-0.01em", fontWeight: "600" }], "label-md": ["12px", { lineHeight: "16px", letterSpacing: "0.02em", fontWeight: "600" }], "title-md": ["16px", { lineHeight: "24px", letterSpacing: "0em", fontWeight: "600" }], "body-sm": ["12px", { lineHeight: "18px", letterSpacing: "0.01em", fontWeight: "400" }], "label-sm": ["10px", { lineHeight: "14px", letterSpacing: "0.04em", fontWeight: "700" }], "label-lg": ["14px", { lineHeight: "20px", letterSpacing: "0.01em", fontWeight: "600" }], "body-md": ["14px", { lineHeight: "22px", letterSpacing: "0em", fontWeight: "400" }], "headline-md": ["22px", { lineHeight: "30px", letterSpacing: "-0.015em", fontWeight: "600" }], "body-lg": ["16px", { lineHeight: "26px", letterSpacing: "0em", fontWeight: "400" }], "headline-lg": ["28px", { lineHeight: "36px", letterSpacing: "-0.02em", fontWeight: "700" }] } } } };</script><style>@layer base{html,body{width:100vw;margin:0;padding:0;}body{overscroll-behavior:none;}.pb-safe{padding-bottom:env(safe-area-inset-bottom,0px);}.pt-safe{padding-top:env(safe-area-inset-top,0px);}main>:first-child{margin-top:0!important;}main>:last-child{margin-bottom:0!important;}}::-webkit-scrollbar{display:none;}.material-symbols-outlined{font-variation-settings:'FILL' 0,'wght' 500,'GRAD' 0,'opsz' 24;}</style><style>
+    body {
+      min-height: max(884px, 100dvh);
+    }
+  </style>
+  </head><body class="bg-surface font-body-md text-on-surface antialiased flex flex-col min-h-screen"><header class="fixed top-0 w-full z-50 pt-safe bg-surface/85 backdrop-blur-xl shadow-[0_1px_8px_rgba(0,0,0,0.04)]"><div class="h-16 px-margin flex items-center justify-between gap-space-sm"><div class="flex items-center gap-space-sm min-w-0"><div class="w-9 h-9 rounded-xl bg-primary flex items-center justify-center text-on-primary font-display-lg text-title-md shadow-[0_4px_12px_rgba(0,105,72,0.25)] flex-shrink-0"><span>NV</span></div><div class="flex flex-col min-w-0"><span class="font-label-sm text-label-sm text-primary tracking-wide uppercase">Assalamu'alaikum</span><span class="font-title-md text-title-md text-on-surface truncate">Infografis</span></div></div><div class="flex items-center gap-space-xs"><div class="flex items-center gap-1 bg-tertiary-fixed/40 px-2.5 py-1 rounded-full flex-shrink-0"><span class="material-symbols-outlined text-tertiary text-[18px]">local_fire_department</span><span class="font-label-md text-label-md text-tertiary">7 Hari</span></div><button aria-label="Pemberitahuan" class="w-11 h-11 flex items-center justify-center rounded-full text-on-surface-variant hover:text-primary transition-colors" type="button"><span class="material-symbols-outlined text-[22px]">notifications</span></button><div class="w-8 h-8 rounded-full bg-primary flex items-center justify-center flex-shrink-0"><span class="material-symbols-outlined text-on-primary text-[18px]">person</span></div></div></div></header><main class="flex-1 w-full bg-surface pt-16 pb-28"><div class="flex flex-col w-full px-margin pb-6 gap-space-lg">
+<!-- Gallery Header Intro (No duplicate app header) -->
+<section class="flex flex-col gap-1.5 pt-2">
+<div class="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-primary/10 w-fit text-primary">
+<span class="material-symbols-outlined text-[16px]">palette</span>
+<span class="font-label-sm text-label-sm uppercase tracking-wider">Pustaka Visual</span>
+</div>
+<h2 class="font-headline-md text-headline-md text-on-surface">Infografis &amp; Poster Edukasi Islam</h2>
+<p class="font-body-md text-body-md text-on-surface-variant">Koleksi materi visual akidah, akhlak, dan kepedulian lingkungan untuk pembelajaran interaktif.</p>
+</section>
+<!-- Search Input Bar -->
+<div class="relative w-full">
+<div class="absolute inset-y-0 left-0 pl-3.5 flex items-center pointer-events-none text-on-surface-variant">
+<span class="material-symbols-outlined text-[20px]">search</span>
+</div>
+<input class="w-full h-12 pl-10 pr-10 rounded-2xl bg-surface-container-lowest text-on-surface font-body-md text-body-md placeholder:text-on-surface-variant/70 shadow-sm focus:outline-none focus:ring-0 focus:shadow-md transition-shadow" id="search-input" placeholder="Cari topik poster atau kata kunci..." type="text"/>
+<button aria-label="Bersihkan pencarian" class="hidden absolute inset-y-0 right-0 pr-3 flex items-center text-on-surface-variant hover:text-primary transition-colors" id="clear-search">
+<span class="material-symbols-outlined text-[18px]">close</span>
+</button>
+</div>
+<!-- Horizontal Scroll Filter Pills -->
+<div class="flex items-center gap-2 overflow-x-auto pb-1 -mx-margin px-margin no-scrollbar">
+<button class="filter-pill flex-shrink-0 px-4 py-2 rounded-full font-label-md text-label-md transition-all duration-200 bg-primary text-on-primary shadow-sm" data-category="all">
+      Semua Poster
+    </button>
+<button class="filter-pill flex-shrink-0 px-4 py-2 rounded-full font-label-md text-label-md transition-all duration-200 bg-surface-container-low text-on-surface-variant hover:bg-surface-container" data-category="akidah">
+      Akidah &amp; Ibadah
+    </button>
+<button class="filter-pill flex-shrink-0 px-4 py-2 rounded-full font-label-md text-label-md transition-all duration-200 bg-surface-container-low text-on-surface-variant hover:bg-surface-container" data-category="akhlak">
+      Akhlak &amp; Adab
+    </button>
+<button class="filter-pill flex-shrink-0 px-4 py-2 rounded-full font-label-md text-label-md transition-all duration-200 bg-surface-container-low text-on-surface-variant hover:bg-surface-container" data-category="alam">
+      Kelestarian Alam
+    </button>
+</div>
+<!-- Vertical Stacked Poster Feed -->
+<div class="flex flex-col gap-space-lg" id="posters-feed">
+<!-- Card 1: Hakikat 6 Rukun Iman -->
+<article class="poster-card flex flex-col rounded-3xl bg-surface-container-lowest shadow-md overflow-hidden transition-transform duration-200 active:scale-[0.99]" data-category="akidah" data-desc="Menyelami pondasi spiritual: Iman kepada Allah, Malaikat, Kitab Suci, Rasul, Hari Akhir, serta Qada &amp; Qadar disertai hikmah kontekstual modern." data-tag="Akidah &amp; Ibadah" data-time="3 Mnt" data-title="Hakikat 6 Rukun Iman">
+<div class="relative h-44 w-full bg-gradient-to-br from-primary to-primary-container p-space-md flex flex-col justify-between overflow-hidden">
+<div class="absolute -right-4 -bottom-6 w-32 h-32 rounded-full bg-white/10 blur-xl pointer-events-none"></div>
+<div class="flex items-center justify-between z-10">
+<span class="inline-flex items-center px-2.5 py-1 rounded-full bg-white/20 backdrop-blur-md text-on-primary font-label-sm text-label-sm uppercase tracking-wide">
+            Akidah
+          </span>
+<span class="inline-flex items-center gap-1 px-2.5 py-1 rounded-full bg-black/25 backdrop-blur-md text-on-primary font-label-sm text-label-sm">
+<span class="material-symbols-outlined text-[14px]">schedule</span> 3 Mnt
+          </span>
+</div>
+<div class="flex items-center gap-3 z-10">
+<div class="w-12 h-12 rounded-2xl bg-white/20 backdrop-blur-md flex items-center justify-center text-2xl shadow-inner">
+            🤲
+          </div>
+<div class="flex flex-col">
+<span class="font-label-sm text-label-sm text-on-primary/80">Infografis Interaktif</span>
+<span class="font-headline-sm text-headline-sm text-on-primary">Hakikat 6 Rukun Iman</span>
+</div>
+</div>
+</div>
+<div class="p-space-md flex flex-col gap-3">
+<p class="font-body-md text-body-md text-on-surface-variant line-clamp-2">
+          Pondasi utama seorang mukmin dalam meneguhkan keyakinan tauhid dari hati, lisan, hingga perbuatan sehari-hari.
+        </p>
+<button class="open-detail-btn w-full h-12 rounded-2xl bg-surface-container-low hover:bg-surface-container text-primary font-label-lg text-label-lg flex items-center justify-center gap-2 transition-colors" type="button">
+<span>Buka Infografis HD</span>
+<span class="material-symbols-outlined text-[18px]">zoom_in</span>
+</button>
+</div>
+</article>
+<!-- Card 2: Sifat Wajib & Jaiz Allah SWT -->
+<article class="poster-card flex flex-col rounded-3xl bg-surface-container-lowest shadow-md overflow-hidden transition-transform duration-200 active:scale-[0.99]" data-category="akidah" data-desc="Kajian visual Asma wa Sifat berdasarkan teologi Ahlus Sunnah: Wujud, Qidam, Baqa', hingga Kaunuhu Hayyan untuk mengenali keagungan Sang Pencipta." data-tag="Akidah &amp; Ibadah" data-time="5 Mnt" data-title="20 Sifat Wajib &amp; Jaiz Allah SWT">
+<div class="relative h-44 w-full bg-gradient-to-tr from-[#004d34] via-secondary to-secondary-container p-space-md flex flex-col justify-between overflow-hidden">
+<div class="flex items-center justify-between z-10">
+<span class="inline-flex items-center px-2.5 py-1 rounded-full bg-white/20 backdrop-blur-md text-on-primary font-label-sm text-label-sm uppercase tracking-wide">
+            Akidah
+          </span>
+<span class="inline-flex items-center gap-1 px-2.5 py-1 rounded-full bg-black/25 backdrop-blur-md text-on-primary font-label-sm text-label-sm">
+<span class="material-symbols-outlined text-[14px]">schedule</span> 5 Mnt
+          </span>
+</div>
+<div class="flex items-center gap-3 z-10">
+<div class="w-12 h-12 rounded-2xl bg-white/20 backdrop-blur-md flex items-center justify-center text-2xl shadow-inner">
+            ✨
+          </div>
+<div class="flex flex-col">
+<span class="font-label-sm text-label-sm text-on-primary/80">Tashawwur Teologi</span>
+<span class="font-headline-sm text-headline-sm text-on-primary">Sifat Wajib &amp; Jaiz Allah</span>
+</div>
+</div>
+</div>
+<div class="p-space-md flex flex-col gap-3">
+<p class="font-body-md text-body-md text-on-surface-variant line-clamp-2">
+          Ikhtisar 20 sifat kesempurnaan mutlak bagi Allah Ta'ala serta satu sifat Jaiz dalam balutan diagram visual memikat.
+        </p>
+<button class="open-detail-btn w-full h-12 rounded-2xl bg-surface-container-low hover:bg-surface-container text-primary font-label-lg text-label-lg flex items-center justify-center gap-2 transition-colors" type="button">
+<span>Buka Infografis HD</span>
+<span class="material-symbols-outlined text-[18px]">zoom_in</span>
+</button>
+</div>
+</article>
+<!-- Card 3: Adab Berinteraksi dengan Alam -->
+<article class="poster-card flex flex-col rounded-3xl bg-surface-container-lowest shadow-md overflow-hidden transition-transform duration-200 active:scale-[0.99]" data-category="alam" data-desc="Tuntunan Fiqh Al-Bi'ah: prinsip hemat air saat bersuci, sedekah bibit pohon, menjaga kebersihan ruang publik, serta amanah kepemimpinan bumi (Khalifah fil Ardh)." data-tag="Kelestarian Alam" data-time="4 Mnt" data-title="Adab Berinteraksi dengan Alam">
+<div class="relative h-44 w-full bg-gradient-to-br from-[#005a40] via-[#1b7a5a] to-[#599e82] p-space-md flex flex-col justify-between overflow-hidden">
+<div class="flex items-center justify-between z-10">
+<span class="inline-flex items-center px-2.5 py-1 rounded-full bg-white/20 backdrop-blur-md text-on-primary font-label-sm text-label-sm uppercase tracking-wide">
+            Kelestarian Alam
+          </span>
+<span class="inline-flex items-center gap-1 px-2.5 py-1 rounded-full bg-black/25 backdrop-blur-md text-on-primary font-label-sm text-label-sm">
+<span class="material-symbols-outlined text-[14px]">schedule</span> 4 Mnt
+          </span>
+</div>
+<div class="flex items-center gap-3 z-10">
+<div class="w-12 h-12 rounded-2xl bg-white/20 backdrop-blur-md flex items-center justify-center text-2xl shadow-inner">
+            🌱
+          </div>
+<div class="flex flex-col">
+<span class="font-label-sm text-label-sm text-on-primary/80">Fiqh Lingkungan</span>
+<span class="font-headline-sm text-headline-sm text-on-primary">Adab Terhadap Alam</span>
+</div>
+</div>
+</div>
+<div class="p-space-md flex flex-col gap-3">
+<p class="font-body-md text-body-md text-on-surface-variant line-clamp-2">
+          Menjaga bumi sebagai amanah khalifah: panduan praktis hemat air wudhu, menanam pohon, dan anti-mubazir.
+        </p>
+<button class="open-detail-btn w-full h-12 rounded-2xl bg-surface-container-low hover:bg-surface-container text-primary font-label-lg text-label-lg flex items-center justify-center gap-2 transition-colors" type="button">
+<span>Buka Infografis HD</span>
+<span class="material-symbols-outlined text-[18px]">zoom_in</span>
+</button>
+</div>
+</article>
+<!-- Card 4: Sifat Utama Rasulullah -->
+<article class="poster-card flex flex-col rounded-3xl bg-surface-container-lowest shadow-md overflow-hidden transition-transform duration-200 active:scale-[0.99]" data-category="akhlak" data-desc="Teladan kepemimpinan sepanjang zaman: Ash-Shiddiq (Jujur), Al-Amanah (Dapat Dipercaya), At-Tabligh (Menyampaikan Kebenaran), dan Al-Fathanah (Cerdas &amp; Bijak)." data-tag="Akhlak &amp; Adab" data-time="3 Mnt" data-title="4 Sifat Utama Rasulullah SAW">
+<div class="relative h-44 w-full bg-gradient-to-tr from-tertiary via-tertiary-container to-tertiary-fixed-dim p-space-md flex flex-col justify-between overflow-hidden">
+<div class="flex items-center justify-between z-10">
+<span class="inline-flex items-center px-2.5 py-1 rounded-full bg-white/20 backdrop-blur-md text-on-primary font-label-sm text-label-sm uppercase tracking-wide">
+            Akhlak Mulia
+          </span>
+<span class="inline-flex items-center gap-1 px-2.5 py-1 rounded-full bg-black/25 backdrop-blur-md text-on-primary font-label-sm text-label-sm">
+<span class="material-symbols-outlined text-[14px]">schedule</span> 3 Mnt
+          </span>
+</div>
+<div class="flex items-center gap-3 z-10">
+<div class="w-12 h-12 rounded-2xl bg-white/20 backdrop-blur-md flex items-center justify-center text-2xl shadow-inner">
+            🌟
+          </div>
+<div class="flex flex-col">
+<span class="font-label-sm text-label-sm text-on-primary/80">Teladan Insani</span>
+<span class="font-headline-sm text-headline-sm text-on-primary">Sifat Utama Rasulullah</span>
+</div>
+</div>
+</div>
+<div class="p-space-md flex flex-col gap-3">
+<p class="font-body-md text-body-md text-on-surface-variant line-clamp-2">
+          Kompas karakter umat Islam: Siddiq, Amanah, Tabligh, dan Fathanah dalam dinamika kehidupan modern.
+        </p>
+<button class="open-detail-btn w-full h-12 rounded-2xl bg-surface-container-low hover:bg-surface-container text-primary font-label-lg text-label-lg flex items-center justify-center gap-2 transition-colors" type="button">
+<span>Buka Infografis HD</span>
+<span class="material-symbols-outlined text-[18px]">zoom_in</span>
+</button>
+</div>
+</article>
+</div>
+<!-- Empty Search Result Indicator -->
+<div class="hidden flex-col items-center justify-center py-10 px-4 text-center" id="empty-state">
+<div class="w-16 h-16 rounded-full bg-surface-container-low flex items-center justify-center text-on-surface-variant mb-3">
+<span class="material-symbols-outlined text-[32px]">image_not_supported</span>
+</div>
+<span class="font-title-md text-title-md text-on-surface">Materi Tidak Ditemukan</span>
+<p class="font-body-sm text-body-sm text-on-surface-variant mt-1">Coba gunakan kata kunci lain seperti 'iman', 'alam', atau 'akhlak'.</p>
+</div>
+<!-- Modal / Bottom Sheet Preview Callout -->
+<div class="fixed inset-0 z-50 pointer-events-none opacity-0 transition-opacity duration-300 flex items-end" id="preview-sheet">
+<!-- Overlay Backdrop -->
+<div class="absolute inset-0 bg-inverse-surface/40 backdrop-blur-sm pointer-events-auto" id="sheet-backdrop"></div>
+<!-- Sheet Box -->
+<div class="relative w-full max-h-[751px] bg-surface-container-lowest rounded-t-[32px] p-margin pb-safe shadow-2xl flex flex-col gap-4 transform translate-y-full transition-transform duration-300 pointer-events-auto overflow-y-auto" id="sheet-content">
+<!-- Handle Drag Pill -->
+<div class="w-12 h-1.5 rounded-full bg-outline-variant/60 mx-auto -mt-1 mb-1"></div>
+<!-- Header with Close Icon -->
+<div class="flex items-start justify-between gap-3">
+<div class="flex flex-col min-w-0">
+<span class="font-label-sm text-label-sm text-primary uppercase font-bold tracking-wider" id="sheet-tag">Kategori</span>
+<h3 class="font-headline-sm text-headline-sm text-on-surface mt-0.5 truncate" id="sheet-title">Judul Poster</h3>
+</div>
+<button aria-label="Tutup" class="w-10 h-10 rounded-full bg-surface-container flex items-center justify-center text-on-surface-variant hover:text-on-surface" id="close-sheet-btn">
+<span class="material-symbols-outlined text-[20px]">close</span>
+</button>
+</div>
+<!-- Preview Image Placeholder -->
+<div class="relative w-full h-52 rounded-2xl bg-surface-container-low overflow-hidden flex items-center justify-center">
+<img class="w-full h-full object-cover" data-alt="Detailed visual Islamic educational infographic poster showing clear typography, clean geometric decorative borders, serene emerald and teal gradients, and elegant diagrams representing core Islamic knowledge." src="https://lh3.googleusercontent.com/aida-public/AB6AXuAZP_ALKSeIXmTvDv5-MyEuB9BmGznpLkCk_6l1xx42qlN_1pvl7PLYu3adg5sjo3azSW_8R7hTHw-KCRZDfRFW4cUy9lwgI0lP7qLrUlkE7AFv48IYzHAi06nYpqDoEYJdnFMD69XyfzbQmEvCCzhKLZYTPSWW96kbdXeBNFlM6OY6L6lMGgTEtUEEJ2luV-3W5j1lDf5swqpwfeJIFTo2psEmoQBY2b5pPVMst0RNZmHYMo4Zl_jt"/>
+<div class="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent"></div>
+<div class="absolute bottom-3 left-3 flex items-center gap-2">
+<span class="px-2.5 py-1 rounded-md bg-black/40 backdrop-blur-md text-white font-label-sm text-label-sm flex items-center gap-1">
+<span class="material-symbols-outlined text-[14px]">high_density</span> 4K Ultra HD
+          </span>
+<span class="px-2.5 py-1 rounded-md bg-black/40 backdrop-blur-md text-white font-label-sm text-label-sm" id="sheet-readtime">
+            3 Mnt
+          </span>
+</div>
+</div>
+<!-- Descriptive Text -->
+<p class="font-body-md text-body-md text-on-surface-variant" id="sheet-desc">
+        Deskripsi materi infografis yang mendalam serta rujukan dalil Al-Qur'an dan Sunnah.
+      </p>
+<!-- Action Buttons (Bottom Anchored Thumbs Zone) -->
+<div class="flex flex-col gap-2.5 pt-2">
+<button class="w-full h-13 py-3 rounded-2xl bg-primary text-on-primary font-label-lg text-label-lg flex items-center justify-center gap-2 shadow-md active:scale-[0.98] transition-transform" id="download-btn">
+<span class="material-symbols-outlined text-[20px]">download</span>
+<span>Unduh / Simpan Materi 📥</span>
+</button>
+<button class="w-full h-12 rounded-2xl bg-secondary-container/50 hover:bg-secondary-container text-on-secondary-container font-label-lg text-label-lg flex items-center justify-center gap-2 transition-colors" id="share-btn">
+<span class="material-symbols-outlined text-[20px]">share</span>
+<span>Bagikan ke Teman 🚀</span>
+</button>
+</div>
+<!-- Feedback Toast Notification -->
+<div class="hidden text-center py-2 px-3 rounded-xl bg-on-background text-inverse-on-surface font-label-sm text-label-sm transition-all duration-200" id="toast-msg">
+        Materi berhasil diunduh ke galeri perangkat!
+      </div>
+</div>
+</div>
+</div>
+<script>
+  (function() {
+    const searchInput = document.getElementById('search-input');
+    const clearSearch = document.getElementById('clear-search');
+    const filterPills = document.querySelectorAll('.filter-pill');
+    const cards = document.querySelectorAll('.poster-card');
+    const emptyState = document.getElementById('empty-state');
+
+    // Modal elements
+    const previewSheet = document.getElementById('preview-sheet');
+    const sheetContent = document.getElementById('sheet-content');
+    const sheetBackdrop = document.getElementById('sheet-backdrop');
+    const closeSheetBtn = document.getElementById('close-sheet-btn');
+    const sheetTitle = document.getElementById('sheet-title');
+    const sheetDesc = document.getElementById('sheet-desc');
+    const sheetTag = document.getElementById('sheet-tag');
+    const sheetReadtime = document.getElementById('sheet-readtime');
+    const downloadBtn = document.getElementById('download-btn');
+    const shareBtn = document.getElementById('share-btn');
+    const toastMsg = document.getElementById('toast-msg');
+
+    let currentFilter = 'all';
+
+    function filterCards() {
+      const query = (searchInput.value || '').toLowerCase().trim();
+      let visibleCount = 0;
+
+      cards.forEach(card => {
+        const category = card.getAttribute('data-category');
+        const title = card.getAttribute('data-title').toLowerCase();
+        const desc = card.getAttribute('data-desc').toLowerCase();
+
+        const matchesCategory = currentFilter === 'all' || category === currentFilter;
+        const matchesQuery = !query || title.includes(query) || desc.includes(query);
+
+        if (matchesCategory && matchesQuery) {
+          card.classList.remove('hidden');
+          visibleCount++;
+        } else {
+          card.classList.add('hidden');
         }
-        function topicViewer() {
-            return {
-                topicData: {
-                    iman: {
-                        category: 'Akidah Islam',
-                        title: 'Rukun Iman & Konsep Ketuhanan',
-                        icon: '🤲',
-                        description: 'Rukun iman adalah fondasi dasar keimanan dalam agama Islam yang harus diyakini di dalam hati, diucapkan dengan lisan, dan diamalkan dalam perbuatan.',
-                        visualTitle: 'Enam Pilar Keimanan',
-                        visualDesc: 'Keimanan kepada Allah, Malaikat, Kitab-kitab, Rasul, Hari Kiamat, serta Qada dan Qadar merupakan satu kesatuan utuh pembentuk kepribadian muslim.',
-                        highlights: ['Landasan utama amal ibadah', 'Menumbuhkan ketenangan jiwa', 'Mendorong rasa tanggung jawab moral'],
-                        stats: [
-                            { value: '6 Pilar', label: 'Rukun Iman' },
-                            { value: '20 Sifat', label: 'Wajib bagi Allah' },
-                            { value: '99 Asma', label: 'Asmaul Husna' }
-                        ],
-                        flashcards: [
-                            { icon: '☝️', frontTitle: '1. Iman kepada Allah SWT', backDesc: 'Myakini dengan sepenuh hati bahwa Allah SWT adalah Tuhan Yang Maha Esa, Pencipta, Pemelihara, dan Penguasa alam semesta.', flipped: false },
-                            { icon: '👼', frontTitle: '2. Iman kepada Malaikat', backDesc: 'Meyakini keberadaan makhluk gaib ciptaan Allah dari cahaya yang taat menjalankan tugas (seperti Jibril, Mikail, Raqib, Atid).', flipped: false },
-                            { icon: '📖', frontTitle: '3. Iman kepada Kitab', backDesc: 'Meyakini wahyu Allah yang diturunkan kepada para rasul sebagai petunjuk hidup, meliputi Taurat, Zabur, Injil, dan Al-Quran.', flipped: false },
-                            { icon: '🕊️', frontTitle: '4. Iman kepada Rasul', backDesc: 'Meyakini para utusan Allah yang membawa ajaran kebenaran untuk membimbing manusia ke jalan yang lurus.', flipped: false },
-                            { icon: '⏳', frontTitle: '5. Iman kepada Hari Kiamat', backDesc: 'Meyakini bahwa kehidupan dunia fana dan akan tiba hari akhir di mana seluruh amal manusia akan dihisab.', flipped: false },
-                            { icon: '⚖️', frontTitle: '6. Iman kepada Qada & Qadar', backDesc: 'Meyakini segala ketentuan, ketetapan, dan takdir Allah SWT yang berlaku bagi seluruh makhluk-Nya dengan sikap sabar dan syukur.', flipped: false }
-                        ]
-                    },
-                    sejarah: {
-                        category: 'Sejarah Peradaban',
-                        title: 'Kisah Teladan Nabi & Rasul',
-                        icon: '📜',
-                        description: 'Mempelajari perjalanan hidup dan perjuangan para nabi dan rasul dalam menyebarkan nilai-nilai tauhid serta akhlak mulia.',
-                        visualTitle: 'Ibrah & Keteladanan',
-                        visualDesc: 'Setiap kisah nabi menyimpan hikmah mendalam mengenai kesabaran, keteguhan prinsip, kejujuran, serta kepemimpinan yang amanah.',
-                        highlights: ['Meneladani kesabaran para nabi', 'Memahami sejarah dakwah islam', 'Mengambil hikmah dari ujian kehidupan'],
-                        stats: [
-                            { value: '25 Nabi', label: 'Wajib Diketahui' },
-                            { value: 'Uswatun', label: 'Hasanah Teladan' },
-                            { value: 'Hikmah', label: 'Kehidupan Nyata' }
-                        ],
-                        flashcards: [
-                            { icon: '🌊', frontTitle: 'Nabi Nuh AS', backDesc: 'Teladan kesabaran luar biasa dalam berdakwah selama ratusan tahun mengajak kaumnya menyembah Allah SWT.', flipped: false },
-                            { icon: '🔥', frontTitle: 'Nabi Ibrahim AS', backDesc: 'Bapak para nabi (Abul Anbiya) yang teguh mempertahankan tauhid meski harus dibakar di dalam kobaran api.', flipped: false },
-                            { icon: '🚢', frontTitle: 'Nabi Musa AS', backDesc: 'Keteguhan menghadapi kekejaman Firaun serta perjuangan membebaskan Bani Israil dengan mukjizat tongkat.', flipped: false },
-                            { icon: '🌟', frontTitle: 'Nabi Muhammad SAW', backDesc: 'Rasul akhir zaman pembawa rahmat bagi seluruh alam (Rahmatan lil ‘alamin) dengan akhlak mulia Al-Quran.', flipped: false },
-                            { icon: '🤝', frontTitle: 'Abu Bakar Ash-Shiddiq', backDesc: 'Sahabat setia Rasulullah yang dikenal sangat jujur, dermawan, dan khalifah pertama yang tegas.', flipped: false },
-                            { icon: '🛡️', frontTitle: 'Umar bin Khattab', backDesc: 'Tokoh sahabat yang terkenal dengan ketegasan, keadilan, serta keberaniannya dalam membela kebenaran islam.', flipped: false }
-                        ]
-                    },
-                    akhlak: {
-                        category: 'Akhlak & Lingkungan',
-                        title: 'Akhlak Terpuji & Adab Ekologis',
-                        icon: '🌿',
-                        description: 'Akhlak mulia mencakup hubungan baik kepada Allah (Hablum minallah), sesama manusia (Hablum minannas), dan kepedulian terhadap kelestarian alam.',
-                        visualTitle: 'Karakter Muslim Beradab',
-                        visualDesc: 'Islam mengajarkan kejujuran, amanah, tolong-menolong, serta tanggung jawab menjaga bumi dari kerusakan sebagai bentuk ibadah.',
-                        highlights: ['Menjunjung tinggi kejujuran & amanah', 'Menjaga kerukunan dan toleransi', 'Melestarikan lingkungan ciptaan Allah'],
-                        stats: [
-                            { value: 'Hablum', label: 'Minannas' },
-                            { value: 'Khalifah', label: 'Fil Ardh' },
-                            { value: 'Amanah', label: 'Lingkungan' }
-                        ],
-                        flashcards: [
-                            { icon: '🤝', frontTitle: 'Sidiq & Amanah', backDesc: 'Berperilaku jujur dalam perkataan serta dapat dipercaya dalam setiap tugas dan tanggung jawab yang diemban.', flipped: false },
-                            { icon: '🤲', frontTitle: 'Toleransi (Tasamuh)', backDesc: 'Sikap menghormati dan menghargai perbedaan keyakinan maupun pendapat dengan tetap menjaga batasan aqidah.', flipped: false },
-                            { icon: '🌱', frontTitle: 'Menjaga Kelestarian Alam', backDesc: 'Kesadaran ekologis tidak merusak alam, gemar menanam pohon, serta menghemat air dan energi sebagai wujud syukur.', flipped: false },
-                            { icon: '🧹', frontTitle: 'Kebersihan (Thaharah)', backDesc: 'Menjaga kebersihan fisik, pakaian, lingkungan rumah, dan tempat ibadah karena kebersihan adalah sebagian dari iman.', flipped: false },
-                            { icon: '❤️', frontTitle: 'Kasih Sayang (Rahmah)', backDesc: 'Menyayangi sesama manusia, anak yatim, fakir miskin, serta berbuat baik kepada seluruh makhluk ciptaan Allah.', flipped: false },
-                            { icon: '⚖️', frontTitle: 'Keadilan', backDesc: 'Berbuat adil kepada diri sendiri, keluarga, dan masyarakat tanpa memandang status sosial maupun kekayaan.', flipped: false }
-                        ]
-                    }
-                },
-                get currentTopicData() {
-                    return this.topicData[this.selectedTopicId] || this.topicData.iman;
-                }
-            }
-        }
-        function quizApp() {
-            return {
-                currentIndex: 0,
-                selectedOption: null,
-                score: 0,
-                quizFinished: false,
-                questions: [
-                    {
-                        question: 'Berapakah jumlah rukun iman yang wajib diyakini oleh setiap muslim?',
-                        options: ['4 Perkara', '5 Perkara', '6 Perkara', '7 Perkara'],
-                        correct: 2
-                    },
-                    {
-                        question: 'Malaikat yang bertugas menyampaikan wahyu kepada para nabi dan rasul adalah...',
-                        options: ['Malaikat Mikail', 'Malaikat Jibril', 'Malaikat Israfil', 'Malaikat Izrail'],
-                        correct: 1
-                    },
-                    {
-                        question: 'Sifat wajib bagi Allah SWT yang berarti Maha Berdiri Sendiri adalah...',
-                        options: ['Qidam', 'Baqa', 'Qiyamuhu Binafsih', 'Wahdaniyah'],
-                        correct: 2
-                    },
-                    {
-                        question: 'Nabi yang diberi mukjizat berupa kapal besar (bahtera) untuk menyelamatkan kaumnya dari banjir besar adalah...',
-                        options: ['Nabi Nuh AS', 'Nabi Ibrahim AS', 'Nabi Musa AS', 'Nabi Isa AS'],
-                        correct: 0
-                    },
-                    {
-                        question: 'Sifat utama Rasulullah SAW yang berarti "Dapat Dipercaya" adalah...',
-                        options: ['Sidiq', 'Amanah', 'Tabligh', 'Fathanah'],
-                        correct: 1
-                    }
-                ],
-                selectOption(index) {
-                    if (this.selectedOption !== null) return;
-                    this.selectedOption = index;
-                    if (index === this.questions[this.currentIndex].correct) {
-                        this.score += 10;
-                    }
-                },
-                nextQuestion() {
-                    if (this.currentIndex < this.questions.length - 1) {
-                        this.currentIndex++;
-                        this.selectedOption = null;
-                    } else {
-                        this.quizFinished = true;
-                    }
-                },
-                resetQuiz() {
-                    this.currentIndex = 0;
-                    this.selectedOption = null;
-                    this.score = 0;
-                    this.quizFinished = false;
-                }
-            }
-        }
-    </script>
-</body>
-</html>
-sempurnakan next js 
+      });
+
+      if (visibleCount === 0) {
+        emptyState.classList.remove('hidden');
+        emptyState.classList.add('flex');
+      } else {
+        emptyState.classList.add('hidden');
+        emptyState.classList.remove('flex');
+      }
+    }
+
+    // Filter pills click
+    filterPills.forEach(pill => {
+      pill.addEventListener('click', () => {
+        filterPills.forEach(p => {
+          p.classList.remove('bg-primary', 'text-on-primary');
+          p.classList.add('bg-surface-container-low', 'text-on-surface-variant');
+        });
+        pill.classList.remove('bg-surface-container-low', 'text-on-surface-variant');
+        pill.classList.add('bg-primary', 'text-on-primary');
+
+        currentFilter = pill.getAttribute('data-category');
+        filterCards();
+      });
+    });
+
+    // Search input typing
+    searchInput.addEventListener('input', (e) => {
+      if (e.target.value.length > 0) {
+        clearSearch.classList.remove('hidden');
+      } else {
+        clearSearch.classList.add('hidden');
+      }
+      filterCards();
+    });
+
+    clearSearch.addEventListener('click', () => {
+      searchInput.value = '';
+      clearSearch.classList.add('hidden');
+      filterCards();
+      searchInput.focus();
+    });
+
+    // Open Bottom Sheet Modal
+    function openModal(card) {
+      sheetTitle.textContent = card.getAttribute('data-title');
+      sheetDesc.textContent = card.getAttribute('data-desc');
+      sheetTag.textContent = card.getAttribute('data-tag');
+      sheetReadtime.textContent = card.getAttribute('data-time');
+
+      previewSheet.classList.remove('pointer-events-none', 'opacity-0');
+      previewSheet.classList.add('opacity-100');
+      sheetContent.classList.remove('translate-y-full');
+      sheetContent.classList.add('translate-y-0');
+    }
+
+    function closeModal() {
+      sheetContent.classList.add('translate-y-full');
+      sheetContent.classList.remove('translate-y-0');
+      previewSheet.classList.add('opacity-0');
+      setTimeout(() => {
+        previewSheet.classList.add('pointer-events-none');
+        toastMsg.classList.add('hidden');
+      }, 300);
+    }
+
+    document.querySelectorAll('.open-detail-btn').forEach(btn => {
+      btn.addEventListener('click', (e) => {
+        const card = e.target.closest('.poster-card');
+        if (card) openModal(card);
+      });
+    });
+
+    closeSheetBtn.addEventListener('click', closeModal);
+    sheetBackdrop.addEventListener('click', closeModal);
+
+    // Interactive Toast triggers
+    downloadBtn.addEventListener('click', () => {
+      toastMsg.textContent = 'Materi berhasil diunduh ke galeri ponsel!';
+      toastMsg.classList.remove('hidden');
+      setTimeout(() => {
+        toastMsg.classList.add('hidden');
+      }, 3000);
+    });
+
+    shareBtn.addEventListener('click', () => {
+      if (navigator.share) {
+        navigator.share({
+          title: sheetTitle.textContent,
+          text: sheetDesc.textContent,
+          url: window.location.href,
+        }).catch(() => {});
+      } else {
+        toastMsg.textContent = 'Tautan poster tersalin ke clipboard!';
+        toastMsg.classList.remove('hidden');
+        setTimeout(() => {
+          toastMsg.classList.add('hidden');
+        }, 3000);
+      }
+    });
+  })();
+</script></main><div class="fixed bottom-0 w-full z-50 pb-safe pointer-events-none"><nav class="pointer-events-auto mx-auto mb-3 w-[calc(100%-2rem)] max-w-md h-16 rounded-full bg-surface-container-lowest/90 backdrop-blur-2xl shadow-[0_8px_24px_rgba(0,105,72,0.1)] flex items-center justify-around px-2" data-active-classes="text-primary font-semibold [&amp;_span.indicator]:opacity-100"><a class="flex flex-col items-center justify-center flex-1 h-full py-1 text-on-surface-variant hover:text-primary transition-all group" data-path="beranda" href="#"><span class="material-symbols-outlined text-[24px] group-hover:scale-105 transition-transform">home</span><span class="font-label-sm text-label-sm mt-0.5">Beranda</span><span class="indicator w-1 h-1 rounded-full bg-primary mt-0.5 opacity-0 transition-opacity"></span></a><a class="flex flex-col items-center justify-center flex-1 h-full py-1 text-on-surface-variant hover:text-primary transition-all group" data-path="modul-belajar" href="#"><span class="material-symbols-outlined text-[24px] group-hover:scale-105 transition-transform">menu_book</span><span class="font-label-sm text-label-sm mt-0.5">Modul</span><span class="indicator w-1 h-1 rounded-full bg-primary mt-0.5 opacity-0 transition-opacity"></span></a><a aria-current="page" class="flex flex-col items-center justify-center flex-1 h-full py-1 transition-all group text-primary font-semibold [&amp;_span.indicator]:opacity-100" data-path="infografis" href="#"><span class="material-symbols-outlined text-[24px] group-hover:scale-105 transition-transform">auto_stories</span><span class="font-label-sm text-label-sm mt-0.5">Infografis</span><span class="indicator w-1 h-1 rounded-full bg-primary mt-0.5 opacity-0 transition-opacity"></span></a><a class="flex flex-col items-center justify-center flex-1 h-full py-1 text-on-surface-variant hover:text-primary transition-all group" data-path="kuis-evaluasi" href="#"><span class="material-symbols-outlined text-[24px] group-hover:scale-105 transition-transform">quiz</span><span class="font-label-sm text-label-sm mt-0.5">Kuis</span><span class="indicator w-1 h-1 rounded-full bg-primary mt-0.5 opacity-0 transition-opacity"></span></a></nav></div></body></html>
