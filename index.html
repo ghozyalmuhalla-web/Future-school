@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>RuangVisual - Media Pembelajaran Interaktif</title>
+    <title>NurVisual - Media Pembelajaran PAI Interaktif</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
     <script defer src="https://cdn.jsdelivr.net/npm/alpinejs@3.x.x/dist/cdn.min.js"></script>
@@ -15,29 +15,30 @@
         .rotate-y-180 { transform: rotateY(180deg); }
     </style>
 </head>
-<body class="bg-slate-50 text-slate-800 min-h-screen flex flex-col justify-between selection:bg-indigo-500 selection:text-white" x-data="learningApp()">
+<body class="bg-slate-50 text-slate-800 min-h-screen flex flex-col justify-between selection:bg-emerald-500 selection:text-white" x-data="learningApp()">
 
     <header class="sticky top-0 z-50 bg-white/80 backdrop-blur-md border-b border-slate-100 shadow-sm">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-20 flex items-center justify-between">
             <div class="flex items-center space-x-3 cursor-pointer" @click="currentTab = 'home'">
-                <div class="w-10 h-10 rounded-xl bg-gradient-to-tr from-indigo-600 to-violet-500 flex items-center justify-center text-white shadow-md shadow-indigo-500/20 font-bold text-xl">
-                    RV
+                <div class="w-10 h-10 rounded-xl bg-gradient-to-tr from-emerald-600 to-teal-500 flex items-center justify-center text-white shadow-md shadow-emerald-500/20 font-bold text-xl">
+                    NV
                 </div>
                 <div>
-                    <span class="text-xl font-extrabold bg-gradient-to-r from-indigo-600 to-violet-600 bg-clip-text text-transparent">RuangVisual</span>
-                    <span class="block text-xs font-medium text-slate-400">Media Pembelajaran Interaktif</span>
+                    <span class="text-xl font-extrabold bg-gradient-to-r from-emerald-600 to-teal-600 bg-clip-text text-transparent">NurVisual</span>
+                    <span class="block text-xs font-medium text-slate-400">Pendidikan Agama Islam Interaktif</span>
                 </div>
             </div>
             
             <nav class="hidden md:flex items-center space-x-1 bg-slate-100/80 p-1.5 rounded-full border border-slate-200/60">
-                <button @click="currentTab = 'home'" :class="currentTab === 'home' ? 'bg-white text-indigo-600 shadow-sm font-semibold' : 'text-slate-600 hover:text-indigo-600 font-medium'" class="px-5 py-2 rounded-full text-sm transition-all duration-200">Beranda</button>
-                <button @click="currentTab = 'topics'" :class="currentTab === 'topics' ? 'bg-white text-indigo-600 shadow-sm font-semibold' : 'text-slate-600 hover:text-indigo-600 font-medium'" class="px-5 py-2 rounded-full text-sm transition-all duration-200">Topik & Flashcard</button>
-                <button @click="currentTab = 'posters'" :class="currentTab === 'posters' ? 'bg-white text-indigo-600 shadow-sm font-semibold' : 'text-slate-600 hover:text-indigo-600 font-medium'" class="px-5 py-2 rounded-full text-sm transition-all duration-200">Galeri Poster & Infografis</button>
+                <button @click="currentTab = 'home'" :class="currentTab === 'home' ? 'bg-white text-emerald-600 shadow-sm font-semibold' : 'text-slate-600 hover:text-emerald-600 font-medium'" class="px-5 py-2 rounded-full text-sm transition-all duration-200">Beranda</button>
+                <button @click="currentTab = 'topics'" :class="currentTab === 'topics' ? 'bg-white text-emerald-600 shadow-sm font-semibold' : 'text-slate-600 hover:text-emerald-600 font-medium'" class="px-5 py-2 rounded-full text-sm transition-all duration-200">Modul & Flashcard</button>
+                <button @click="currentTab = 'posters'" :class="currentTab === 'posters' ? 'bg-white text-emerald-600 shadow-sm font-semibold' : 'text-slate-600 hover:text-emerald-600 font-medium'" class="px-5 py-2 rounded-full text-sm transition-all duration-200">Galeri Infografis</button>
+                <button @click="currentTab = 'quiz'" :class="currentTab === 'quiz' ? 'bg-white text-emerald-600 shadow-sm font-semibold' : 'text-slate-600 hover:text-emerald-600 font-medium'" class="px-5 py-2 rounded-full text-sm transition-all duration-200">Kuis Mini 🎯</button>
             </nav>
 
             <div class="flex items-center space-x-3">
                 <span class="hidden sm:inline-flex items-center px-3 py-1 rounded-full text-xs font-semibold bg-emerald-50 text-emerald-600 border border-emerald-200">
-                    <span class="w-2 h-2 rounded-full bg-emerald-500 mr-1.5 animate-pulse"></span> Mode Aktif
+                    <span class="w-2 h-2 rounded-full bg-emerald-500 mr-1.5 animate-pulse"></span> PAI Interaktif
                 </span>
                 <!-- Mobile Menu Button -->
                 <button @click="mobileMenuOpen = !mobileMenuOpen" class="md:hidden p-2 rounded-lg text-slate-600 hover:bg-slate-100 focus:outline-none">
@@ -47,60 +48,60 @@
         </div>
         <!-- Mobile Navigation Menu -->
         <div x-show="mobileMenuOpen" x-transition class="md:hidden bg-white border-b border-slate-100 px-4 pt-2 pb-4 space-y-2">
-            <button @click="currentTab = 'home'; mobileMenuOpen = false" class="block w-full text-left px-4 py-2 rounded-lg text-sm font-medium" :class="currentTab === 'home' ? 'bg-indigo-50 text-indigo-600' : 'text-slate-600'">Beranda</button>
-            <button @click="currentTab = 'topics'; mobileMenuOpen = false" class="block w-full text-left px-4 py-2 rounded-lg text-sm font-medium" :class="currentTab === 'topics' ? 'bg-indigo-50 text-indigo-600' : 'text-slate-600'">Topik & Flashcard</button>
-            <button @click="currentTab = 'posters'; mobileMenuOpen = false" class="block w-full text-left px-4 py-2 rounded-lg text-sm font-medium" :class="currentTab === 'posters' ? 'bg-indigo-50 text-indigo-600' : 'text-slate-600'">Galeri Poster & Infografis</button>
+            <button @click="currentTab = 'home'; mobileMenuOpen = false" class="block w-full text-left px-4 py-2 rounded-lg text-sm font-medium" :class="currentTab === 'home' ? 'bg-emerald-50 text-emerald-600' : 'text-slate-600'">Beranda</button>
+            <button @click="currentTab = 'topics'; mobileMenuOpen = false" class="block w-full text-left px-4 py-2 rounded-lg text-sm font-medium" :class="currentTab === 'topics' ? 'bg-emerald-50 text-emerald-600' : 'text-slate-600'">Modul & Flashcard</button>
+            <button @click="currentTab = 'posters'; mobileMenuOpen = false" class="block w-full text-left px-4 py-2 rounded-lg text-sm font-medium" :class="currentTab === 'posters' ? 'bg-emerald-50 text-emerald-600' : 'text-slate-600'">Galeri Infografis</button>
+            <button @click="currentTab = 'quiz'; mobileMenuOpen = false" class="block w-full text-left px-4 py-2 rounded-lg text-sm font-medium" :class="currentTab === 'quiz' ? 'bg-emerald-50 text-emerald-600' : 'text-slate-600'">Kuis Mini 🎯</button>
         </div>
     </header>
 
     <main class="flex-grow">
         
-        <!-- ================= HOME TAB ================= -->
         <div x-show="currentTab === 'home'" class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
             <!-- Hero Section -->
             <div class="grid grid-cols-1 lg:grid-cols-12 gap-12 items-center mb-16">
                 <div class="lg:col-span-7 space-y-6">
-                    <div class="inline-flex items-center space-x-2 px-3.5 py-1.5 rounded-full bg-indigo-50 border border-indigo-100 text-indigo-600 text-xs font-bold uppercase tracking-wider">
-                        <span>✨ Belajar Lebih Seru & Visual</span>
+                    <div class="inline-flex items-center space-x-2 px-3.5 py-1.5 rounded-full bg-emerald-50 border border-emerald-100 text-emerald-700 text-xs font-bold uppercase tracking-wider">
+                        <span>✨ Belajar Agama Lebih Menyenangkan & Bermakna</span>
                     </div>
                     <h1 class="text-4xl sm:text-5xl lg:text-6xl font-extrabold text-slate-900 tracking-tight leading-tight">
-                        Eksplorasi Ilmu Pengetahuan Lewat <span class="bg-gradient-to-r from-indigo-600 via-violet-600 to-pink-600 bg-clip-text text-transparent">Media Visual Interaktif</span>
+                        Eksplorasi Nilai-Nilai Islam Lewat <span class="bg-gradient-to-r from-emerald-600 via-teal-600 to-cyan-600 bg-clip-text text-transparent">Media Visual Modern</span>
                     </h1>
                     <p class="text-lg text-slate-600 leading-relaxed max-w-2xl">
-                        Tingkatkan pemahaman belajar anak dan siswa melalui ilustrasi modern, infografis mendalam, peta konsep interaktif, serta flashcard kilat yang menyenangkan.
+                        Mendalami Rukun Iman, Kisah Teladan Rasul & Sahabat, Akhlak Terpuji, serta Pelestarian Alam dengan pendekatan visual interaktif yang segar dan mudah dipahami.
                     </p>
                     <div class="flex flex-wrap gap-4 pt-4">
-                        <button @click="currentTab = 'topics'" class="px-8 py-4 bg-indigo-600 hover:bg-indigo-700 text-white font-semibold rounded-2xl shadow-lg shadow-indigo-500/25 transition-all duration-200 transform hover:-translate-y-0.5">
-                            Mulai Belajar Sekarang 🚀
+                        <button @click="currentTab = 'topics'" class="px-8 py-4 bg-emerald-600 hover:bg-emerald-700 text-white font-semibold rounded-2xl shadow-lg shadow-emerald-500/25 transition-all duration-200 transform hover:-translate-y-0.5">
+                            Mulai Belajar Materi 🕌
                         </button>
-                        <button @click="currentTab = 'posters'" class="px-8 py-4 bg-white hover:bg-slate-50 text-slate-700 font-semibold rounded-2xl border border-slate-200 shadow-sm transition-all duration-200">
-                            Lihat Galeri Poster 🖼️
+                        <button @click="currentTab = 'quiz'" class="px-8 py-4 bg-white hover:bg-slate-50 text-slate-700 font-semibold rounded-2xl border border-slate-200 shadow-sm transition-all duration-200">
+                            Uji Kemampuan (Kuis) 🎯
                         </button>
                     </div>
                 </div>
                 <div class="lg:col-span-5 relative">
-                    <div class="absolute -inset-1 bg-gradient-to-r from-indigo-500 to-violet-600 rounded-3xl blur-xl opacity-20 animate-pulse"></div>
+                    <div class="absolute -inset-1 bg-gradient-to-r from-emerald-500 to-teal-600 rounded-3xl blur-xl opacity-20 animate-pulse"></div>
                     <div class="relative bg-white rounded-3xl p-6 border border-slate-100 shadow-xl space-y-6">
                         <div class="flex items-center justify-between pb-4 border-b border-slate-100">
-                            <span class="text-xs font-bold uppercase text-slate-400 tracking-wider">Preview Flashcard Kilat</span>
-                            <span class="px-2.5 py-1 bg-amber-50 text-amber-600 rounded-full text-xs font-bold">Interaktif</span>
+                            <span class="text-xs font-bold uppercase text-slate-400 tracking-wider">Preview Flashcard PAI</span>
+                            <span class="px-2.5 py-1 bg-emerald-50 text-emerald-600 rounded-full text-xs font-bold">Interaktif</span>
                         </div>
-                        <div class="bg-gradient-to-br from-indigo-500 to-violet-600 rounded-2xl p-6 text-white text-center space-y-4 shadow-md">
-                            <div class="text-4xl">🪐</div>
-                            <h3 class="text-xl font-bold">Planet Terbesar di Tata Surya</h3>
-                            <p class="text-xs text-indigo-100 bg-white/10 py-1.5 px-3 rounded-full inline-block">Klik Topik untuk Membuka Semua Kartu</p>
+                        <div class="bg-gradient-to-br from-emerald-600 to-teal-700 rounded-2xl p-6 text-white text-center space-y-4 shadow-md">
+                            <div class="text-4xl">📖</div>
+                            <h3 class="text-xl font-bold">Rukun Iman Pertama: Iman kepada Allah SWT</h3>
+                            <p class="text-xs text-emerald-100 bg-white/10 py-1.5 px-3 rounded-full inline-block">Klik Modul untuk Membuka Semua Kartu</p>
                         </div>
                         <div class="grid grid-cols-3 gap-3 text-center">
                             <div class="p-3 bg-slate-50 rounded-xl border border-slate-100">
-                                <span class="block text-xl font-bold text-indigo-600">3+</span>
-                                <span class="text-[10px] text-slate-500 font-semibold uppercase">Topik Utama</span>
+                                <span class="block text-xl font-bold text-emerald-600">3+</span>
+                                <span class="text-[10px] text-slate-500 font-semibold uppercase">Modul Utama</span>
                             </div>
                             <div class="p-3 bg-slate-50 rounded-xl border border-slate-100">
-                                <span class="block text-xl font-bold text-violet-600">12+</span>
+                                <span class="block text-xl font-bold text-teal-600">18+</span>
                                 <span class="text-[10px] text-slate-500 font-semibold uppercase">Flashcard</span>
                             </div>
                             <div class="p-3 bg-slate-50 rounded-xl border border-slate-100">
-                                <span class="block text-xl font-bold text-pink-600">6+</span>
+                                <span class="block text-xl font-bold text-cyan-600">6+</span>
                                 <span class="text-[10px] text-slate-500 font-semibold uppercase">Infografis</span>
                             </div>
                         </div>
@@ -111,48 +112,47 @@
             <!-- Features Grid -->
             <div class="mb-16">
                 <div class="text-center max-w-2xl mx-auto mb-12 space-y-3">
-                    <h2 class="text-3xl font-bold text-slate-900">Keunggulan Media Pembelajaran Visual</h2>
-                    <p class="text-slate-600 text-sm">Dirancang khusus untuk mengoptimalkan daya ingat dan pemikiran analitis visual peserta didik.</p>
+                    <h2 class="text-3xl font-bold text-slate-900">Pilar Pembelajaran Agama Islam</h2>
+                    <p class="text-slate-600 text-sm">Dirancang secara pedagogis untuk membangun pemahaman akidah, akhlak mulia, dan wawasan sejarah Islam.</p>
                 </div>
                 <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
                     <div class="bg-white p-8 rounded-3xl border border-slate-100 shadow-sm hover:shadow-md transition-all space-y-4 group">
-                        <div class="w-14 h-14 rounded-2xl bg-indigo-50 text-indigo-600 flex items-center justify-center text-2xl group-hover:scale-110 transition-transform">
-                            🎨
+                        <div class="w-14 h-14 rounded-2xl bg-emerald-50 text-emerald-600 flex items-center justify-center text-2xl group-hover:scale-110 transition-transform">
+                            🤲
                         </div>
-                        <h3 class="text-xl font-bold text-slate-900">Ilustrasi Semi-Flat Modern</h3>
-                        <p class="text-slate-600 text-sm leading-relaxed">Visual grafis yang bersih, warna cerah berenergi, serta representasi objek yang mudah dicerna oleh otak siswa.</p>
+                        <h3 class="text-xl font-bold text-slate-900">Rukun Iman & Akidah</h3>
+                        <p class="text-slate-600 text-sm leading-relaxed">Mendalami 6 rukun iman, sifat wajib bagi Allah SWT, serta asmaul husna secara mendalam dan kontekstual.</p>
                     </div>
                     <div class="bg-white p-8 rounded-3xl border border-slate-100 shadow-sm hover:shadow-md transition-all space-y-4 group">
-                        <div class="w-14 h-14 rounded-2xl bg-violet-50 text-violet-600 flex items-center justify-center text-2xl group-hover:scale-110 transition-transform">
-                            🎴
+                        <div class="w-14 h-14 rounded-2xl bg-teal-50 text-teal-600 flex items-center justify-center text-2xl group-hover:scale-110 transition-transform">
+                            📜
                         </div>
-                        <h3 class="text-xl font-bold text-slate-900">Flashcard Interaktif</h3>
-                        <p class="text-slate-600 text-sm leading-relaxed">Metode belajar aktif dengan sistem kartu bolak-balik (flip card) untuk menguji pemahaman konsep secara cepat dan menyenangkan.</p>
+                        <h3 class="text-xl font-bold text-slate-900">Kisah Teladan & Sejarah</h3>
+                        <p class="text-slate-600 text-sm leading-relaxed">Meneladani akhlak para Nabi, Rasul, dan sahabat terkemuka sebagai cerminan perilaku kehidupan sehari-hari.</p>
                     </div>
                     <div class="bg-white p-8 rounded-3xl border border-slate-100 shadow-sm hover:shadow-md transition-all space-y-4 group">
-                        <div class="w-14 h-14 rounded-2xl bg-pink-50 text-pink-600 flex items-center justify-center text-2xl group-hover:scale-110 transition-transform">
-                            📊
+                        <div class="w-14 h-14 rounded-2xl bg-cyan-50 text-cyan-600 flex items-center justify-center text-2xl group-hover:scale-110 transition-transform">
+                            🌿
                         </div>
-                        <h3 class="text-xl font-bold text-slate-900">Infografis & Poster Edukasi</h3>
-                        <p class="text-slate-600 text-sm leading-relaxed">Ringkasan materi komprehensif dalam bentuk poster digital yang informatif dan siap digunakan untuk bahan ajar kelas.</p>
+                        <h3 class="text-xl font-bold text-slate-900">Akhlak & Pelestarian Alam</h3>
+                        <p class="text-slate-600 text-sm leading-relaxed">Membentuk karakter jujur, amanah, toleran, serta kesadaran ekologis menjaga bumi sebagai khalifah.</p>
                     </div>
                 </div>
             </div>
         </div>
 
-        <!-- ================= TOPICS & FLASHCARD TAB ================= -->
         <div x-show="currentTab === 'topics'" class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
             <div class="text-center max-w-2xl mx-auto mb-12 space-y-3">
-                <span class="text-xs font-bold uppercase text-indigo-600 tracking-wider">Modul Belajar</span>
-                <h2 class="text-3xl font-bold text-slate-900">Pilih Topik Pembelajaran Visual</h2>
-                <p class="text-slate-600 text-sm">Pilih salah satu topik di bawah ini untuk memulai sesi belajar dengan infografis dan flashcard interaktif.</p>
+                <span class="text-xs font-bold uppercase text-emerald-600 tracking-wider">Modul Belajar PAI</span>
+                <h2 class="text-3xl font-bold text-slate-900">Pilih Materi Pembelajaran Islam</h2>
+                <p class="text-slate-600 text-sm">Pilih salah satu topik di bawah ini untuk melihat ringkasan infografis dan kartu hafalan interaktif.</p>
             </div>
 
             <!-- Topic Selector Buttons -->
             <div class="flex flex-wrap justify-center gap-3 mb-12">
                 <template x-for="topic in topics" :key="topic.id">
-                    <button @click="selectedTopicId = topic.id; activeFilter = 'all'" 
-                        :class="selectedTopicId === topic.id ? 'bg-indigo-600 text-white shadow-md shadow-indigo-500/20' : 'bg-white text-slate-600 border border-slate-200 hover:bg-slate-50'"
+                    <button @click="selectedTopicId = topic.id" 
+                        :class="selectedTopicId === topic.id ? 'bg-emerald-600 text-white shadow-md shadow-emerald-500/20' : 'bg-white text-slate-600 border border-slate-200 hover:bg-slate-50'"
                         class="px-6 py-3 rounded-2xl font-semibold text-sm transition-all duration-200 flex items-center space-x-2">
                         <span x-text="topic.icon"></span>
                         <span x-text="topic.name"></span>
@@ -167,15 +167,15 @@
                 <div class="bg-white rounded-3xl p-8 border border-slate-100 shadow-sm">
                     <div class="grid grid-cols-1 lg:grid-cols-12 gap-8 items-center">
                         <div class="lg:col-span-5 space-y-4">
-                            <span class="px-3 py-1 rounded-full text-xs font-bold bg-indigo-50 text-indigo-600" x-text="currentTopicData.category"></span>
+                            <span class="px-3 py-1 rounded-full text-xs font-bold bg-emerald-50 text-emerald-600" x-text="currentTopicData.category"></span>
                             <h3 class="text-3xl font-extrabold text-slate-900" x-text="currentTopicData.title"></h3>
                             <p class="text-slate-600 text-sm leading-relaxed" x-text="currentTopicData.description"></p>
                             <div class="p-4 bg-slate-50 rounded-2xl border border-slate-100 space-y-2">
-                                <span class="text-xs font-bold uppercase text-slate-400">Poin Utama Infografis:</span>
+                                <span class="text-xs font-bold uppercase text-slate-400">Poin Penting Pembelajaran:</span>
                                 <ul class="space-y-1.5 text-xs text-slate-700 font-medium">
                                     <template x-for="point in currentTopicData.highlights">
                                         <li class="flex items-center space-x-2">
-                                            <span class="w-1.5 h-1.5 rounded-full bg-indigo-600"></span>
+                                            <span class="w-1.5 h-1.5 rounded-full bg-emerald-600"></span>
                                             <span x-text="point"></span>
                                         </li>
                                     </template>
@@ -183,22 +183,22 @@
                             </div>
                         </div>
                         <div class="lg:col-span-7">
-                            <div class="bg-gradient-to-br from-indigo-500 via-violet-600 to-indigo-700 rounded-3xl p-8 text-white relative overflow-hidden shadow-xl">
+                            <div class="bg-gradient-to-br from-emerald-600 via-teal-700 to-cyan-800 rounded-3xl p-8 text-white relative overflow-hidden shadow-xl">
                                 <div class="absolute -right-10 -bottom-10 w-48 h-48 bg-white/10 rounded-full blur-2xl"></div>
                                 <div class="relative z-10 space-y-6">
                                     <div class="flex items-center justify-between">
-                                        <span class="text-xs font-bold uppercase tracking-wider bg-white/20 px-3 py-1 rounded-full">Visualisasi Infografis</span>
+                                        <span class="text-xs font-bold uppercase tracking-wider bg-white/20 px-3 py-1 rounded-full">Ringkasan Konsep Utama</span>
                                         <span class="text-3xl" x-text="currentTopicData.icon"></span>
                                     </div>
                                     <div class="space-y-2">
                                         <h4 class="text-2xl font-bold" x-text="currentTopicData.visualTitle"></h4>
-                                        <p class="text-indigo-100 text-sm leading-relaxed" x-text="currentTopicData.visualDesc"></p>
+                                        <p class="text-emerald-100 text-sm leading-relaxed" x-text="currentTopicData.visualDesc"></p>
                                     </div>
                                     <div class="grid grid-cols-2 sm:grid-cols-3 gap-3 pt-2">
                                         <template x-for="stat in currentTopicData.stats">
                                             <div class="bg-white/10 backdrop-blur-md p-3 rounded-2xl border border-white/10">
                                                 <span class="block text-lg font-extrabold" x-text="stat.value"></span>
-                                                <span class="text-[10px] text-indigo-200" x-text="stat.label"></span>
+                                                <span class="text-[10px] text-emerald-200" x-text="stat.label"></span>
                                             </div>
                                         </template>
                                     </div>
@@ -212,11 +212,11 @@
                 <div class="space-y-6">
                     <div class="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4">
                         <div>
-                            <h3 class="text-2xl font-bold text-slate-900">Flashcard Kilat Interaktif</h3>
-                            <p class="text-slate-500 text-sm">Klik kartu di bawah untuk membalik dan melihat penjelasan materi!</p>
+                            <h3 class="text-2xl font-bold text-slate-900">Flashcard Hafalan & Konsep</h3>
+                            <p class="text-slate-500 text-sm">Klik kartu di bawah untuk membalik dan melihat penjelasan lengkap materi!</p>
                         </div>
                         <div class="inline-flex items-center space-x-2 text-xs font-semibold text-slate-500 bg-white px-4 py-2 rounded-2xl border border-slate-200 shadow-sm">
-                            <span>💡 Tips: Kartu bisa diklik berkali-kali</span>
+                            <span>💡 Tips: Kartu dapat dibolak-balik kapanpun</span>
                         </div>
                     </div>
 
@@ -229,12 +229,12 @@
                                     <!-- Front Side -->
                                     <div class="absolute inset-0 w-full h-full bg-white border border-slate-100 rounded-3xl p-6 flex flex-col justify-between backface-hidden">
                                         <div class="flex items-center justify-between">
-                                            <span class="w-8 h-8 rounded-full bg-indigo-50 text-indigo-600 flex items-center justify-center text-xs font-bold" x-text="index + 1"></span>
+                                            <span class="w-8 h-8 rounded-full bg-emerald-50 text-emerald-600 flex items-center justify-center text-xs font-bold" x-text="index + 1"></span>
                                             <span class="text-2xl" x-text="card.icon"></span>
                                         </div>
                                         <div class="space-y-2 text-center my-auto">
                                             <h4 class="text-lg font-bold text-slate-900" x-text="card.frontTitle"></h4>
-                                            <span class="inline-block text-xs font-semibold text-indigo-600 bg-indigo-50 px-3 py-1 rounded-full">Klik untuk Balik Kartu 🔄</span>
+                                            <span class="inline-block text-xs font-semibold text-emerald-600 bg-emerald-50 px-3 py-1 rounded-full">Klik untuk Balik Kartu 🔄</span>
                                         </div>
                                         <div class="text-center">
                                             <span class="text-[10px] uppercase font-bold text-slate-400 tracking-wider">Sisi Depan</span>
@@ -242,16 +242,16 @@
                                     </div>
 
                                     <!-- Back Side -->
-                                    <div class="absolute inset-0 w-full h-full bg-gradient-to-br from-indigo-600 to-violet-600 text-white rounded-3xl p-6 flex flex-col justify-between backface-hidden rotate-y-180">
+                                    <div class="absolute inset-0 w-full h-full bg-gradient-to-br from-emerald-600 to-teal-700 text-white rounded-3xl p-6 flex flex-col justify-between backface-hidden rotate-y-180">
                                         <div class="flex items-center justify-between">
-                                            <span class="text-xs font-bold uppercase tracking-wider text-indigo-200">Penjelasan Materi</span>
+                                            <span class="text-xs font-bold uppercase tracking-wider text-emerald-200">Penjelasan & Makna</span>
                                             <span class="text-2xl">✨</span>
                                         </div>
                                         <div class="space-y-2 my-auto">
-                                            <p class="text-sm leading-relaxed text-indigo-50 font-medium" x-text="card.backDesc"></p>
+                                            <p class="text-sm leading-relaxed text-emerald-50 font-medium" x-text="card.backDesc"></p>
                                         </div>
                                         <div class="text-center">
-                                            <span class="text-[10px] uppercase font-bold text-indigo-200 tracking-wider">Klik untuk Kembali</span>
+                                            <span class="text-[10px] uppercase font-bold text-emerald-200 tracking-wider">Klik untuk Kembali</span>
                                         </div>
                                     </div>
 
@@ -264,29 +264,28 @@
             </div>
         </div>
 
-        <!-- ================= POSTER GALLERY TAB ================= -->
         <div x-show="currentTab === 'posters'" class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
             <div class="text-center max-w-2xl mx-auto mb-12 space-y-3">
-                <span class="text-xs font-bold uppercase text-indigo-600 tracking-wider">Galeri Visual</span>
-                <h2 class="text-3xl font-bold text-slate-900">Poster Edukasi & Infografis</h2>
-                <p class="text-slate-600 text-sm">Koleksi poster visual siap pakai yang merangkum topik-topik sains penting secara kreatif dan estetis.</p>
+                <span class="text-xs font-bold uppercase text-emerald-600 tracking-wider">Galeri Visual</span>
+                <h2 class="text-3xl font-bold text-slate-900">Infografis & Poster Edukasi Islam</h2>
+                <p class="text-slate-600 text-sm">Koleksi poster visual seputar akidah, akhlak mulia, adab islami, serta kepedulian lingkungan hidup.</p>
             </div>
 
             <!-- Filter Categories -->
             <div class="flex flex-wrap justify-center gap-2 mb-10">
-                <button @click="posterFilter = 'all'" :class="posterFilter === 'all' ? 'bg-indigo-600 text-white' : 'bg-white text-slate-600 border border-slate-200'" class="px-5 py-2 rounded-full text-xs font-semibold transition-all">Semua Poster</button>
-                <button @click="posterFilter = 'sains'" :class="posterFilter === 'sains' ? 'bg-indigo-600 text-white' : 'bg-white text-slate-600 border border-slate-200'" class="px-5 py-2 rounded-full text-xs font-semibold transition-all">Sains & Alam</button>
-                <button @click="posterFilter = 'biologi'" :class="posterFilter === 'biologi' ? 'bg-indigo-600 text-white' : 'bg-white text-slate-600 border border-slate-200'" class="px-5 py-2 rounded-full text-xs font-semibold transition-all">Biologi & Tumbuhan</button>
-                <button @click="posterFilter = 'fisika'" :class="posterFilter === 'fisika' ? 'bg-indigo-600 text-white' : 'bg-white text-slate-600 border border-slate-200'" class="px-5 py-2 rounded-full text-xs font-semibold transition-all">Fisika & Energi</button>
+                <button @click="posterFilter = 'all'" :class="posterFilter === 'all' ? 'bg-emerald-600 text-white' : 'bg-white text-slate-600 border border-slate-200'" class="px-5 py-2 rounded-full text-xs font-semibold transition-all">Semua Poster</button>
+                <button @click="posterFilter = 'akidah'" :class="posterFilter === 'akidah' ? 'bg-emerald-600 text-white' : 'bg-white text-slate-600 border border-slate-200'" class="px-5 py-2 rounded-full text-xs font-semibold transition-all">Akidah & Ibadah</button>
+                <button @click="posterFilter = 'akhlak'" :class="posterFilter === 'akhlak' ? 'bg-emerald-600 text-white' : 'bg-white text-slate-600 border border-slate-200'" class="px-5 py-2 rounded-full text-xs font-semibold transition-all">Akhlak & Adab</button>
+                <button @click="posterFilter = 'alam'" :class="posterFilter === 'alam' ? 'bg-emerald-600 text-white' : 'bg-white text-slate-600 border border-slate-200'" class="px-5 py-2 rounded-full text-xs font-semibold transition-all">Kelestarian Alam</button>
             </div>
 
             <!-- Poster Grid -->
             <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
                 <template x-for="poster in filteredPosters" :key="poster.id">
                     <div class="bg-white rounded-3xl border border-slate-100 shadow-sm hover:shadow-lg transition-all overflow-hidden flex flex-col justify-between group">
-                        <div class="relative h-56 bg-gradient-to-tr from-slate-900 to-indigo-950 p-6 flex flex-col justify-between overflow-hidden">
+                        <div class="relative h-56 bg-gradient-to-tr from-slate-900 to-emerald-950 p-6 flex flex-col justify-between overflow-hidden">
                             <div class="absolute inset-0 opacity-20 bg-[radial-gradient(#ffffff_1px,transparent_1px)] [background-size:16px_16px]"></div>
-                            <div class="absolute -right-8 -top-8 w-32 h-32 bg-indigo-500/30 rounded-full blur-xl group-hover:scale-150 transition-transform duration-500"></div>
+                            <div class="absolute -right-8 -top-8 w-32 h-32 bg-emerald-500/30 rounded-full blur-xl group-hover:scale-150 transition-transform duration-500"></div>
                             
                             <div class="flex items-center justify-between relative z-10">
                                 <span class="px-3 py-1 bg-white/10 backdrop-blur-md rounded-full text-[10px] font-bold text-white uppercase tracking-wider" x-text="poster.tag"></span>
@@ -294,14 +293,14 @@
                             </div>
                             <div class="relative z-10 space-y-1">
                                 <h3 class="text-xl font-bold text-white" x-text="poster.title"></h3>
-                                <p class="text-xs text-indigo-200" x-text="poster.subtitle"></p>
+                                <p class="text-xs text-emerald-200" x-text="poster.subtitle"></p>
                             </div>
                         </div>
                         <div class="p-6 space-y-4 flex-grow flex flex-col justify-between">
                             <p class="text-xs text-slate-600 leading-relaxed" x-text="poster.description"></p>
                             <div class="flex items-center justify-between pt-4 border-t border-slate-100">
                                 <span class="text-xs font-semibold text-slate-400" x-text="poster.readTime"></span>
-                                <button @click="openPosterModal(poster)" class="px-4 py-2 bg-indigo-50 hover:bg-indigo-100 text-indigo-600 font-semibold rounded-xl text-xs transition-colors">
+                                <button @click="openPosterModal(poster)" class="px-4 py-2 bg-emerald-50 hover:bg-emerald-100 text-emerald-600 font-semibold rounded-xl text-xs transition-colors">
                                     Perbesar Poster 🔍
                                 </button>
                             </div>
@@ -311,9 +310,75 @@
             </div>
         </div>
 
+        <div x-show="currentTab === 'quiz'" class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
+            <div class="bg-white rounded-3xl p-8 border border-slate-100 shadow-sm space-y-8" x-data="quizApp()">
+                
+                <div class="text-center space-y-2 pb-6 border-b border-slate-100">
+                    <span class="px-3 py-1 bg-emerald-50 text-emerald-600 rounded-full text-xs font-bold">Evaluasi PAI</span>
+                    <h2 class="text-2xl sm:text-3xl font-extrabold text-slate-900">Kuis Mini Pilihan Ganda</h2>
+                    <p class="text-slate-500 text-sm">Uji pemahamanmu seputar akidah, akhlak, dan sejarah Islam dengan menjawab soal di bawah ini.</p>
+                </div>
+
+                <!-- Quiz Active State -->
+                <template x-if="!quizFinished">
+                    <div class="space-y-6">
+                        <div class="flex items-center justify-between text-xs font-semibold text-slate-500 bg-slate-50 px-4 py-2.5 rounded-2xl">
+                            <span>Soal <span class="text-emerald-600 font-bold" x-text="currentIndex + 1"></span> dari <span x-text="questions.length"></span></span>
+                            <span>Skor Sementara: <span class="text-emerald-600 font-bold" x-text="score"></span></span>
+                        </div>
+
+                        <div class="space-y-4">
+                            <h3 class="text-lg sm:text-xl font-bold text-slate-900" x-text="questions[currentIndex].question"></h3>
+                            
+                            <div class="grid grid-cols-1 gap-3">
+                                <template x-for="(option, optIndex) in questions[currentIndex].options" :key="optIndex">
+                                    <button @click="selectOption(optIndex)"
+                                        :class="selectedOption === null ? 'bg-slate-50 hover:bg-emerald-50 hover:border-emerald-200 border-slate-200 text-slate-700' : (optIndex === questions[currentIndex].correct ? 'bg-emerald-100 border-emerald-500 text-emerald-900 font-semibold' : (selectedOption === optIndex ? 'bg-rose-100 border-rose-400 text-rose-900' : 'bg-slate-50 border-slate-200 text-slate-400 opacity-60'))"
+                                        class="p-4 rounded-2xl border text-left text-sm transition-all flex items-center justify-between">
+                                        <span x-text="option"></span>
+                                        <template x-if="selectedOption !== null">
+                                            <span x-text="optIndex === questions[currentIndex].correct ? '✅ Benar' : (selectedOption === optIndex ? '❌ Pilihanmu' : '')" class="text-xs font-bold"></span>
+                                        </template>
+                                    </button>
+                                </template>
+                            </div>
+                        </div>
+
+                        <template x-if="selectedOption !== null">
+                            <div class="pt-4 flex justify-end">
+                                <button @click="nextQuestion" class="px-6 py-3 bg-emerald-600 hover:bg-emerald-700 text-white font-semibold text-xs rounded-xl shadow-md transition-all">
+                                    <span x-text="currentIndex < questions.length - 1 ? 'Soal Berikutnya ➡️' : 'Lihat Hasil Kuis 🏆'"></span>
+                                </button>
+                            </div>
+                        </template>
+                    </div>
+                </template>
+
+                <!-- Quiz Finished State -->
+                <template x-if="quizFinished">
+                    <div class="text-center space-y-6 py-8">
+                        <div class="w-20 h-20 bg-emerald-50 text-emerald-600 rounded-3xl mx-auto flex items-center justify-center text-4xl shadow-inner">
+                            🏆
+                        </div>
+                        <div class="space-y-2">
+                            <h3 class="text-2xl font-bold text-slate-900">Alhamdulillah, Kuis Selesai!</h3>
+                            <p class="text-sm text-slate-600">Kamu telah menyelesaikan seluruh pertanyaan evaluasi Pendidikan Agama Islam.</p>
+                        </div>
+                        <div class="p-6 bg-slate-50 rounded-2xl border border-slate-100 max-w-sm mx-auto space-y-1">
+                            <span class="text-xs uppercase font-bold text-slate-400">Skor Akhir Kamu</span>
+                            <div class="text-4xl font-extrabold text-emerald-600" x-text="score + ' / ' + (questions.length * 10)"></div>
+                        </div>
+                        <button @click="resetQuiz" class="px-8 py-3.5 bg-emerald-600 hover:bg-emerald-700 text-white font-semibold text-xs rounded-xl shadow-md transition-all">
+                            Ulangi Kuis 🔄
+                        </button>
+                    </div>
+                </template>
+
+            </div>
+        </div>
+
     </main>
 
-    <!-- Poster Detail Modal -->
     <div x-show="modalOpen" class="fixed inset-0 z-50 flex items-center justify-center p-4 bg-slate-900/60 backdrop-blur-sm" x-transition.opacity>
         <div @click.away="modalOpen = false" class="bg-white rounded-3xl max-w-2xl w-full p-8 space-y-6 shadow-2xl relative">
             <div class="flex items-center justify-between pb-4 border-b border-slate-100">
@@ -321,7 +386,7 @@
                     <span class="text-3xl" x-text="activePoster.icon"></span>
                     <div>
                         <h3 class="text-xl font-bold text-slate-900" x-text="activePoster.title"></h3>
-                        <span class="text-xs font-semibold text-indigo-600 uppercase tracking-wider" x-text="activePoster.tag"></span>
+                        <span class="text-xs font-semibold text-emerald-600 uppercase tracking-wider" x-text="activePoster.tag"></span>
                     </div>
                 </div>
                 <button @click="modalOpen = false" class="p-2 rounded-xl text-slate-400 hover:bg-slate-100 hover:text-slate-600">
@@ -329,36 +394,35 @@
                 </button>
             </div>
             <div class="space-y-4">
-                <div class="bg-indigo-50 p-6 rounded-2xl border border-indigo-100 text-center space-y-2">
+                <div class="bg-emerald-50 p-6 rounded-2xl border border-emerald-100 text-center space-y-2">
                     <span class="text-4xl">🌟</span>
-                    <h4 class="text-lg font-bold text-indigo-900" x-text="activePoster.subtitle"></h4>
-                    <p class="text-xs text-indigo-700 leading-relaxed" x-text="activePoster.description"></p>
+                    <h4 class="text-lg font-bold text-emerald-900" x-text="activePoster.subtitle"></h4>
+                    <p class="text-xs text-emerald-800 leading-relaxed" x-text="activePoster.description"></p>
                 </div>
                 <div class="space-y-2">
-                    <h5 class="text-xs font-bold uppercase text-slate-400 tracking-wider">Rincian Materi Poster:</h5>
+                    <h5 class="text-xs font-bold uppercase text-slate-400 tracking-wider">Rincian Materi Infografis:</h5>
                     <div class="p-4 bg-slate-50 rounded-2xl border border-slate-100 text-xs text-slate-700 space-y-2">
-                        <p>• Poster ini dirancang khusus untuk pembelajaran visual tingkat sekolah dasar & menengah.</p>
-                        <p>• Membantu siswa mengenali pola, struktur, serta konsep dasar dengan cepat tanpa teks berlebih.</p>
-                        <p>• Dapat digunakan guru sebagai media peraga presentasi digital interaktif di kelas.</p>
+                        <p>• Dirancang untuk memperkuat pemahaman nilai-nilai spiritual, akhlak mulia, dan tanggung jawab sosial.</p>
+                        <p>• Menggabungkan ayat/hadis ringkas dengan implementasi praktis dalam kehidupan sehari-hari siswa.</p>
+                        <p>• Cocok digunakan guru sebagai media peraga presentasi interaktif di ruang kelas.</p>
                     </div>
                 </div>
             </div>
             <div class="flex justify-end pt-4 border-t border-slate-100">
-                <button @click="modalOpen = false" class="px-6 py-2.5 bg-indigo-600 text-white font-semibold rounded-xl text-xs hover:bg-indigo-700 shadow-md">
+                <button @click="modalOpen = false" class="px-6 py-2.5 bg-emerald-600 text-white font-semibold rounded-xl text-xs hover:bg-emerald-700 shadow-md">
                     Tutup Tampilan
                 </button>
             </div>
         </div>
     </div>
 
-    <!-- Footer -->
     <footer class="bg-white border-t border-slate-100 py-8 mt-16">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex flex-col sm:flex-row items-center justify-between gap-4 text-center sm:text-left">
             <div class="flex items-center space-x-2">
-                <div class="w-7 h-7 rounded-lg bg-indigo-600 flex items-center justify-center text-white font-bold text-xs">RV</div>
-                <span class="text-sm font-bold text-slate-800">RuangVisual - Media Pembelajaran Interaktif</span>
+                <div class="w-7 h-7 rounded-lg bg-emerald-600 flex items-center justify-center text-white font-bold text-xs">NV</div>
+                <span class="text-sm font-bold text-slate-800">NurVisual - Media Pembelajaran PAI Interaktif</span>
             </div>
-            <p class="text-xs text-slate-500">Mendukung metode pembelajaran visual modern, bersih, dan menyenangkan untuk siswa.</p>
+            <p class="text-xs text-slate-500">Mendukung metode pembelajaran agama Islam modern, bersih, interaktif, dan penuh nilai keteladanan.</p>
         </div>
     </footer>
 
@@ -367,24 +431,24 @@
             return {
                 currentTab: 'home',
                 mobileMenuOpen: false,
-                selectedTopicId: 'solar',
+                selectedTopicId: 'iman',
                 modalOpen: false,
                 activePoster: {},
                 posterFilter: 'all',
 
                 topics: [
-                    { id: 'solar', name: 'Tata Surya', icon: '🪐', category: 'Astronomi & Sains' },
-                    { id: 'water', name: 'Siklus Air', icon: '💧', category: 'Ilmu Bumi & Lingkungan' },
-                    { id: 'plant', name: 'Anatomi Tumbuhan', icon: '🌿', category: 'Biologi & Botani' }
+                    { id: 'iman', name: 'Rukun Iman & Akidah', icon: '🤲', category: 'Akidah Islam' },
+                    { id: 'sejarah', name: 'Kisah Teladan & Sejarah', icon: '📜', category: 'Sejarah Peradaban' },
+                    { id: 'akhlak', name: 'Akhlak & Pelestarian Alam', icon: '🌿', category: 'Akhlak & Lingkungan' }
                 ],
 
                 posters: [
-                    { id: 1, title: 'Sistem Tata Surya', subtitle: 'Mengenal 8 Planet Utama & Orbitnya', tag: 'sains', icon: '🪐', description: 'Poster infografis lengkap mengenai urutan planet dari Matahari, ukuran relatif, serta karakteristik unik setiap planet di galaksi.', readTime: '3 Menit Baca' },
-                    { id: 2, title: 'Siklus Hidrologi (Air)', subtitle: 'Evaporasi, Kondensasi, Presipitasi', tag: 'sains', icon: '🌧️', description: 'Visualisasi proses perjalanan air di bumi mulai dari penguapan air laut hingga turun kembali sebagai hujan ke daratan.', readTime: '2 Menit Baca' },
-                    { id: 3, title: 'Struktur Bagian Tumbuhan', subtitle: 'Akar, Batang, Daun, & Bunga', tag: 'biologi', icon: '🌱', description: 'Infografis anatomi lengkap tumbuhan berpembuluh dan fungsi penting setiap organ bagi kelangsungan hidup tanaman.', readTime: '4 Menit Baca' },
-                    { id: 4, title: 'Lapisan Atmosfer Bumi', subtitle: 'Troposfer hingga Eksosfer', tag: 'sains', icon: '🌍', description: 'Peta visual lapisan udara yang melindungi bumi dari radiasi kosmik serta tempat terjadinya berbagai fenomena cuaca.', readTime: '3 Menit Baca' },
-                    { id: 5, title: 'Fotosintesis Alami', subtitle: 'Energi Matahari Menjadi Oksigen', tag: 'biologi', icon: '🍃', description: 'Poster edukasi proses tumbuhan mengubah karbondioksida dan air menjadi glukosa berkat bantuan klorofil dan cahaya matahari.', readTime: '3 Menit Baca' },
-                    { id: 6, title: 'Sumber Energi Terbarukan', subtitle: 'Matahari, Angin, & Air', tag: 'fisika', icon: '⚡', description: 'Pengenalan energi ramah lingkungan pengganti bahan bakar fosil demi menjaga kelestarian masa depan bumi.', readTime: '2 Menit Baca' }
+                    { id: 1, title: 'Hakikat 6 Rukun Iman', subtitle: 'Pilar Pondasi Keyakinan Seorang Muslim', tag: 'akidah', icon: '🤲', description: 'Infografis lengkap tentang urutan Rukun Iman mulai dari Iman kepada Allah hingga Qada dan Qadar.', readTime: '3 Menit Baca' },
+                    { id: 2, title: 'Sifat Wajib & Jaiz Allah SWT', subtitle: 'Mengenal Sifat Kesempurnaan Sang Pencipta', tag: 'akidah', icon: '✨', description: 'Penjelasan ringkas 20 sifat wajib Allah SWT beserta sifat mustahil dan sifat jaiz-Nya.', readTime: '4 Menit Baca' },
+                    { id: 3, title: 'Kisah Teladan Nabi Ibrahim AS', subtitle: 'Keteguhan Tauhid Menghadapi Ujian', tag: 'akhlak', icon: '🔥', description: 'Pelajaran berharga dari keteguhan iman Nabi Ibrahim AS dalam menegakkan kalimat tauhid.', readTime: '3 Menit Baca' },
+                    { id: 4, title: 'Adab Berinteraksi dengan Alam', subtitle: 'Menjaga Bumi sebagai Amanah Khalifah', tag: 'alam', icon: '🌍', description: 'Poster edukasi larangan berbuat kerusakan di muka bumi serta anjuran menanam pohon dan menjaga kebersihan.', readTime: '2 Menit Baca' },
+                    { id: 5, title: 'Sifat Utama Rasulullah (Sidiq, Amanah, Tabligh, Fathanah)', subtitle: 'Teladan Utama Akhlak Karimah', tag: 'akhlak', icon: '⭐', description: 'Empat sifat mulia para rasul yang wajib diteladani dalam kehidupan sehari-hari oleh setiap pelajar.', readTime: '3 Menit Baca' },
+                    { id: 6, title: 'Toleransi & Ukhuwah Islamiyah', subtitle: 'Menjaga Persaudaraan Sesama Manusia', tag: 'akhlak', icon: '🤝', description: 'Infografis tentang pentingnya menghargai perbedaan, tolong-menolong dalam kebaikan, dan menjaga kerukunan.', readTime: '2 Menit Baca' }
                 ],
 
                 get filteredPosters() {
@@ -402,76 +466,137 @@
         function topicViewer() {
             return {
                 topicData: {
-                    solar: {
-                        category: 'Astronomi & Sains',
-                        title: 'Tata Surya & Karakteristik Planet',
-                        icon: '🪐',
-                        description: 'Tata surya terdiri dari Matahari sebagai pusat dan berbagai benda langit yang mengitarinya termasuk 8 planet utama.',
-                        visualTitle: 'Pusat Gravitasi & Planet',
-                        visualDesc: 'Matahari mendominasi 99.8% massa tata surya, menciptakan gaya gravitasi kuat yang menahan seluruh planet tetap berada di orbitnya.',
-                        highlights: ['Matahari adalah bintang induk', 'Dibagi menjadi planet luar dan dalam', 'Jarak dihitung menggunakan Satuan Astronomi (SA)'],
+                    iman: {
+                        category: 'Akidah Islam',
+                        title: 'Rukun Iman & Konsep Ketuhanan',
+                        icon: '🤲',
+                        description: 'Rukun iman adalah fondasi dasar keimanan dalam agama Islam yang harus diyakini di dalam hati, diucapkan dengan lisan, dan diamalkan dalam perbuatan.',
+                        visualTitle: 'Enam Pilar Keimanan',
+                        visualDesc: 'Keimanan kepada Allah, Malaikat, Kitab-kitab, Rasul, Hari Kiamat, serta Qada dan Qadar merupakan satu kesatuan utuh pembentuk kepribadian muslim.',
+                        highlights: ['Landasan utama amal ibadah', 'Menumbuhkan ketenangan jiwa', 'Mendorong rasa tanggung jawab moral'],
                         stats: [
-                            { value: '8 Planet', label: 'Jumlah Utama' },
-                            { value: '4.6 Miliar', label: 'Usia Tata Surya' },
-                            { value: '150 Juta KM', label: 'Jarak Bumi-Matahari' }
+                            { value: '6 Pilar', label: 'Rukun Iman' },
+                            { value: '20 Sifat', label: 'Wajib bagi Allah' },
+                            { value: '99 Asma', label: 'Asmaul Husna' }
                         ],
                         flashcards: [
-                            { icon: '☀️', frontTitle: 'Matahari', backDesc: 'Pusat tata surya berupa bola gas panas raksasa yang menghasilkan energi cahaya dan panas melalui reaksi fusi nuklir.', flipped: false },
-                            { icon: '🔴', frontTitle: 'Merkurius', backDesc: 'Planet terdekat dari Matahari dengan permukaan dipenuhi kawah akibat hantaman asteroid serta suhu ekstrem.', flipped: false },
-                            { icon: '⭐', frontTitle: 'Venus', backDesc: 'Planet paling panas di tata surya akibat efek rumah kaca yang sangat kuat dari atmosfer karbon dioksidanya.', flipped: false },
-                            { icon: '🌍', frontTitle: 'Bumi', backDesc: 'Satu-satunya planet yang diketahui memiliki air berwujud cair dan kaya akan oksigen penunjang kehidupan.', flipped: false },
-                            { icon: '🟠', frontTitle: 'Mars', backDesc: 'Dikenal sebagai Planet Merah karena kandungan besi oksida (karat) yang melimpah di permukaan tanahnya.', flipped: false },
-                            { icon: '🪐', frontTitle: 'Jupiter', backDesc: 'Planet raksasa gas terbesar di tata surya yang memiliki badai raksasa ikonik bernama Bintik Merah Raksasa.', flipped: false }
+                            { icon: '☝️', frontTitle: '1. Iman kepada Allah SWT', backDesc: 'Myakini dengan sepenuh hati bahwa Allah SWT adalah Tuhan Yang Maha Esa, Pencipta, Pemelihara, dan Penguasa alam semesta.', flipped: false },
+                            { icon: '👼', frontTitle: '2. Iman kepada Malaikat', backDesc: 'Meyakini keberadaan makhluk gaib ciptaan Allah dari cahaya yang taat menjalankan tugas (seperti Jibril, Mikail, Raqib, Atid).', flipped: false },
+                            { icon: '📖', frontTitle: '3. Iman kepada Kitab', backDesc: 'Meyakini wahyu Allah yang diturunkan kepada para rasul sebagai petunjuk hidup, meliputi Taurat, Zabur, Injil, dan Al-Quran.', flipped: false },
+                            { icon: '🕊️', frontTitle: '4. Iman kepada Rasul', backDesc: 'Meyakini para utusan Allah yang membawa ajaran kebenaran untuk membimbing manusia ke jalan yang lurus.', flipped: false },
+                            { icon: '⏳', frontTitle: '5. Iman kepada Hari Kiamat', backDesc: 'Meyakini bahwa kehidupan dunia fana dan akan tiba hari akhir di mana seluruh amal manusia akan dihisab.', flipped: false },
+                            { icon: '⚖️', frontTitle: '6. Iman kepada Qada & Qadar', backDesc: 'Meyakini segala ketentuan, ketetapan, dan takdir Allah SWT yang berlaku bagi seluruh makhluk-Nya dengan sikap sabar dan syukur.', flipped: false }
                         ]
                     },
-                    water: {
-                        category: 'Ilmu Bumi & Lingkungan',
-                        title: 'Siklus Hidrologi (Siklus Air)',
-                        icon: '💧',
-                        description: 'Jumlah air di bumi relatif tetap karena mengalami perputaran siklus alami secara terus-menerus tanpa henti.',
-                        visualTitle: 'Sirkulasi Air Global',
-                        visualDesc: 'Air mengalami perubahan wujud dari cair menjadi gas di atmosfer, lalu mengembun menjadi awan, dan kembali turun ke bumi sebagai presipitasi.',
-                        highlights: ['Didorong oleh energi panas matahari', 'Menjaga ketersediaan air bersih di daratan', 'Melibatkan proses evaporasi dan kondensasi'],
+                    sejarah: {
+                        category: 'Sejarah Peradaban',
+                        title: 'Kisah Teladan Nabi & Rasul',
+                        icon: '📜',
+                        description: 'Mempelajari perjalanan hidup dan perjuangan para nabi dan rasul dalam menyebarkan nilai-nilai tauhid serta akhlak mulia.',
+                        visualTitle: 'Ibrah & Keteladanan',
+                        visualDesc: 'Setiap kisah nabi menyimpan hikmah mendalam mengenai kesabaran, keteguhan prinsip, kejujuran, serta kepemimpinan yang amanah.',
+                        highlights: ['Meneladani kesabaran para nabi', 'Memahami sejarah dakwah islam', 'Mengambil hikmah dari ujian kehidupan'],
                         stats: [
-                            { value: '71%', label: 'Permukaan Bumi' },
-                            { value: '97.5% Air', label: 'Berwujud Laut Asin' },
-                            { value: '3 Tahap', label: 'Proses Utama' }
+                            { value: '25 Nabi', label: 'Wajib Diketahui' },
+                            { value: 'Uswatun', label: 'Hasanah Teladan' },
+                            { value: 'Hikmah', label: 'Kehidupan Nyata' }
                         ],
                         flashcards: [
-                            { icon: '☀️', frontTitle: 'Evaporasi & Transpirasi', backDesc: 'Penguapan air dari permukaan laut, danau, serta pelepasan uap air dari jaringan daun tumbuhan.', flipped: false },
-                            { icon: '☁️', frontTitle: 'Kondensasi', backDesc: 'Proses perubahan uap air di udara dingin menjadi titik-titik air atau kristal es membentuk awan.', flipped: false },
-                            { icon: '🌧️', frontTitle: 'Presipitasi', backDesc: 'Jatuhnya titik-titik air dari awan ke permukaan bumi dalam bentuk hujan, salju, atau es batu.', flipped: false },
-                            { icon: '💧', frontTitle: 'Infiltrasi & Perkolasi', backDesc: 'Penyerapan air hujan ke dalam pori-pori tanah hingga menjadi air tanah atau sumber mata air.', flipped: false },
-                            { icon: '🌊', frontTitle: 'Run-off (Limpasan)', backDesc: 'Aliran air di atas permukaan tanah menuju sungai, danau, hingga kembali bermuara ke laut.', flipped: false },
-                            { icon: '♻️', frontTitle: 'Siklus Berkelanjutan', backDesc: 'Proses berulang secara terus-menerus yang menjaga keseimbangan ekosistem hidrologi bumi.', flipped: false }
+                            { icon: '🌊', frontTitle: 'Nabi Nuh AS', backDesc: 'Teladan kesabaran luar biasa dalam berdakwah selama ratusan tahun mengajak kaumnya menyembah Allah SWT.', flipped: false },
+                            { icon: '🔥', frontTitle: 'Nabi Ibrahim AS', backDesc: 'Bapak para nabi (Abul Anbiya) yang teguh mempertahankan tauhid meski harus dibakar di dalam kobaran api.', flipped: false },
+                            { icon: '🚢', frontTitle: 'Nabi Musa AS', backDesc: 'Keteguhan menghadapi kekejaman Firaun serta perjuangan membebaskan Bani Israil dengan mukjizat tongkat.', flipped: false },
+                            { icon: '🌟', frontTitle: 'Nabi Muhammad SAW', backDesc: 'Rasul akhir zaman pembawa rahmat bagi seluruh alam (Rahmatan lil ‘alamin) dengan akhlak mulia Al-Quran.', flipped: false },
+                            { icon: '🤝', frontTitle: 'Abu Bakar Ash-Shiddiq', backDesc: 'Sahabat setia Rasulullah yang dikenal sangat jujur, dermawan, dan khalifah pertama yang tegas.', flipped: false },
+                            { icon: '🛡️', frontTitle: 'Umar bin Khattab', backDesc: 'Tokoh sahabat yang terkenal dengan ketegasan, keadilan, serta keberaniannya dalam membela kebenaran islam.', flipped: false }
                         ]
                     },
-                    plant: {
-                        category: 'Biologi & Botani',
-                        title: 'Anatomi & Struktur Tumbuhan',
+                    akhlak: {
+                        category: 'Akhlak & Lingkungan',
+                        title: 'Akhlak Terpuji & Adab Ekologis',
                         icon: '🌿',
-                        description: 'Tumbuhan memiliki organ utama seperti akar, batang, dan daun yang bekerja sama untuk kelangsungan hidup dan fotosintesis.',
-                        visualTitle: 'Organ Utama Tumbuhan',
-                        visualDesc: 'Setiap bagian tanaman memiliki fungsi khusus mulai dari penyerapan nutrisi di dalam tanah hingga pembuatan makanan di daun.',
-                        highlights: ['Akar menyerap air dan mineral', 'Batang menyalurkan zat makanan', 'Daun tempat dapur utama fotosintesis'],
+                        description: 'Akhlak mulia mencakup hubungan baik kepada Allah (Hablum minallah), sesama manusia (Hablum minannas), dan kepedulian terhadap kelestarian alam.',
+                        visualTitle: 'Karakter Muslim Beradab',
+                        visualDesc: 'Islam mengajarkan kejujuran, amanah, tolong-menolong, serta tanggung jawab menjaga bumi dari kerusakan sebagai bentuk ibadah.',
+                        highlights: ['Menjunjung tinggi kejujuran & amanah', 'Menjaga kerukunan dan toleransi', 'Melestarikan lingkungan ciptaan Allah'],
                         stats: [
-                            { value: '3 Organ', label: 'Vegetatif Utama' },
-                            { value: 'Klorofil', label: 'Zat Hijau Daun' },
-                            { value: 'Oksigen', label: 'Hasil Sampingan' }
+                            { value: 'Hablum', label: 'Minannas' },
+                            { value: 'Khalifah', label: 'Fil Ardh' },
+                            { value: 'Amanah', label: 'Lingkungan' }
                         ],
                         flashcards: [
-                            { icon: '🌱', frontTitle: 'Akar Tumbuhan', backDesc: 'Bagian tanaman di dalam tanah yang berfungsi menyerap air serta mineral hara serta memperkokoh berdirinya tanaman.', flipped: false },
-                            { icon: '🪵', frontTitle: 'Batang Tanaman', backDesc: 'Saluran transportasi utama pengangkut air dari akar ke daun (xilem) serta hasil fotosintesis ke seluruh tubuh (floem).', flipped: false },
-                            { icon: '🍃', frontTitle: 'Daun & Klorofil', backDesc: 'Tempat berlangsungnya fotosintesis menggunakan bantuan cahaya matahari, karbon dioksida, dan zat hijau daun.', flipped: false },
-                            { icon: '🌸', frontTitle: 'Bunga', backDesc: 'Organ reproduksi tumbuhan yang menghasilkan alat kelamin jantan dan betina untuk proses penyerbukan.', flipped: false },
-                            { icon: '🍎', frontTitle: 'Buah & Biji', backDesc: 'Hasil pembuahan bunga yang membungkus biji sebagai alat perkembangbiakan generasi tanaman berikutnya.', flipped: false },
-                            { icon: '☀️', frontTitle: 'Stomata', backDesc: 'Pori-pori kecil di permukaan daun sebagai jalur keluar masuknya gas pernapasan tumbuhan.', flipped: false }
+                            { icon: '🤝', frontTitle: 'Sidiq & Amanah', backDesc: 'Berperilaku jujur dalam perkataan serta dapat dipercaya dalam setiap tugas dan tanggung jawab yang diemban.', flipped: false },
+                            { icon: '🤲', frontTitle: 'Toleransi (Tasamuh)', backDesc: 'Sikap menghormati dan menghargai perbedaan keyakinan maupun pendapat dengan tetap menjaga batasan aqidah.', flipped: false },
+                            { icon: '🌱', frontTitle: 'Menjaga Kelestarian Alam', backDesc: 'Kesadaran ekologis tidak merusak alam, gemar menanam pohon, serta menghemat air dan energi sebagai wujud syukur.', flipped: false },
+                            { icon: '🧹', frontTitle: 'Kebersihan (Thaharah)', backDesc: 'Menjaga kebersihan fisik, pakaian, lingkungan rumah, dan tempat ibadah karena kebersihan adalah sebagian dari iman.', flipped: false },
+                            { icon: '❤️', frontTitle: 'Kasih Sayang (Rahmah)', backDesc: 'Menyayangi sesama manusia, anak yatim, fakir miskin, serta berbuat baik kepada seluruh makhluk ciptaan Allah.', flipped: false },
+                            { icon: '⚖️', frontTitle: 'Keadilan', backDesc: 'Berbuat adil kepada diri sendiri, keluarga, dan masyarakat tanpa memandang status sosial maupun kekayaan.', flipped: false }
                         ]
                     }
                 },
 
                 get currentTopicData() {
-                    return this.topicData[this.selectedTopicId] || this.topicData.solar;
+                    return this.topicData[this.selectedTopicId] || this.topicData.iman;
+                }
+            }
+        }
+
+        function quizApp() {
+            return {
+                currentIndex: 0,
+                selectedOption: null,
+                score: 0,
+                quizFinished: false,
+
+                questions: [
+                    {
+                        question: 'Berapakah jumlah rukun iman yang wajib diyakini oleh setiap muslim?',
+                        options: ['4 Perkara', '5 Perkara', '6 Perkara', '7 Perkara'],
+                        correct: 2
+                    },
+                    {
+                        question: 'Malaikat yang bertugas menyampaikan wahyu kepada para nabi dan rasul adalah...',
+                        options: ['Malaikat Mikail', 'Malaikat Jibril', 'Malaikat Israfil', 'Malaikat Izrail'],
+                        correct: 1
+                    },
+                    {
+                        question: 'Sifat wajib bagi Allah SWT yang berarti Maha Berdiri Sendiri adalah...',
+                        options: ['Qidam', 'Baqa', 'Qiyamuhu Binafsih', 'Wahdaniyah'],
+                        correct: 2
+                    },
+                    {
+                        question: 'Nabi yang diberi mukjizat berupa kapal besar (bahtera) untuk menyelamatkan kaumnya dari banjir besar adalah...',
+                        options: ['Nabi Nuh AS', 'Nabi Ibrahim AS', 'Nabi Musa AS', 'Nabi Isa AS'],
+                        correct: 0
+                    },
+                    {
+                        question: 'Sifat utama Rasulullah SAW yang berarti "Dapat Dipercaya" adalah...',
+                        options: ['Sidiq', 'Amanah', 'Tabligh', 'Fathanah'],
+                        correct: 1
+                    }
+                ],
+
+                selectOption(index) {
+                    if (this.selectedOption !== null) return;
+                    this.selectedOption = index;
+                    if (index === this.questions[this.currentIndex].correct) {
+                        this.score += 10;
+                    }
+                },
+
+                nextQuestion() {
+                    if (this.currentIndex < this.questions.length - 1) {
+                        this.currentIndex++;
+                        this.selectedOption = null;
+                    } else {
+                        this.quizFinished = true;
+                    }
+                },
+
+                resetQuiz() {
+                    this.currentIndex = 0;
+                    this.selectedOption = null;
+                    this.score = 0;
+                    this.quizFinished = false;
                 }
             }
         }
