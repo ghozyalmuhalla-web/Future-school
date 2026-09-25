@@ -6,370 +6,280 @@
       min-height: max(884px, 100dvh);
     }
   </style>
-  </head><body class="bg-surface font-body-md text-on-surface antialiased flex flex-col min-h-screen"><header class="fixed top-0 w-full z-50 pt-safe bg-surface/85 backdrop-blur-xl shadow-[0_1px_8px_rgba(0,0,0,0.04)]"><div class="h-16 px-margin flex items-center justify-between gap-space-sm"><div class="flex items-center gap-space-sm min-w-0"><div class="w-9 h-9 rounded-xl bg-primary flex items-center justify-center text-on-primary font-display-lg text-title-md shadow-[0_4px_12px_rgba(0,105,72,0.25)] flex-shrink-0"><span>NV</span></div><div class="flex flex-col min-w-0"><span class="font-label-sm text-label-sm text-primary tracking-wide uppercase">Assalamu'alaikum</span><span class="font-title-md text-title-md text-on-surface truncate">Infografis</span></div></div><div class="flex items-center gap-space-xs"><div class="flex items-center gap-1 bg-tertiary-fixed/40 px-2.5 py-1 rounded-full flex-shrink-0"><span class="material-symbols-outlined text-tertiary text-[18px]">local_fire_department</span><span class="font-label-md text-label-md text-tertiary">7 Hari</span></div><button aria-label="Pemberitahuan" class="w-11 h-11 flex items-center justify-center rounded-full text-on-surface-variant hover:text-primary transition-colors" type="button"><span class="material-symbols-outlined text-[22px]">notifications</span></button><div class="w-8 h-8 rounded-full bg-primary flex items-center justify-center flex-shrink-0"><span class="material-symbols-outlined text-on-primary text-[18px]">person</span></div></div></div></header><main class="flex-1 w-full bg-surface pt-16 pb-28"><div class="flex flex-col w-full px-margin pb-6 gap-space-lg">
-<!-- Gallery Header Intro (No duplicate app header) -->
-<section class="flex flex-col gap-1.5 pt-2">
-<div class="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-primary/10 w-fit text-primary">
-<span class="material-symbols-outlined text-[16px]">palette</span>
-<span class="font-label-sm text-label-sm uppercase tracking-wider">Pustaka Visual</span>
+  </head><body class="bg-surface font-body-md text-on-surface antialiased flex flex-col min-h-screen"><header class="fixed top-0 w-full z-50 pt-safe bg-surface/85 backdrop-blur-xl shadow-[0_1px_8px_rgba(0,0,0,0.04)]"><div class="h-16 px-margin flex items-center justify-between gap-space-sm"><div class="flex items-center gap-space-sm min-w-0"><div class="w-9 h-9 rounded-xl bg-primary flex items-center justify-center text-on-primary font-display-lg text-title-md shadow-[0_4px_12px_rgba(0,105,72,0.25)] flex-shrink-0"><span>NV</span></div><div class="flex flex-col min-w-0"><span class="font-label-sm text-label-sm text-primary tracking-wide uppercase">Assalamu'alaikum</span><span class="font-title-md text-title-md text-on-surface truncate">Beranda</span></div></div><div class="flex items-center gap-space-xs"><div class="flex items-center gap-1 bg-tertiary-fixed/40 px-2.5 py-1 rounded-full flex-shrink-0"><span class="material-symbols-outlined text-tertiary text-[18px]">local_fire_department</span><span class="font-label-md text-label-md text-tertiary">7 Hari</span></div><button aria-label="Pemberitahuan" class="w-11 h-11 flex items-center justify-center rounded-full text-on-surface-variant hover:text-primary transition-colors" type="button"><span class="material-symbols-outlined text-[22px]">notifications</span></button><div class="w-8 h-8 rounded-full bg-primary flex items-center justify-center flex-shrink-0"><span class="material-symbols-outlined text-on-primary text-[18px]">person</span></div></div></div></header><main class="flex-1 w-full bg-surface pt-16 pb-28"><div class="flex flex-col w-full px-margin space-y-space-lg pb-10">
+<!-- Sub-Header Greeting & Quick Status Card -->
+<div class="bg-surface-container-low rounded-3xl p-space-md shadow-sm relative overflow-hidden">
+<div class="absolute -right-6 -bottom-6 w-28 h-28 bg-primary/5 rounded-full blur-xl pointer-events-none"></div>
+<div class="flex items-center justify-between gap-space-sm mb-space-sm">
+<div class="flex items-center gap-space-xs">
+<span class="inline-flex items-center gap-1 bg-primary/10 text-primary px-2.5 py-1 rounded-full font-label-sm text-label-sm">
+<span class="material-symbols-outlined text-[14px]">school</span>
+          Kelas 7 • Pemula
+        </span>
 </div>
-<h2 class="font-headline-md text-headline-md text-on-surface">Infografis &amp; Poster Edukasi Islam</h2>
-<p class="font-body-md text-body-md text-on-surface-variant">Koleksi materi visual akidah, akhlak, dan kepedulian lingkungan untuk pembelajaran interaktif.</p>
-</section>
-<!-- Search Input Bar -->
-<div class="relative w-full">
-<div class="absolute inset-y-0 left-0 pl-3.5 flex items-center pointer-events-none text-on-surface-variant">
-<span class="material-symbols-outlined text-[20px]">search</span>
-</div>
-<input class="w-full h-12 pl-10 pr-10 rounded-2xl bg-surface-container-lowest text-on-surface font-body-md text-body-md placeholder:text-on-surface-variant/70 shadow-sm focus:outline-none focus:ring-0 focus:shadow-md transition-shadow" id="search-input" placeholder="Cari topik poster atau kata kunci..." type="text"/>
-<button aria-label="Bersihkan pencarian" class="hidden absolute inset-y-0 right-0 pr-3 flex items-center text-on-surface-variant hover:text-primary transition-colors" id="clear-search">
-<span class="material-symbols-outlined text-[18px]">close</span>
-</button>
-</div>
-<!-- Horizontal Scroll Filter Pills -->
-<div class="flex items-center gap-2 overflow-x-auto pb-1 -mx-margin px-margin no-scrollbar">
-<button class="filter-pill flex-shrink-0 px-4 py-2 rounded-full font-label-md text-label-md transition-all duration-200 bg-primary text-on-primary shadow-sm" data-category="all">
-      Semua Poster
-    </button>
-<button class="filter-pill flex-shrink-0 px-4 py-2 rounded-full font-label-md text-label-md transition-all duration-200 bg-surface-container-low text-on-surface-variant hover:bg-surface-container" data-category="akidah">
-      Akidah &amp; Ibadah
-    </button>
-<button class="filter-pill flex-shrink-0 px-4 py-2 rounded-full font-label-md text-label-md transition-all duration-200 bg-surface-container-low text-on-surface-variant hover:bg-surface-container" data-category="akhlak">
-      Akhlak &amp; Adab
-    </button>
-<button class="filter-pill flex-shrink-0 px-4 py-2 rounded-full font-label-md text-label-md transition-all duration-200 bg-surface-container-low text-on-surface-variant hover:bg-surface-container" data-category="alam">
-      Kelestarian Alam
-    </button>
-</div>
-<!-- Vertical Stacked Poster Feed -->
-<div class="flex flex-col gap-space-lg" id="posters-feed">
-<!-- Card 1: Hakikat 6 Rukun Iman -->
-<article class="poster-card flex flex-col rounded-3xl bg-surface-container-lowest shadow-md overflow-hidden transition-transform duration-200 active:scale-[0.99]" data-category="akidah" data-desc="Menyelami pondasi spiritual: Iman kepada Allah, Malaikat, Kitab Suci, Rasul, Hari Akhir, serta Qada &amp; Qadar disertai hikmah kontekstual modern." data-tag="Akidah &amp; Ibadah" data-time="3 Mnt" data-title="Hakikat 6 Rukun Iman">
-<div class="relative h-44 w-full bg-gradient-to-br from-primary to-primary-container p-space-md flex flex-col justify-between overflow-hidden">
-<div class="absolute -right-4 -bottom-6 w-32 h-32 rounded-full bg-white/10 blur-xl pointer-events-none"></div>
-<div class="flex items-center justify-between z-10">
-<span class="inline-flex items-center px-2.5 py-1 rounded-full bg-white/20 backdrop-blur-md text-on-primary font-label-sm text-label-sm uppercase tracking-wide">
-            Akidah
-          </span>
-<span class="inline-flex items-center gap-1 px-2.5 py-1 rounded-full bg-black/25 backdrop-blur-md text-on-primary font-label-sm text-label-sm">
-<span class="material-symbols-outlined text-[14px]">schedule</span> 3 Mnt
-          </span>
-</div>
-<div class="flex items-center gap-3 z-10">
-<div class="w-12 h-12 rounded-2xl bg-white/20 backdrop-blur-md flex items-center justify-center text-2xl shadow-inner">
-            🤲
-          </div>
-<div class="flex flex-col">
-<span class="font-label-sm text-label-sm text-on-primary/80">Infografis Interaktif</span>
-<span class="font-headline-sm text-headline-sm text-on-primary">Hakikat 6 Rukun Iman</span>
+<div class="flex items-center gap-1 bg-tertiary-fixed text-on-tertiary-fixed px-2.5 py-1 rounded-full shadow-sm">
+<span class="material-symbols-outlined text-tertiary-container text-[16px]" style="font-variation-settings: 'FILL' 1;">local_fire_department</span>
+<span class="font-label-md text-label-md">5 Hari Beruntun</span>
 </div>
 </div>
-</div>
-<div class="p-space-md flex flex-col gap-3">
-<p class="font-body-md text-body-md text-on-surface-variant line-clamp-2">
-          Pondasi utama seorang mukmin dalam meneguhkan keyakinan tauhid dari hati, lisan, hingga perbuatan sehari-hari.
-        </p>
-<button class="open-detail-btn w-full h-12 rounded-2xl bg-surface-container-low hover:bg-surface-container text-primary font-label-lg text-label-lg flex items-center justify-center gap-2 transition-colors" type="button">
-<span>Buka Infografis HD</span>
-<span class="material-symbols-outlined text-[18px]">zoom_in</span>
-</button>
-</div>
-</article>
-<!-- Card 2: Sifat Wajib & Jaiz Allah SWT -->
-<article class="poster-card flex flex-col rounded-3xl bg-surface-container-lowest shadow-md overflow-hidden transition-transform duration-200 active:scale-[0.99]" data-category="akidah" data-desc="Kajian visual Asma wa Sifat berdasarkan teologi Ahlus Sunnah: Wujud, Qidam, Baqa', hingga Kaunuhu Hayyan untuk mengenali keagungan Sang Pencipta." data-tag="Akidah &amp; Ibadah" data-time="5 Mnt" data-title="20 Sifat Wajib &amp; Jaiz Allah SWT">
-<div class="relative h-44 w-full bg-gradient-to-tr from-[#004d34] via-secondary to-secondary-container p-space-md flex flex-col justify-between overflow-hidden">
-<div class="flex items-center justify-between z-10">
-<span class="inline-flex items-center px-2.5 py-1 rounded-full bg-white/20 backdrop-blur-md text-on-primary font-label-sm text-label-sm uppercase tracking-wide">
-            Akidah
-          </span>
-<span class="inline-flex items-center gap-1 px-2.5 py-1 rounded-full bg-black/25 backdrop-blur-md text-on-primary font-label-sm text-label-sm">
-<span class="material-symbols-outlined text-[14px]">schedule</span> 5 Mnt
-          </span>
-</div>
-<div class="flex items-center gap-3 z-10">
-<div class="w-12 h-12 rounded-2xl bg-white/20 backdrop-blur-md flex items-center justify-center text-2xl shadow-inner">
-            ✨
-          </div>
-<div class="flex flex-col">
-<span class="font-label-sm text-label-sm text-on-primary/80">Tashawwur Teologi</span>
-<span class="font-headline-sm text-headline-sm text-on-primary">Sifat Wajib &amp; Jaiz Allah</span>
+<div>
+<h2 class="font-headline-sm text-headline-sm text-on-surface">Assalamu'alaikum, Sahabat PAI ✨</h2>
+<p class="font-body-sm text-body-sm text-on-surface-variant mt-0.5">Siap menambah wawasan akidah &amp; akhlak hari ini?</p>
 </div>
 </div>
+<!-- Hero Banner Interaktif Mobile -->
+<div class="relative overflow-hidden rounded-3xl bg-gradient-to-br from-primary via-primary-container to-secondary text-on-primary p-space-lg shadow-md">
+<!-- Modern Geometric Islamic Motif Accents -->
+<div class="absolute -top-12 -right-12 w-44 h-44 rounded-full bg-white/10 blur-2xl pointer-events-none"></div>
+<div class="absolute right-3 top-3 opacity-15 pointer-events-none">
+<svg class="animate-pulse" fill="none" height="110" viewbox="0 0 100 100" width="110">
+<rect height="50" rx="8" stroke="currentColor" stroke-width="2.5" transform="rotate(45 50 50)" width="50" x="25" y="25"></rect>
+<circle cx="50" cy="50" r="18" stroke="currentColor" stroke-width="2"></circle>
+<circle cx="50" cy="50" fill="currentColor" r="4"></circle>
+</svg>
 </div>
-<div class="p-space-md flex flex-col gap-3">
-<p class="font-body-md text-body-md text-on-surface-variant line-clamp-2">
-          Ikhtisar 20 sifat kesempurnaan mutlak bagi Allah Ta'ala serta satu sifat Jaiz dalam balutan diagram visual memikat.
-        </p>
-<button class="open-detail-btn w-full h-12 rounded-2xl bg-surface-container-low hover:bg-surface-container text-primary font-label-lg text-label-lg flex items-center justify-center gap-2 transition-colors" type="button">
-<span>Buka Infografis HD</span>
-<span class="material-symbols-outlined text-[18px]">zoom_in</span>
-</button>
-</div>
-</article>
-<!-- Card 3: Adab Berinteraksi dengan Alam -->
-<article class="poster-card flex flex-col rounded-3xl bg-surface-container-lowest shadow-md overflow-hidden transition-transform duration-200 active:scale-[0.99]" data-category="alam" data-desc="Tuntunan Fiqh Al-Bi'ah: prinsip hemat air saat bersuci, sedekah bibit pohon, menjaga kebersihan ruang publik, serta amanah kepemimpinan bumi (Khalifah fil Ardh)." data-tag="Kelestarian Alam" data-time="4 Mnt" data-title="Adab Berinteraksi dengan Alam">
-<div class="relative h-44 w-full bg-gradient-to-br from-[#005a40] via-[#1b7a5a] to-[#599e82] p-space-md flex flex-col justify-between overflow-hidden">
-<div class="flex items-center justify-between z-10">
-<span class="inline-flex items-center px-2.5 py-1 rounded-full bg-white/20 backdrop-blur-md text-on-primary font-label-sm text-label-sm uppercase tracking-wide">
-            Kelestarian Alam
-          </span>
-<span class="inline-flex items-center gap-1 px-2.5 py-1 rounded-full bg-black/25 backdrop-blur-md text-on-primary font-label-sm text-label-sm">
-<span class="material-symbols-outlined text-[14px]">schedule</span> 4 Mnt
-          </span>
-</div>
-<div class="flex items-center gap-3 z-10">
-<div class="w-12 h-12 rounded-2xl bg-white/20 backdrop-blur-md flex items-center justify-center text-2xl shadow-inner">
-            🌱
-          </div>
-<div class="flex flex-col">
-<span class="font-label-sm text-label-sm text-on-primary/80">Fiqh Lingkungan</span>
-<span class="font-headline-sm text-headline-sm text-on-primary">Adab Terhadap Alam</span>
-</div>
-</div>
-</div>
-<div class="p-space-md flex flex-col gap-3">
-<p class="font-body-md text-body-md text-on-surface-variant line-clamp-2">
-          Menjaga bumi sebagai amanah khalifah: panduan praktis hemat air wudhu, menanam pohon, dan anti-mubazir.
-        </p>
-<button class="open-detail-btn w-full h-12 rounded-2xl bg-surface-container-low hover:bg-surface-container text-primary font-label-lg text-label-lg flex items-center justify-center gap-2 transition-colors" type="button">
-<span>Buka Infografis HD</span>
-<span class="material-symbols-outlined text-[18px]">zoom_in</span>
-</button>
-</div>
-</article>
-<!-- Card 4: Sifat Utama Rasulullah -->
-<article class="poster-card flex flex-col rounded-3xl bg-surface-container-lowest shadow-md overflow-hidden transition-transform duration-200 active:scale-[0.99]" data-category="akhlak" data-desc="Teladan kepemimpinan sepanjang zaman: Ash-Shiddiq (Jujur), Al-Amanah (Dapat Dipercaya), At-Tabligh (Menyampaikan Kebenaran), dan Al-Fathanah (Cerdas &amp; Bijak)." data-tag="Akhlak &amp; Adab" data-time="3 Mnt" data-title="4 Sifat Utama Rasulullah SAW">
-<div class="relative h-44 w-full bg-gradient-to-tr from-tertiary via-tertiary-container to-tertiary-fixed-dim p-space-md flex flex-col justify-between overflow-hidden">
-<div class="flex items-center justify-between z-10">
-<span class="inline-flex items-center px-2.5 py-1 rounded-full bg-white/20 backdrop-blur-md text-on-primary font-label-sm text-label-sm uppercase tracking-wide">
-            Akhlak Mulia
-          </span>
-<span class="inline-flex items-center gap-1 px-2.5 py-1 rounded-full bg-black/25 backdrop-blur-md text-on-primary font-label-sm text-label-sm">
-<span class="material-symbols-outlined text-[14px]">schedule</span> 3 Mnt
-          </span>
-</div>
-<div class="flex items-center gap-3 z-10">
-<div class="w-12 h-12 rounded-2xl bg-white/20 backdrop-blur-md flex items-center justify-center text-2xl shadow-inner">
-            🌟
-          </div>
-<div class="flex flex-col">
-<span class="font-label-sm text-label-sm text-on-primary/80">Teladan Insani</span>
-<span class="font-headline-sm text-headline-sm text-on-primary">Sifat Utama Rasulullah</span>
-</div>
-</div>
-</div>
-<div class="p-space-md flex flex-col gap-3">
-<p class="font-body-md text-body-md text-on-surface-variant line-clamp-2">
-          Kompas karakter umat Islam: Siddiq, Amanah, Tabligh, dan Fathanah dalam dinamika kehidupan modern.
-        </p>
-<button class="open-detail-btn w-full h-12 rounded-2xl bg-surface-container-low hover:bg-surface-container text-primary font-label-lg text-label-lg flex items-center justify-center gap-2 transition-colors" type="button">
-<span>Buka Infografis HD</span>
-<span class="material-symbols-outlined text-[18px]">zoom_in</span>
-</button>
-</div>
-</article>
-</div>
-<!-- Empty Search Result Indicator -->
-<div class="hidden flex-col items-center justify-center py-10 px-4 text-center" id="empty-state">
-<div class="w-16 h-16 rounded-full bg-surface-container-low flex items-center justify-center text-on-surface-variant mb-3">
-<span class="material-symbols-outlined text-[32px]">image_not_supported</span>
-</div>
-<span class="font-title-md text-title-md text-on-surface">Materi Tidak Ditemukan</span>
-<p class="font-body-sm text-body-sm text-on-surface-variant mt-1">Coba gunakan kata kunci lain seperti 'iman', 'alam', atau 'akhlak'.</p>
-</div>
-<!-- Modal / Bottom Sheet Preview Callout -->
-<div class="fixed inset-0 z-50 pointer-events-none opacity-0 transition-opacity duration-300 flex items-end" id="preview-sheet">
-<!-- Overlay Backdrop -->
-<div class="absolute inset-0 bg-inverse-surface/40 backdrop-blur-sm pointer-events-auto" id="sheet-backdrop"></div>
-<!-- Sheet Box -->
-<div class="relative w-full max-h-[751px] bg-surface-container-lowest rounded-t-[32px] p-margin pb-safe shadow-2xl flex flex-col gap-4 transform translate-y-full transition-transform duration-300 pointer-events-auto overflow-y-auto" id="sheet-content">
-<!-- Handle Drag Pill -->
-<div class="w-12 h-1.5 rounded-full bg-outline-variant/60 mx-auto -mt-1 mb-1"></div>
-<!-- Header with Close Icon -->
-<div class="flex items-start justify-between gap-3">
-<div class="flex flex-col min-w-0">
-<span class="font-label-sm text-label-sm text-primary uppercase font-bold tracking-wider" id="sheet-tag">Kategori</span>
-<h3 class="font-headline-sm text-headline-sm text-on-surface mt-0.5 truncate" id="sheet-title">Judul Poster</h3>
-</div>
-<button aria-label="Tutup" class="w-10 h-10 rounded-full bg-surface-container flex items-center justify-center text-on-surface-variant hover:text-on-surface" id="close-sheet-btn">
-<span class="material-symbols-outlined text-[20px]">close</span>
-</button>
-</div>
-<!-- Preview Image Placeholder -->
-<div class="relative w-full h-52 rounded-2xl bg-surface-container-low overflow-hidden flex items-center justify-center">
-<img class="w-full h-full object-cover" data-alt="Detailed visual Islamic educational infographic poster showing clear typography, clean geometric decorative borders, serene emerald and teal gradients, and elegant diagrams representing core Islamic knowledge." src="https://lh3.googleusercontent.com/aida-public/AB6AXuAZP_ALKSeIXmTvDv5-MyEuB9BmGznpLkCk_6l1xx42qlN_1pvl7PLYu3adg5sjo3azSW_8R7hTHw-KCRZDfRFW4cUy9lwgI0lP7qLrUlkE7AFv48IYzHAi06nYpqDoEYJdnFMD69XyfzbQmEvCCzhKLZYTPSWW96kbdXeBNFlM6OY6L6lMGgTEtUEEJ2luV-3W5j1lDf5swqpwfeJIFTo2psEmoQBY2b5pPVMst0RNZmHYMo4Zl_jt"/>
-<div class="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent"></div>
-<div class="absolute bottom-3 left-3 flex items-center gap-2">
-<span class="px-2.5 py-1 rounded-md bg-black/40 backdrop-blur-md text-white font-label-sm text-label-sm flex items-center gap-1">
-<span class="material-symbols-outlined text-[14px]">high_density</span> 4K Ultra HD
-          </span>
-<span class="px-2.5 py-1 rounded-md bg-black/40 backdrop-blur-md text-white font-label-sm text-label-sm" id="sheet-readtime">
-            3 Mnt
-          </span>
-</div>
-</div>
-<!-- Descriptive Text -->
-<p class="font-body-md text-body-md text-on-surface-variant" id="sheet-desc">
-        Deskripsi materi infografis yang mendalam serta rujukan dalil Al-Qur'an dan Sunnah.
+<div class="relative z-10 flex flex-col gap-space-sm">
+<span class="inline-flex items-center gap-1.5 self-start px-2.5 py-1 rounded-full bg-white/15 backdrop-blur-md text-on-primary font-label-sm text-label-sm">
+<span class="material-symbols-outlined text-[14px]" style="font-variation-settings: 'FILL' 1;">auto_awesome</span>
+        Media Pembelajaran Visual PAI
+      </span>
+<h1 class="font-headline-md text-headline-md text-on-primary font-bold leading-tight">
+        Eksplorasi Nilai-Nilai Islam Lewat Media Visual Modern
+      </h1>
+<p class="font-body-sm text-body-sm text-on-primary/90 leading-relaxed max-w-[92%]">
+        Belajar rukun iman, sirah nabi, dan kelestarian alam secara interaktif melalui infografis kurasi mendalam.
       </p>
-<!-- Action Buttons (Bottom Anchored Thumbs Zone) -->
-<div class="flex flex-col gap-2.5 pt-2">
-<button class="w-full h-13 py-3 rounded-2xl bg-primary text-on-primary font-label-lg text-label-lg flex items-center justify-center gap-2 shadow-md active:scale-[0.98] transition-transform" id="download-btn">
-<span class="material-symbols-outlined text-[20px]">download</span>
-<span>Unduh / Simpan Materi 📥</span>
-</button>
-<button class="w-full h-12 rounded-2xl bg-secondary-container/50 hover:bg-secondary-container text-on-secondary-container font-label-lg text-label-lg flex items-center justify-center gap-2 transition-colors" id="share-btn">
-<span class="material-symbols-outlined text-[20px]">share</span>
-<span>Bagikan ke Teman 🚀</span>
+<!-- Thumb-friendly Quick CTA Row -->
+<div class="grid grid-cols-2 gap-space-sm pt-space-xs mt-1">
+<button class="w-full h-12 flex items-center justify-center gap-1.5 rounded-2xl bg-surface text-primary font-label-lg text-label-lg shadow-sm active:scale-95 transition-transform" type="button">
+<span class="material-symbols-outlined text-[20px]">mosque</span>
+          Mulai Belajar
+        </button>
+<button class="w-full h-12 flex items-center justify-center gap-1.5 rounded-2xl bg-white/20 backdrop-blur-md text-on-primary font-label-lg text-label-lg active:scale-95 transition-transform" type="button">
+<span class="material-symbols-outlined text-[20px]">quiz</span>
+          Uji Kuis
+        </button>
+</div>
+</div>
+</div>
+<!-- Quick Stats & Daily Progress Card -->
+<div class="bg-surface-container-lowest rounded-3xl p-space-md shadow-sm space-y-space-md">
+<div class="flex items-center justify-between">
+<div class="flex items-center gap-2">
+<div class="w-8 h-8 rounded-xl bg-primary/10 flex items-center justify-center text-primary">
+<span class="material-symbols-outlined text-[18px]">trending_up</span>
+</div>
+<span class="font-title-md text-title-md text-on-surface">Target Harianmu</span>
+</div>
+<span class="font-label-lg text-label-lg text-primary">68% Selesai</span>
+</div>
+<!-- Progress Track -->
+<div class="w-full bg-surface-container-high rounded-full h-3 overflow-hidden p-0.5">
+<div class="bg-primary h-full rounded-full transition-all duration-700 ease-out" style="width: 68%;"></div>
+</div>
+<!-- Metrics Trio Grid -->
+<div class="grid grid-cols-3 gap-space-xs pt-space-xs">
+<div class="flex flex-col items-center justify-center p-2.5 rounded-2xl bg-surface-container-low text-center">
+<span class="font-headline-sm text-headline-sm text-primary font-bold">3</span>
+<span class="font-label-sm text-label-sm text-on-surface-variant mt-0.5">Modul Aktif</span>
+</div>
+<div class="flex flex-col items-center justify-center p-2.5 rounded-2xl bg-surface-container-low text-center">
+<span class="font-headline-sm text-headline-sm text-secondary font-bold">18</span>
+<span class="font-label-sm text-label-sm text-on-surface-variant mt-0.5">Flashcard</span>
+</div>
+<div class="flex flex-col items-center justify-center p-2.5 rounded-2xl bg-surface-container-low text-center">
+<span class="font-headline-sm text-headline-sm text-tertiary font-bold">6 HD</span>
+<span class="font-label-sm text-label-sm text-on-surface-variant mt-0.5">Infografis</span>
+</div>
+</div>
+</div>
+<!-- Kategori Pilar Pembelajaran -->
+<div class="space-y-space-sm">
+<div class="flex items-center justify-between">
+<div>
+<h3 class="font-headline-sm text-headline-sm text-on-surface">Pilar Pembelajaran</h3>
+<p class="font-body-sm text-body-sm text-on-surface-variant">Kurikulum esensial terstruktur</p>
+</div>
+<button class="font-label-md text-label-md text-primary flex items-center gap-0.5" type="button">
+        Lihat Semua
+        <span class="material-symbols-outlined text-[16px]">arrow_forward</span>
 </button>
 </div>
-<!-- Feedback Toast Notification -->
-<div class="hidden text-center py-2 px-3 rounded-xl bg-on-background text-inverse-on-surface font-label-sm text-label-sm transition-all duration-200" id="toast-msg">
-        Materi berhasil diunduh ke galeri perangkat!
-      </div>
+<div class="flex flex-col gap-space-sm">
+<!-- Item 1: Rukun Iman & Akidah -->
+<div class="w-full bg-surface-container-lowest rounded-3xl p-space-md shadow-sm flex items-center gap-space-md active:bg-surface-container-low transition-colors">
+<div class="w-14 h-14 rounded-2xl bg-primary/10 flex items-center justify-center text-primary text-2xl flex-shrink-0 shadow-sm">
+          🤲
+        </div>
+<div class="flex-1 min-w-0">
+<div class="flex items-center justify-between gap-1">
+<h4 class="font-title-md text-title-md text-on-surface truncate">Rukun Iman &amp; Akidah</h4>
+<span class="font-label-sm text-label-sm text-primary bg-primary/10 px-2 py-0.5 rounded-full">Bab 1-6</span>
+</div>
+<p class="font-body-sm text-body-sm text-on-surface-variant line-clamp-2 mt-0.5">
+            Fondasi keyakinan tauhid, mengenal asma'ul husna, malaikat, dan kitabullah secara visual.
+          </p>
+</div>
+<span class="material-symbols-outlined text-outline-variant text-[20px] flex-shrink-0">chevron_right</span>
+</div>
+<!-- Item 2: Kisah Teladan & Sejarah -->
+<div class="w-full bg-surface-container-lowest rounded-3xl p-space-md shadow-sm flex items-center gap-space-md active:bg-surface-container-low transition-colors">
+<div class="w-14 h-14 rounded-2xl bg-secondary/10 flex items-center justify-center text-secondary text-2xl flex-shrink-0 shadow-sm">
+          📜
+        </div>
+<div class="flex-1 min-w-0">
+<div class="flex items-center justify-between gap-1">
+<h4 class="font-title-md text-title-md text-on-surface truncate">Kisah Teladan &amp; Sejarah</h4>
+<span class="font-label-sm text-label-sm text-secondary bg-secondary/10 px-2 py-0.5 rounded-full">Sirah</span>
+</div>
+<p class="font-body-sm text-body-sm text-on-surface-variant line-clamp-2 mt-0.5">
+            Hikmah perjalanan para Nabi, Khulafaur Rasyidin, dan generasi emas peradaban Islam.
+          </p>
+</div>
+<span class="material-symbols-outlined text-outline-variant text-[20px] flex-shrink-0">chevron_right</span>
+</div>
+<!-- Item 3: Akhlak & Pelestarian Alam -->
+<div class="w-full bg-surface-container-lowest rounded-3xl p-space-md shadow-sm flex items-center gap-space-md active:bg-surface-container-low transition-colors">
+<div class="w-14 h-14 rounded-2xl bg-tertiary/10 flex items-center justify-center text-tertiary text-2xl flex-shrink-0 shadow-sm">
+          🌿
+        </div>
+<div class="flex-1 min-w-0">
+<div class="flex items-center justify-between gap-1">
+<h4 class="font-title-md text-title-md text-on-surface truncate">Akhlak &amp; Pelestarian Alam</h4>
+<span class="font-label-sm text-label-sm text-tertiary bg-tertiary-fixed/60 px-2 py-0.5 rounded-full">Ekologi</span>
+</div>
+<p class="font-body-sm text-body-sm text-on-surface-variant line-clamp-2 mt-0.5">
+            Tanggung jawab khalifah fil ardh, adab sesama manusia, flora, fauna, dan air bersih.
+          </p>
+</div>
+<span class="material-symbols-outlined text-outline-variant text-[20px] flex-shrink-0">chevron_right</span>
+</div>
+</div>
+</div>
+<!-- Interactive Flashcard of the Day (Tap to Flip Demo) -->
+<div class="space-y-space-sm">
+<div class="flex items-center justify-between">
+<div class="flex items-center gap-2">
+<span class="material-symbols-outlined text-primary text-[20px]">style</span>
+<h3 class="font-headline-sm text-headline-sm text-on-surface">Flashcard Hari Ini</h3>
+</div>
+<span class="font-label-sm text-label-sm text-on-surface-variant bg-surface-container-high px-2 py-0.5 rounded-full">Ketuk kartu</span>
+</div>
+<!-- The Flip Container -->
+<div class="cursor-pointer select-none relative min-h-[190px] rounded-3xl bg-surface-container-lowest shadow-sm p-space-lg flex flex-col justify-between overflow-hidden active:scale-[0.99] transition-all" id="flashcard-container">
+<div class="absolute -right-8 -top-8 w-24 h-24 bg-primary/10 rounded-full blur-lg pointer-events-none"></div>
+<!-- Front View -->
+<div class="flex flex-col justify-between h-full space-y-space-sm" id="flashcard-front">
+<div class="flex items-center justify-between">
+<span class="font-label-sm text-label-sm text-primary bg-primary/10 px-2.5 py-1 rounded-full">Rukun Iman #1</span>
+<span class="material-symbols-outlined text-outline text-[20px]">flip</span>
+</div>
+<div class="py-space-xs">
+<h4 class="font-headline-sm text-headline-sm text-on-surface font-bold">Iman kepada Allah SWT</h4>
+<p class="font-body-sm text-body-sm text-on-surface-variant mt-1 leading-relaxed">
+            Meyakini dengan hati, mengikrarkan dengan lisan, dan mengamalkan dengan perbuatan bahwa Allah Maha Esa tanpa sekutu.
+          </p>
+</div>
+<div class="flex items-center gap-1.5 text-primary font-label-sm text-label-sm pt-1">
+<span class="material-symbols-outlined text-[16px]">touch_app</span>
+          Sentuh untuk membaca dalil &amp; tafsir makna ringkas
+        </div>
+</div>
+<!-- Back View (Hidden by default) -->
+<div class="hidden flex-col justify-between h-full space-y-space-sm" id="flashcard-back">
+<div class="flex items-center justify-between">
+<span class="font-label-sm text-label-sm text-secondary bg-secondary/15 px-2.5 py-1 rounded-full">QS. Al-Ikhlas: 1-4</span>
+<span class="material-symbols-outlined text-secondary text-[20px]">verified</span>
+</div>
+<div class="py-space-xs">
+<p class="font-title-md text-title-md text-primary font-semibold text-right leading-loose">
+            قُلْ هُوَ اللَّهُ أَحَدٌ ۝
+          </p>
+<p class="font-body-sm text-body-sm text-on-surface-variant mt-1.5 italic">
+            "Katakanlah (Muhammad), Dialah Allah, Yang Maha Esa." Intisari tauhid murni yang membebaskan jiwa dari ketakutan selain-Nya.
+          </p>
+</div>
+<div class="flex items-center gap-1.5 text-secondary font-label-sm text-label-sm pt-1">
+<span class="material-symbols-outlined text-[16px]">check_circle</span>
+          Hafalan tersimpan di catatan harianmu
+        </div>
+</div>
+</div>
+</div>
+<!-- Akses Cepat Materi Populer & Rekomendasi Kuis -->
+<div class="space-y-space-sm">
+<div class="flex items-center justify-between">
+<h3 class="font-headline-sm text-headline-sm text-on-surface">Materi Populer &amp; Kuis</h3>
+<span class="font-label-md text-label-md text-primary">Pilihan Guru</span>
+</div>
+<!-- 2-Card Visual Grid with curated Placeholders -->
+<div class="grid grid-cols-2 gap-space-sm">
+<!-- Visual Card 1: Infografis Populer -->
+<div class="rounded-3xl bg-surface-container-lowest p-space-sm shadow-sm flex flex-col justify-between space-y-space-sm">
+<div class="relative w-full h-28 rounded-2xl overflow-hidden bg-surface-container">
+<img class="w-full h-full object-cover" data-alt="A clean modern 3D isometric illustration of a luminous Quran on a polished wooden rehal stand, soft emerald glowing particles, high resolution educational Islamic art style in teal and emerald palette." src="https://lh3.googleusercontent.com/aida-public/AB6AXuAbRyE-_r7Q-YkuAkGRyzJClGfauCvwyqttgJhDe_slmNhSm4phavxN92nIpT_e7qpOh6w28KS0o0IYxQg2gnWbY9x8mR3Oe5UKozdVXwwSJ0YhW2PYAYtL16sUyBFIWD2ZPViEwFAQ8LvkihDZ3725-Keys63nJWONs4PXpj1OftkhUiG_7Wf6051aJqtp6c34x3w42Bm565HDS2Stgo3AfyJe1f2u44gVHQrT5I_pKK4cNVPQ5zp5"/>
+<span class="absolute top-2 left-2 bg-primary/90 text-on-primary px-2 py-0.5 rounded-full font-label-sm text-label-sm backdrop-blur-sm">
+            Infografis
+          </span>
+</div>
+<div>
+<h5 class="font-title-md text-title-md text-on-surface line-clamp-1">Peta Sirah Hijrah</h5>
+<p class="font-body-sm text-body-sm text-on-surface-variant line-clamp-1 mt-0.5">Rute Yatsrib &amp; Gua Tsur HD</p>
+</div>
+<button class="w-full h-10 rounded-xl bg-surface-container-high text-on-surface font-label-md text-label-md flex items-center justify-center gap-1 active:bg-primary active:text-on-primary transition-colors" type="button">
+          Buka Visual
+        </button>
+</div>
+<!-- Visual Card 2: Kuis Tantangan Mingguan -->
+<div class="rounded-3xl bg-surface-container-lowest p-space-sm shadow-sm flex flex-col justify-between space-y-space-sm">
+<div class="relative w-full h-28 rounded-2xl overflow-hidden bg-surface-container">
+<img class="w-full h-full object-cover" data-alt="A playful modern digital badge illustration with sparkling golden stars, a green shield with crescent moon, representing Islamic knowledge competition, vector aesthetic with emerald gradient background." src="https://lh3.googleusercontent.com/aida-public/AB6AXuBVB6cmHsfExO0Vjw6F2MlV-1GSAbbOdcO4i7kJfFPfOmn-dZS4bFXcDpSv8gl9lGc9zrLACCRlWe7uiZDTcfhlbMnNXcbgLW0ObBE3rP1FK1D8Fek75YBVIDgPLfImdFZOzayliMqMiOQ1V--pC80_rIVMTDKa2o0uMr3hGw19fz1Lqtf4N6ylbBN1Sf9QFN0UDpaEhul7A1Ry_3pbO99opuhsBAn2nXxMrYaL3vyRL1PgbBffDch6"/>
+<span class="absolute top-2 left-2 bg-tertiary-container text-on-tertiary px-2 py-0.5 rounded-full font-label-sm text-label-sm backdrop-blur-sm">
+            Kuis Pekan Ini
+          </span>
+</div>
+<div>
+<h5 class="font-title-md text-title-md text-on-surface line-clamp-1">Tantangan Fiqih Alam</h5>
+<p class="font-body-sm text-body-sm text-on-surface-variant line-clamp-1 mt-0.5">10 Soal • 150 Poin</p>
+</div>
+<button class="w-full h-10 rounded-xl bg-primary text-on-primary font-label-md text-label-md flex items-center justify-center gap-1 shadow-sm active:scale-95 transition-transform" type="button">
+          Ikuti Kuis
+        </button>
+</div>
+</div>
+</div>
+<!-- Motivational Reminder Footer Snippet -->
+<div class="bg-gradient-to-r from-surface-container-low to-surface-container rounded-2xl p-space-md flex items-center gap-space-sm">
+<div class="w-10 h-10 rounded-full bg-primary/10 flex items-center justify-center text-primary flex-shrink-0">
+<span class="material-symbols-outlined text-[20px]">lightbulb</span>
+</div>
+<div class="min-w-0">
+<p class="font-label-sm text-label-sm text-primary uppercase font-bold">Mutiara Hari Ini</p>
+<p class="font-body-sm text-body-sm text-on-surface-variant italic">"Menuntut ilmu adalah kewajiban bagi setiap muslim." (HR. Ibnu Majah)</p>
 </div>
 </div>
 </div>
 <script>
-  (function() {
-    const searchInput = document.getElementById('search-input');
-    const clearSearch = document.getElementById('clear-search');
-    const filterPills = document.querySelectorAll('.filter-pill');
-    const cards = document.querySelectorAll('.poster-card');
-    const emptyState = document.getElementById('empty-state');
+  (function initFlashcardFlip() {
+    const card = document.getElementById('flashcard-container');
+    const front = document.getElementById('flashcard-front');
+    const back = document.getElementById('flashcard-back');
+    if (!card || !front || !back) return;
 
-    // Modal elements
-    const previewSheet = document.getElementById('preview-sheet');
-    const sheetContent = document.getElementById('sheet-content');
-    const sheetBackdrop = document.getElementById('sheet-backdrop');
-    const closeSheetBtn = document.getElementById('close-sheet-btn');
-    const sheetTitle = document.getElementById('sheet-title');
-    const sheetDesc = document.getElementById('sheet-desc');
-    const sheetTag = document.getElementById('sheet-tag');
-    const sheetReadtime = document.getElementById('sheet-readtime');
-    const downloadBtn = document.getElementById('download-btn');
-    const shareBtn = document.getElementById('share-btn');
-    const toastMsg = document.getElementById('toast-msg');
-
-    let currentFilter = 'all';
-
-    function filterCards() {
-      const query = (searchInput.value || '').toLowerCase().trim();
-      let visibleCount = 0;
-
-      cards.forEach(card => {
-        const category = card.getAttribute('data-category');
-        const title = card.getAttribute('data-title').toLowerCase();
-        const desc = card.getAttribute('data-desc').toLowerCase();
-
-        const matchesCategory = currentFilter === 'all' || category === currentFilter;
-        const matchesQuery = !query || title.includes(query) || desc.includes(query);
-
-        if (matchesCategory && matchesQuery) {
-          card.classList.remove('hidden');
-          visibleCount++;
-        } else {
-          card.classList.add('hidden');
-        }
-      });
-
-      if (visibleCount === 0) {
-        emptyState.classList.remove('hidden');
-        emptyState.classList.add('flex');
+    let isFlipped = false;
+    card.addEventListener('click', function() {
+      isFlipped = !isFlipped;
+      if (isFlipped) {
+        front.classList.add('hidden');
+        front.classList.remove('flex');
+        back.classList.remove('hidden');
+        back.classList.add('flex');
       } else {
-        emptyState.classList.add('hidden');
-        emptyState.classList.remove('flex');
-      }
-    }
-
-    // Filter pills click
-    filterPills.forEach(pill => {
-      pill.addEventListener('click', () => {
-        filterPills.forEach(p => {
-          p.classList.remove('bg-primary', 'text-on-primary');
-          p.classList.add('bg-surface-container-low', 'text-on-surface-variant');
-        });
-        pill.classList.remove('bg-surface-container-low', 'text-on-surface-variant');
-        pill.classList.add('bg-primary', 'text-on-primary');
-
-        currentFilter = pill.getAttribute('data-category');
-        filterCards();
-      });
-    });
-
-    // Search input typing
-    searchInput.addEventListener('input', (e) => {
-      if (e.target.value.length > 0) {
-        clearSearch.classList.remove('hidden');
-      } else {
-        clearSearch.classList.add('hidden');
-      }
-      filterCards();
-    });
-
-    clearSearch.addEventListener('click', () => {
-      searchInput.value = '';
-      clearSearch.classList.add('hidden');
-      filterCards();
-      searchInput.focus();
-    });
-
-    // Open Bottom Sheet Modal
-    function openModal(card) {
-      sheetTitle.textContent = card.getAttribute('data-title');
-      sheetDesc.textContent = card.getAttribute('data-desc');
-      sheetTag.textContent = card.getAttribute('data-tag');
-      sheetReadtime.textContent = card.getAttribute('data-time');
-
-      previewSheet.classList.remove('pointer-events-none', 'opacity-0');
-      previewSheet.classList.add('opacity-100');
-      sheetContent.classList.remove('translate-y-full');
-      sheetContent.classList.add('translate-y-0');
-    }
-
-    function closeModal() {
-      sheetContent.classList.add('translate-y-full');
-      sheetContent.classList.remove('translate-y-0');
-      previewSheet.classList.add('opacity-0');
-      setTimeout(() => {
-        previewSheet.classList.add('pointer-events-none');
-        toastMsg.classList.add('hidden');
-      }, 300);
-    }
-
-    document.querySelectorAll('.open-detail-btn').forEach(btn => {
-      btn.addEventListener('click', (e) => {
-        const card = e.target.closest('.poster-card');
-        if (card) openModal(card);
-      });
-    });
-
-    closeSheetBtn.addEventListener('click', closeModal);
-    sheetBackdrop.addEventListener('click', closeModal);
-
-    // Interactive Toast triggers
-    downloadBtn.addEventListener('click', () => {
-      toastMsg.textContent = 'Materi berhasil diunduh ke galeri ponsel!';
-      toastMsg.classList.remove('hidden');
-      setTimeout(() => {
-        toastMsg.classList.add('hidden');
-      }, 3000);
-    });
-
-    shareBtn.addEventListener('click', () => {
-      if (navigator.share) {
-        navigator.share({
-          title: sheetTitle.textContent,
-          text: sheetDesc.textContent,
-          url: window.location.href,
-        }).catch(() => {});
-      } else {
-        toastMsg.textContent = 'Tautan poster tersalin ke clipboard!';
-        toastMsg.classList.remove('hidden');
-        setTimeout(() => {
-          toastMsg.classList.add('hidden');
-        }, 3000);
+        back.classList.add('hidden');
+        back.classList.remove('flex');
+        front.classList.remove('hidden');
+        front.classList.add('flex');
       }
     });
   })();
-</script></main><div class="fixed bottom-0 w-full z-50 pb-safe pointer-events-none"><nav class="pointer-events-auto mx-auto mb-3 w-[calc(100%-2rem)] max-w-md h-16 rounded-full bg-surface-container-lowest/90 backdrop-blur-2xl shadow-[0_8px_24px_rgba(0,105,72,0.1)] flex items-center justify-around px-2" data-active-classes="text-primary font-semibold [&amp;_span.indicator]:opacity-100"><a class="flex flex-col items-center justify-center flex-1 h-full py-1 text-on-surface-variant hover:text-primary transition-all group" data-path="beranda" href="#"><span class="material-symbols-outlined text-[24px] group-hover:scale-105 transition-transform">home</span><span class="font-label-sm text-label-sm mt-0.5">Beranda</span><span class="indicator w-1 h-1 rounded-full bg-primary mt-0.5 opacity-0 transition-opacity"></span></a><a class="flex flex-col items-center justify-center flex-1 h-full py-1 text-on-surface-variant hover:text-primary transition-all group" data-path="modul-belajar" href="#"><span class="material-symbols-outlined text-[24px] group-hover:scale-105 transition-transform">menu_book</span><span class="font-label-sm text-label-sm mt-0.5">Modul</span><span class="indicator w-1 h-1 rounded-full bg-primary mt-0.5 opacity-0 transition-opacity"></span></a><a aria-current="page" class="flex flex-col items-center justify-center flex-1 h-full py-1 transition-all group text-primary font-semibold [&amp;_span.indicator]:opacity-100" data-path="infografis" href="#"><span class="material-symbols-outlined text-[24px] group-hover:scale-105 transition-transform">auto_stories</span><span class="font-label-sm text-label-sm mt-0.5">Infografis</span><span class="indicator w-1 h-1 rounded-full bg-primary mt-0.5 opacity-0 transition-opacity"></span></a><a class="flex flex-col items-center justify-center flex-1 h-full py-1 text-on-surface-variant hover:text-primary transition-all group" data-path="kuis-evaluasi" href="#"><span class="material-symbols-outlined text-[24px] group-hover:scale-105 transition-transform">quiz</span><span class="font-label-sm text-label-sm mt-0.5">Kuis</span><span class="indicator w-1 h-1 rounded-full bg-primary mt-0.5 opacity-0 transition-opacity"></span></a></nav></div></body></html>
+</script></main><div class="fixed bottom-0 w-full z-50 pb-safe pointer-events-none"><nav class="pointer-events-auto mx-auto mb-3 w-[calc(100%-2rem)] max-w-md h-16 rounded-full bg-surface-container-lowest/90 backdrop-blur-2xl shadow-[0_8px_24px_rgba(0,105,72,0.1)] flex items-center justify-around px-2" data-active-classes="text-primary font-semibold [&amp;_span.indicator]:opacity-100"><a aria-current="page" class="flex flex-col items-center justify-center flex-1 h-full py-1 transition-all group text-primary font-semibold [&amp;_span.indicator]:opacity-100" data-path="beranda" href="#"><span class="material-symbols-outlined text-[24px] group-hover:scale-105 transition-transform">home</span><span class="font-label-sm text-label-sm mt-0.5">Beranda</span><span class="indicator w-1 h-1 rounded-full bg-primary mt-0.5 opacity-0 transition-opacity"></span></a><a class="flex flex-col items-center justify-center flex-1 h-full py-1 text-on-surface-variant hover:text-primary transition-all group" data-path="modul-belajar" href="#"><span class="material-symbols-outlined text-[24px] group-hover:scale-105 transition-transform">menu_book</span><span class="font-label-sm text-label-sm mt-0.5">Modul</span><span class="indicator w-1 h-1 rounded-full bg-primary mt-0.5 opacity-0 transition-opacity"></span></a><a class="flex flex-col items-center justify-center flex-1 h-full py-1 text-on-surface-variant hover:text-primary transition-all group" data-path="infografis" href="#"><span class="material-symbols-outlined text-[24px] group-hover:scale-105 transition-transform">auto_stories</span><span class="font-label-sm text-label-sm mt-0.5">Infografis</span><span class="indicator w-1 h-1 rounded-full bg-primary mt-0.5 opacity-0 transition-opacity"></span></a><a class="flex flex-col items-center justify-center flex-1 h-full py-1 text-on-surface-variant hover:text-primary transition-all group" data-path="kuis-evaluasi" href="#"><span class="material-symbols-outlined text-[24px] group-hover:scale-105 transition-transform">quiz</span><span class="font-label-sm text-label-sm mt-0.5">Kuis</span><span class="indicator w-1 h-1 rounded-full bg-primary mt-0.5 opacity-0 transition-opacity"></span></a></nav></div></body></html>
