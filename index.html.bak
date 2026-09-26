@@ -108,12 +108,12 @@
     }
   </style>
 </head>
-<body class="bg-gradient-to-br from-[#0f172a] to-[#1e293b] sm:py-8 font-body-md text-on-surface antialiased flex justify-center items-start min-h-screen">
+<body class="bg-surface font-body-md text-on-surface antialiased flex justify-center items-start min-h-screen">
   
   <!-- App Container (Mobile Frame) -->
-  <div class="w-full sm:max-w-[414px] bg-surface sm:rounded-[2.5rem] shadow-[0_20px_60px_rgba(0,0,0,0.5)] relative overflow-hidden flex flex-col min-h-screen sm:min-h-[896px] sm:h-[896px] sm:ring-8 sm:ring-slate-800 app-container">
+  <div class="w-full bg-surface relative overflow-hidden flex flex-col min-h-screen app-container">
     
-    <header class="absolute top-0 w-full z-50 pt-safe bg-surface/85 backdrop-blur-xl shadow-[0_1px_8px_rgba(0,0,0,0.04)] sm:rounded-t-[2.5rem]">
+    <header class="absolute top-0 w-full z-50 pt-safe bg-surface/85 backdrop-blur-xl shadow-[0_1px_8px_rgba(0,0,0,0.04)]">
       <div class="h-16 px-4 flex items-center justify-between gap-2">
         <div class="flex items-center gap-2 min-w-0">
           <div class="w-9 h-9 rounded-xl bg-primary flex items-center justify-center text-on-primary font-display-lg text-title-md shadow-[0_4px_12px_rgba(0,105,72,0.25)] flex-shrink-0">
