@@ -4,6 +4,7 @@
   <meta charset="utf-8"/>
   <meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover" name="viewport"/>
   <meta content="mobile_tab" name="shell-type"/>
+  <title>Sahabat PAI</title>
   <link href="https://fonts.googleapis.com" rel="preconnect"/>
   <link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
   <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&amp;display=swap" rel="stylesheet"/>
@@ -84,8 +85,8 @@
   </script>
   <style>
     @layer base {
-      html, body { width: 100vw; margin: 0; padding: 0; }
-      body { overscroll-behavior: none; min-height: max(884px, 100dvh); }
+      html, body { width: 100vw; margin: 0; padding: 0; overflow-x: hidden; }
+      body { overscroll-behavior: none; }
       .pb-safe { padding-bottom: env(safe-area-inset-bottom, 0px); }
       .pt-safe { padding-top: env(safe-area-inset-top, 0px); }
       main > :first-child { margin-top: 0 !important; }
@@ -93,345 +94,293 @@
     }
     ::-webkit-scrollbar { display: none; }
     .material-symbols-outlined { font-variation-settings: 'FILL' 0, 'wght' 500, 'GRAD' 0, 'opsz' 24; }
+    
+    /* Desktop Mockup Styles */
+    .app-container::-webkit-scrollbar { display: none; }
   </style>
 </head>
-<body class="bg-surface font-body-md text-on-surface antialiased flex flex-col min-h-screen">
-  <header class="fixed top-0 w-full z-50 pt-safe bg-surface/85 backdrop-blur-xl shadow-[0_1px_8px_rgba(0,0,0,0.04)]">
-    <div class="h-16 px-margin flex items-center justify-between gap-space-sm">
-      <div class="flex items-center gap-space-sm min-w-0">
-        <div class="w-9 h-9 rounded-xl bg-primary flex items-center justify-center text-on-primary font-display-lg text-title-md shadow-[0_4px_12px_rgba(0,105,72,0.25)] flex-shrink-0">
-          <span>NV</span>
-        </div>
-        <div class="flex flex-col min-w-0">
-          <span class="font-label-sm text-label-sm text-primary tracking-wide uppercase">Assalamu'alaikum</span>
-          <span class="font-title-md text-title-md text-on-surface truncate">Beranda</span>
-        </div>
-      </div>
-      <div class="flex items-center gap-space-xs">
-        <div class="flex items-center gap-1 bg-tertiary-fixed/40 px-2.5 py-1 rounded-full flex-shrink-0">
-          <span class="material-symbols-outlined text-tertiary text-[18px]">local_fire_department</span>
-          <span class="font-label-md text-label-md text-tertiary">7 Hari</span>
-        </div>
-        <button aria-label="Pemberitahuan" class="w-11 h-11 flex items-center justify-center rounded-full text-on-surface-variant hover:text-primary transition-colors" type="button">
-          <span class="material-symbols-outlined text-[22px]">notifications</span>
-        </button>
-        <div class="w-8 h-8 rounded-full bg-primary flex items-center justify-center flex-shrink-0">
-          <span class="material-symbols-outlined text-on-primary text-[18px]">person</span>
-        </div>
-      </div>
-    </div>
-  </header>
-  <main class="flex-1 w-full bg-surface pt-16 pb-28">
-    <div class="flex flex-col w-full px-margin space-y-space-lg pb-10">
-      
-      <!-- Sub-Header Greeting & Quick Status Card -->
-      <div class="bg-surface-container-low rounded-3xl p-space-md shadow-sm relative overflow-hidden">
-        <div class="absolute -right-6 -bottom-6 w-28 h-28 bg-primary/5 rounded-full blur-xl pointer-events-none"></div>
-        <div class="flex items-center justify-between gap-space-sm mb-space-sm">
-          <div class="flex items-center gap-space-xs">
-            <span class="inline-flex items-center gap-1 bg-primary/10 text-primary px-2.5 py-1 rounded-full font-label-sm text-label-sm">
-              <span class="material-symbols-outlined text-[14px]">school</span>
-              Kelas 7 • Pemula
-            </span>
+<body class="bg-gradient-to-br from-[#0f172a] to-[#1e293b] sm:py-8 font-body-md text-on-surface antialiased flex justify-center items-start min-h-screen">
+  
+  <!-- App Container (Mobile Frame) -->
+  <div class="w-full sm:max-w-[414px] bg-surface sm:rounded-[2.5rem] shadow-[0_20px_60px_rgba(0,0,0,0.5)] relative overflow-hidden flex flex-col min-h-screen sm:min-h-[896px] sm:h-[896px] sm:ring-8 sm:ring-slate-800 app-container">
+    
+    <header class="absolute top-0 w-full z-50 pt-safe bg-surface/85 backdrop-blur-xl shadow-[0_1px_8px_rgba(0,0,0,0.04)] sm:rounded-t-[2.5rem]">
+      <div class="h-16 px-4 flex items-center justify-between gap-2">
+        <div class="flex items-center gap-2 min-w-0">
+          <div class="w-9 h-9 rounded-xl bg-primary flex items-center justify-center text-on-primary font-display-lg text-title-md shadow-[0_4px_12px_rgba(0,105,72,0.25)] flex-shrink-0">
+            <span>NV</span>
           </div>
-          <div class="flex items-center gap-1 bg-tertiary-fixed text-on-tertiary-fixed px-2.5 py-1 rounded-full shadow-sm">
-            <span class="material-symbols-outlined text-tertiary-container text-[16px]" style="font-variation-settings: 'FILL' 1;">local_fire_department</span>
-            <span class="font-label-md text-label-md">5 Hari Beruntun</span>
+          <div class="flex flex-col min-w-0">
+            <span class="font-label-sm text-label-sm text-primary tracking-wide uppercase">Assalamu'alaikum</span>
+            <span class="font-title-md text-title-md text-on-surface truncate">Beranda</span>
           </div>
         </div>
-        <div>
-          <h2 class="font-headline-sm text-headline-sm text-on-surface">Assalamu'alaikum, Sahabat PAI ✨</h2>
-          <p class="font-body-sm text-body-sm text-on-surface-variant mt-0.5">Siap menambah wawasan akidah &amp; akhlak hari ini?</p>
-        </div>
-      </div>
-      
-      <!-- Hero Banner Interaktif Mobile -->
-      <div class="relative overflow-hidden rounded-3xl bg-gradient-to-br from-primary via-primary-container to-secondary text-on-primary p-space-lg shadow-md">
-        <!-- Modern Geometric Islamic Motif Accents -->
-        <div class="absolute -top-12 -right-12 w-44 h-44 rounded-full bg-white/10 blur-2xl pointer-events-none"></div>
-        <div class="absolute right-3 top-3 opacity-15 pointer-events-none">
-          <svg class="animate-pulse" fill="none" height="110" viewbox="0 0 100 100" width="110">
-            <rect height="50" rx="8" stroke="currentColor" stroke-width="2.5" transform="rotate(45 50 50)" width="50" x="25" y="25"></rect>
-            <circle cx="50" cy="50" r="18" stroke="currentColor" stroke-width="2"></circle>
-            <circle cx="50" cy="50" fill="currentColor" r="4"></circle>
-          </svg>
-        </div>
-        <div class="relative z-10 flex flex-col gap-space-sm">
-          <span class="inline-flex items-center gap-1.5 self-start px-2.5 py-1 rounded-full bg-white/15 backdrop-blur-md text-on-primary font-label-sm text-label-sm">
-            <span class="material-symbols-outlined text-[14px]" style="font-variation-settings: 'FILL' 1;">auto_awesome</span>
-            Media Pembelajaran Visual PAI
-          </span>
-          <h1 class="font-headline-md text-headline-md text-on-primary font-bold leading-tight">
-            Eksplorasi Nilai-Nilai Islam Lewat Media Visual Modern
-          </h1>
-          <p class="font-body-sm text-body-sm text-on-primary/90 leading-relaxed max-w-[92%]">
-            Belajar rukun iman, sirah nabi, dan kelestarian alam secara interaktif melalui infografis kurasi mendalam.
-          </p>
-          <!-- Thumb-friendly Quick CTA Row -->
-          <div class="grid grid-cols-2 gap-space-sm pt-space-xs mt-1">
-            <button class="w-full h-12 flex items-center justify-center gap-1.5 rounded-2xl bg-surface text-primary font-label-lg text-label-lg shadow-sm active:scale-95 transition-transform" type="button">
-              <span class="material-symbols-outlined text-[20px]">mosque</span>
-              Mulai Belajar
-            </button>
-            <button class="w-full h-12 flex items-center justify-center gap-1.5 rounded-2xl bg-white/20 backdrop-blur-md text-on-primary font-label-lg text-label-lg active:scale-95 transition-transform" type="button">
-              <span class="material-symbols-outlined text-[20px]">quiz</span>
-              Uji Kuis
-            </button>
+        <div class="flex items-center gap-1">
+          <div class="flex items-center gap-1 bg-tertiary-fixed/40 px-2.5 py-1 rounded-full flex-shrink-0">
+            <span class="material-symbols-outlined text-tertiary text-[18px]">local_fire_department</span>
+            <span class="font-label-md text-label-md text-tertiary">7 Hari</span>
           </div>
-        </div>
-      </div>
-      
-      <!-- Quick Stats & Daily Progress Card -->
-      <div class="bg-surface-container-lowest rounded-3xl p-space-md shadow-sm space-y-space-md">
-        <div class="flex items-center justify-between">
-          <div class="flex items-center gap-2">
-            <div class="w-8 h-8 rounded-xl bg-primary/10 flex items-center justify-center text-primary">
-              <span class="material-symbols-outlined text-[18px]">trending_up</span>
-            </div>
-            <span class="font-title-md text-title-md text-on-surface">Target Harianmu</span>
-          </div>
-          <span class="font-label-lg text-label-lg text-primary">68% Selesai</span>
-        </div>
-        <!-- Progress Track -->
-        <div class="w-full bg-surface-container-high rounded-full h-3 overflow-hidden p-0.5">
-          <div class="bg-primary h-full rounded-full transition-all duration-700 ease-out" style="width: 68%;"></div>
-        </div>
-        <!-- Metrics Trio Grid -->
-        <div class="grid grid-cols-3 gap-space-xs pt-space-xs">
-          <div class="flex flex-col items-center justify-center p-2.5 rounded-2xl bg-surface-container-low text-center">
-            <span class="font-headline-sm text-headline-sm text-primary font-bold">3</span>
-            <span class="font-label-sm text-label-sm text-on-surface-variant mt-0.5">Modul Aktif</span>
-          </div>
-          <div class="flex flex-col items-center justify-center p-2.5 rounded-2xl bg-surface-container-low text-center">
-            <span class="font-headline-sm text-headline-sm text-secondary font-bold">18</span>
-            <span class="font-label-sm text-label-sm text-on-surface-variant mt-0.5">Flashcard</span>
-          </div>
-          <div class="flex flex-col items-center justify-center p-2.5 rounded-2xl bg-surface-container-low text-center">
-            <span class="font-headline-sm text-headline-sm text-tertiary font-bold">6 HD</span>
-            <span class="font-label-sm text-label-sm text-on-surface-variant mt-0.5">Infografis</span>
-          </div>
-        </div>
-      </div>
-      
-      <!-- Kategori Pilar Pembelajaran -->
-      <div class="space-y-space-sm">
-        <div class="flex items-center justify-between">
-          <div>
-            <h3 class="font-headline-sm text-headline-sm text-on-surface">Pilar Pembelajaran</h3>
-            <p class="font-body-sm text-body-sm text-on-surface-variant">Kurikulum esensial terstruktur</p>
-          </div>
-          <button class="font-label-md text-label-md text-primary flex items-center gap-0.5" type="button">
-            Lihat Semua
-            <span class="material-symbols-outlined text-[16px]">arrow_forward</span>
+          <button aria-label="Pemberitahuan" class="w-10 h-10 flex items-center justify-center rounded-full text-on-surface-variant hover:text-primary hover:bg-primary/5 transition-colors" type="button">
+            <span class="material-symbols-outlined text-[22px]">notifications</span>
           </button>
         </div>
-        <div class="flex flex-col gap-space-sm">
-          <!-- Item 1: Rukun Iman & Akidah -->
-          <div class="w-full bg-surface-container-lowest rounded-3xl p-space-md shadow-sm flex items-center gap-space-md active:bg-surface-container-low transition-colors">
-            <div class="w-14 h-14 rounded-2xl bg-primary/10 flex items-center justify-center text-primary text-2xl flex-shrink-0 shadow-sm">
-              🤲
-            </div>
-            <div class="flex-1 min-w-0">
-              <div class="flex items-center justify-between gap-1">
-                <h4 class="font-title-md text-title-md text-on-surface truncate">Rukun Iman &amp; Akidah</h4>
-                <span class="font-label-sm text-label-sm text-primary bg-primary/10 px-2 py-0.5 rounded-full">Bab 1-6</span>
-              </div>
-              <p class="font-body-sm text-body-sm text-on-surface-variant line-clamp-2 mt-0.5">
-                Fondasi keyakinan tauhid, mengenal asma'ul husna, malaikat, dan kitabullah secara visual.
-              </p>
-            </div>
-            <span class="material-symbols-outlined text-outline-variant text-[20px] flex-shrink-0">chevron_right</span>
-          </div>
-          <!-- Item 2: Kisah Teladan & Sejarah -->
-          <div class="w-full bg-surface-container-lowest rounded-3xl p-space-md shadow-sm flex items-center gap-space-md active:bg-surface-container-low transition-colors">
-            <div class="w-14 h-14 rounded-2xl bg-secondary/10 flex items-center justify-center text-secondary text-2xl flex-shrink-0 shadow-sm">
-              📜
-            </div>
-            <div class="flex-1 min-w-0">
-              <div class="flex items-center justify-between gap-1">
-                <h4 class="font-title-md text-title-md text-on-surface truncate">Kisah Teladan &amp; Sejarah</h4>
-                <span class="font-label-sm text-label-sm text-secondary bg-secondary/10 px-2 py-0.5 rounded-full">Sirah</span>
-              </div>
-              <p class="font-body-sm text-body-sm text-on-surface-variant line-clamp-2 mt-0.5">
-                Hikmah perjalanan para Nabi, Khulafaur Rasyidin, dan generasi emas peradaban Islam.
-              </p>
-            </div>
-            <span class="material-symbols-outlined text-outline-variant text-[20px] flex-shrink-0">chevron_right</span>
-          </div>
-          <!-- Item 3: Akhlak & Pelestarian Alam -->
-          <div class="w-full bg-surface-container-lowest rounded-3xl p-space-md shadow-sm flex items-center gap-space-md active:bg-surface-container-low transition-colors">
-            <div class="w-14 h-14 rounded-2xl bg-tertiary/10 flex items-center justify-center text-tertiary text-2xl flex-shrink-0 shadow-sm">
-              🌿
-            </div>
-            <div class="flex-1 min-w-0">
-              <div class="flex items-center justify-between gap-1">
-                <h4 class="font-title-md text-title-md text-on-surface truncate">Akhlak &amp; Pelestarian Alam</h4>
-                <span class="font-label-sm text-label-sm text-tertiary bg-tertiary-fixed/60 px-2 py-0.5 rounded-full">Ekologi</span>
-              </div>
-              <p class="font-body-sm text-body-sm text-on-surface-variant line-clamp-2 mt-0.5">
-                Tanggung jawab khalifah fil ardh, adab sesama manusia, flora, fauna, dan air bersih.
-              </p>
-            </div>
-            <span class="material-symbols-outlined text-outline-variant text-[20px] flex-shrink-0">chevron_right</span>
-          </div>
-        </div>
       </div>
-      
-      <!-- Interactive Flashcard of the Day (Tap to Flip Demo) -->
-      <div class="space-y-space-sm">
-        <div class="flex items-center justify-between">
-          <div class="flex items-center gap-2">
-            <span class="material-symbols-outlined text-primary text-[20px]">style</span>
-            <h3 class="font-headline-sm text-headline-sm text-on-surface">Flashcard Hari Ini</h3>
-          </div>
-          <span class="font-label-sm text-label-sm text-on-surface-variant bg-surface-container-high px-2 py-0.5 rounded-full">Ketuk kartu</span>
-        </div>
-        <!-- The Flip Container -->
-        <div class="cursor-pointer select-none relative min-h-[190px] rounded-3xl bg-surface-container-lowest shadow-sm p-space-lg flex flex-col justify-between overflow-hidden active:scale-[0.99] transition-all" id="flashcard-container">
-          <div class="absolute -right-8 -top-8 w-24 h-24 bg-primary/10 rounded-full blur-lg pointer-events-none"></div>
-          <!-- Front View -->
-          <div class="flex flex-col justify-between h-full space-y-space-sm" id="flashcard-front">
-            <div class="flex items-center justify-between">
-              <span class="font-label-sm text-label-sm text-primary bg-primary/10 px-2.5 py-1 rounded-full">Rukun Iman #1</span>
-              <span class="material-symbols-outlined text-outline text-[20px]">flip</span>
-            </div>
-            <div class="py-space-xs">
-              <h4 class="font-headline-sm text-headline-sm text-on-surface font-bold">Iman kepada Allah SWT</h4>
-              <p class="font-body-sm text-body-sm text-on-surface-variant mt-1 leading-relaxed">
-                Meyakini dengan hati, mengikrarkan dengan lisan, dan mengamalkan dengan perbuatan bahwa Allah Maha Esa tanpa sekutu.
-              </p>
-            </div>
-            <div class="flex items-center gap-1.5 text-primary font-label-sm text-label-sm pt-1">
-              <span class="material-symbols-outlined text-[16px]">touch_app</span>
-              Sentuh untuk membaca dalil &amp; tafsir makna ringkas
-            </div>
-          </div>
-          <!-- Back View (Hidden by default) -->
-          <div class="hidden flex-col justify-between h-full space-y-space-sm" id="flashcard-back">
-            <div class="flex items-center justify-between">
-              <span class="font-label-sm text-label-sm text-secondary bg-secondary/15 px-2.5 py-1 rounded-full">QS. Al-Ikhlas: 1-4</span>
-              <span class="material-symbols-outlined text-secondary text-[20px]">verified</span>
-            </div>
-            <div class="py-space-xs">
-              <p class="font-title-md text-title-md text-primary font-semibold text-right leading-loose">
-                قُلْ هُوَ اللَّهُ أَحَدٌ ۝
-              </p>
-              <p class="font-body-sm text-body-sm text-on-surface-variant mt-1.5 italic">
-                "Katakanlah (Muhammad), Dialah Allah, Yang Maha Esa." Intisari tauhid murni yang membebaskan jiwa dari ketakutan selain-Nya.
-              </p>
-            </div>
-            <div class="flex items-center gap-1.5 text-secondary font-label-sm text-label-sm pt-1">
-              <span class="material-symbols-outlined text-[16px]">check_circle</span>
-              Hafalan tersimpan di catatan harianmu
-            </div>
-          </div>
-        </div>
-      </div>
-      
-      <!-- Akses Cepat Materi Populer & Rekomendasi Kuis -->
-      <div class="space-y-space-sm">
-        <div class="flex items-center justify-between">
-          <h3 class="font-headline-sm text-headline-sm text-on-surface">Materi Populer &amp; Kuis</h3>
-          <span class="font-label-md text-label-md text-primary">Pilihan Guru</span>
-        </div>
-        <!-- 2-Card Visual Grid with curated Placeholders -->
-        <div class="grid grid-cols-2 gap-space-sm">
-          <!-- Visual Card 1: Infografis Populer -->
-          <div class="rounded-3xl bg-surface-container-lowest p-space-sm shadow-sm flex flex-col justify-between space-y-space-sm">
-            <div class="relative w-full h-28 rounded-2xl overflow-hidden bg-surface-container">
-              <img class="w-full h-full object-cover" data-alt="A clean modern 3D isometric illustration of a luminous Quran on a polished wooden rehal stand" src="https://lh3.googleusercontent.com/aida-public/AB6AXuAbRyE-_r7Q-YkuAkGRyzJClGfauCvwyqttgJhDe_slmNhSm4phavxN92nIpT_e7qpOh6w28KS0o0IYxQg2gnWbY9x8mR3Oe5UKozdVXwwSJ0YhW2PYAYtL16sUyBFIWD2ZPViEwFAQ8LvkihDZ3725-Keys63nJWONs4PXpj1OftkhUiG_7Wf6051aJqtp6c34x3w42Bm565HDS2Stgo3AfyJe1f2u44gVHQrT5I_pKK4cNVPQ5zp5"/>
-              <span class="absolute top-2 left-2 bg-primary/90 text-on-primary px-2 py-0.5 rounded-full font-label-sm text-label-sm backdrop-blur-sm">
-                Infografis
-              </span>
-            </div>
-            <div>
-              <h5 class="font-title-md text-title-md text-on-surface line-clamp-1">Peta Sirah Hijrah</h5>
-              <p class="font-body-sm text-body-sm text-on-surface-variant line-clamp-1 mt-0.5">Rute Yatsrib &amp; Gua Tsur HD</p>
-            </div>
-            <button class="w-full h-10 rounded-xl bg-surface-container-high text-on-surface font-label-md text-label-md flex items-center justify-center gap-1 active:bg-primary active:text-on-primary transition-colors" type="button">
-              Buka Visual
-            </button>
-          </div>
-          <!-- Visual Card 2: Kuis Tantangan Mingguan -->
-          <div class="rounded-3xl bg-surface-container-lowest p-space-sm shadow-sm flex flex-col justify-between space-y-space-sm">
-            <div class="relative w-full h-28 rounded-2xl overflow-hidden bg-surface-container">
-              <img class="w-full h-full object-cover" data-alt="A playful modern digital badge illustration" src="https://lh3.googleusercontent.com/aida-public/AB6AXuBVB6cmHsfExO0Vjw6F2MlV-1GSAbbOdcO4i7kJfFPfOmn-dZS4bFXcDpSv8gl9lGc9zrLACCRlWe7uiZDTcfhlbMnNXcbgLW0ObBE3rP1FK1D8Fek75YBVIDgPLfImdFZOzayliMqMiOQ1V--pC80_rIVMTDKa2o0uMr3hGw19fz1Lqtf4N6ylbBN1Sf9QFN0UDpaEhul7A1Ry_3pbO99opuhsBAn2nXxMrYaL3vyRL1PgbBffDch6"/>
-              <span class="absolute top-2 left-2 bg-tertiary-container text-on-tertiary px-2 py-0.5 rounded-full font-label-sm text-label-sm backdrop-blur-sm">
-                Kuis Pekan Ini
-              </span>
-            </div>
-            <div>
-              <h5 class="font-title-md text-title-md text-on-surface line-clamp-1">Tantangan Fiqih Alam</h5>
-              <p class="font-body-sm text-body-sm text-on-surface-variant line-clamp-1 mt-0.5">10 Soal • 150 Poin</p>
-            </div>
-            <button class="w-full h-10 rounded-xl bg-primary text-on-primary font-label-md text-label-md flex items-center justify-center gap-1 shadow-sm active:scale-95 transition-transform" type="button">
-              Ikuti Kuis
-            </button>
-          </div>
-        </div>
-      </div>
-      
-      <!-- Motivational Reminder Footer Snippet -->
-      <div class="bg-gradient-to-r from-surface-container-low to-surface-container rounded-2xl p-space-md flex items-center gap-space-sm">
-        <div class="w-10 h-10 rounded-full bg-primary/10 flex items-center justify-center text-primary flex-shrink-0">
-          <span class="material-symbols-outlined text-[20px]">lightbulb</span>
-        </div>
-        <div class="min-w-0">
-          <p class="font-label-sm text-label-sm text-primary uppercase font-bold">Mutiara Hari Ini</p>
-          <p class="font-body-sm text-body-sm text-on-surface-variant italic">"Menuntut ilmu adalah kewajiban bagi setiap muslim." (HR. Ibnu Majah)</p>
-        </div>
-      </div>
-    </div>
+    </header>
     
-    <script>
-      (function initFlashcardFlip() {
-        const card = document.getElementById('flashcard-container');
-        const front = document.getElementById('flashcard-front');
-        const back = document.getElementById('flashcard-back');
-        if (!card || !front || !back) return;
+    <main class="flex-1 w-full bg-surface pt-16 pb-28 overflow-y-auto app-container">
+      <div class="flex flex-col w-full px-4 space-y-6 pt-4 pb-10">
         
-        let isFlipped = false;
-        card.addEventListener('click', function() {
-          isFlipped = !isFlipped;
-          if (isFlipped) {
-            front.classList.add('hidden');
-            front.classList.remove('flex');
-            back.classList.remove('hidden');
-            back.classList.add('flex');
-          } else {
-            back.classList.add('hidden');
-            back.classList.remove('flex');
-            front.classList.remove('hidden');
-            front.classList.add('flex');
-          }
-        });
-      })();
-    </script>
-  </main>
-  
-  <div class="fixed bottom-0 w-full z-50 pb-safe pointer-events-none">
-    <nav class="pointer-events-auto mx-auto mb-3 w-[calc(100%-2rem)] max-w-md h-16 rounded-full bg-surface-container-lowest/90 backdrop-blur-2xl shadow-[0_8px_24px_rgba(0,105,72,0.1)] flex items-center justify-around px-2" data-active-classes="text-primary font-semibold [&amp;_span.indicator]:opacity-100">
-      <a aria-current="page" class="flex flex-col items-center justify-center flex-1 h-full py-1 transition-all group text-primary font-semibold [&amp;_span.indicator]:opacity-100" data-path="beranda" href="#">
-        <span class="material-symbols-outlined text-[24px] group-hover:scale-105 transition-transform">home</span>
-        <span class="font-label-sm text-label-sm mt-0.5">Beranda</span>
-        <span class="indicator w-1 h-1 rounded-full bg-primary mt-0.5 opacity-0 transition-opacity"></span>
-      </a>
-      <a class="flex flex-col items-center justify-center flex-1 h-full py-1 text-on-surface-variant hover:text-primary transition-all group" data-path="modul-belajar" href="#">
-        <span class="material-symbols-outlined text-[24px] group-hover:scale-105 transition-transform">menu_book</span>
-        <span class="font-label-sm text-label-sm mt-0.5">Modul</span>
-        <span class="indicator w-1 h-1 rounded-full bg-primary mt-0.5 opacity-0 transition-opacity"></span>
-      </a>
-      <a class="flex flex-col items-center justify-center flex-1 h-full py-1 text-on-surface-variant hover:text-primary transition-all group" data-path="infografis" href="#">
-        <span class="material-symbols-outlined text-[24px] group-hover:scale-105 transition-transform">auto_stories</span>
-        <span class="font-label-sm text-label-sm mt-0.5">Infografis</span>
-        <span class="indicator w-1 h-1 rounded-full bg-primary mt-0.5 opacity-0 transition-opacity"></span>
-      </a>
-      <a class="flex flex-col items-center justify-center flex-1 h-full py-1 text-on-surface-variant hover:text-primary transition-all group" data-path="kuis-evaluasi" href="#">
-        <span class="material-symbols-outlined text-[24px] group-hover:scale-105 transition-transform">quiz</span>
-        <span class="font-label-sm text-label-sm mt-0.5">Kuis</span>
-        <span class="indicator w-1 h-1 rounded-full bg-primary mt-0.5 opacity-0 transition-opacity"></span>
-      </a>
-    </nav>
+        <!-- Sub-Header Greeting & Quick Status Card -->
+        <div class="bg-surface-container-low rounded-3xl p-4 shadow-sm relative overflow-hidden group hover:shadow-md transition-shadow">
+          <div class="absolute -right-6 -bottom-6 w-28 h-28 bg-primary/5 rounded-full blur-xl pointer-events-none group-hover:scale-110 transition-transform duration-500"></div>
+          <div class="flex items-center justify-between gap-2 mb-3">
+            <div class="flex items-center gap-1">
+              <span class="inline-flex items-center gap-1 bg-primary/10 text-primary px-2.5 py-1 rounded-full font-label-sm text-label-sm">
+                <span class="material-symbols-outlined text-[14px]">school</span>
+                Kelas 7 • Pemula
+              </span>
+            </div>
+            <div class="flex items-center gap-1 bg-tertiary-fixed text-on-tertiary-fixed px-2.5 py-1 rounded-full shadow-sm">
+              <span class="material-symbols-outlined text-tertiary-container text-[16px]" style="font-variation-settings: 'FILL' 1;">local_fire_department</span>
+              <span class="font-label-md text-label-md">5 Hari Beruntun</span>
+            </div>
+          </div>
+          <div>
+            <h2 class="font-headline-sm text-headline-sm text-on-surface">Assalamu'alaikum, Sahabat PAI ✨</h2>
+            <p class="font-body-sm text-body-sm text-on-surface-variant mt-0.5">Siap menambah wawasan akidah &amp; akhlak hari ini?</p>
+          </div>
+        </div>
+        
+        <!-- Hero Banner Interaktif Mobile -->
+        <div class="relative overflow-hidden rounded-3xl bg-gradient-to-br from-primary via-primary-container to-secondary text-on-primary p-5 shadow-lg transform transition-transform hover:scale-[1.02] duration-300">
+          <!-- Modern Geometric Islamic Motif Accents -->
+          <div class="absolute -top-12 -right-12 w-44 h-44 rounded-full bg-white/10 blur-2xl pointer-events-none"></div>
+          <div class="absolute right-3 top-3 opacity-20 pointer-events-none">
+            <svg class="animate-[pulse_3s_ease-in-out_infinite]" fill="none" height="110" viewbox="0 0 100 100" width="110">
+              <rect height="50" rx="8" stroke="currentColor" stroke-width="2.5" transform="rotate(45 50 50)" width="50" x="25" y="25"></rect>
+              <circle cx="50" cy="50" r="18" stroke="currentColor" stroke-width="2"></circle>
+              <circle cx="50" cy="50" fill="currentColor" r="4"></circle>
+            </svg>
+          </div>
+          <div class="relative z-10 flex flex-col gap-3">
+            <span class="inline-flex items-center gap-1.5 self-start px-3 py-1 rounded-full bg-white/20 backdrop-blur-md text-on-primary font-label-sm text-label-sm border border-white/10">
+              <span class="material-symbols-outlined text-[14px]" style="font-variation-settings: 'FILL' 1;">auto_awesome</span>
+              Media Pembelajaran Visual PAI
+            </span>
+            <h1 class="font-headline-md text-[22px] text-on-primary font-bold leading-snug">
+              Eksplorasi Nilai Islam Lewat Visual Modern
+            </h1>
+            <p class="font-body-sm text-body-sm text-on-primary/90 leading-relaxed max-w-[90%]">
+              Belajar rukun iman, sirah nabi, dan kelestarian alam secara interaktif.
+            </p>
+            <!-- Thumb-friendly Quick CTA Row -->
+            <div class="grid grid-cols-2 gap-3 pt-2 mt-1">
+              <button class="w-full h-11 flex items-center justify-center gap-1.5 rounded-2xl bg-surface text-primary font-label-lg text-label-lg shadow-sm active:scale-95 hover:bg-surface-container-lowest transition-all" type="button">
+                <span class="material-symbols-outlined text-[20px]">mosque</span>
+                Mulai
+              </button>
+              <button class="w-full h-11 flex items-center justify-center gap-1.5 rounded-2xl bg-white/20 backdrop-blur-md text-on-primary border border-white/10 font-label-lg text-label-lg active:scale-95 hover:bg-white/30 transition-all" type="button">
+                <span class="material-symbols-outlined text-[20px]">quiz</span>
+                Uji Kuis
+              </button>
+            </div>
+          </div>
+        </div>
+        
+        <!-- Quick Stats & Daily Progress Card -->
+        <div class="bg-surface-container-lowest rounded-3xl p-4 shadow-sm space-y-4 hover:shadow-md transition-shadow">
+          <div class="flex items-center justify-between">
+            <div class="flex items-center gap-2">
+              <div class="w-8 h-8 rounded-xl bg-primary/10 flex items-center justify-center text-primary">
+                <span class="material-symbols-outlined text-[18px]">trending_up</span>
+              </div>
+              <span class="font-title-md text-title-md text-on-surface">Target Harianmu</span>
+            </div>
+            <span class="font-label-lg text-label-lg text-primary">68% Selesai</span>
+          </div>
+          <!-- Progress Track -->
+          <div class="w-full bg-surface-container-high rounded-full h-3 overflow-hidden p-0.5">
+            <div class="bg-primary h-full rounded-full transition-all duration-1000 ease-out" style="width: 68%;"></div>
+          </div>
+          <!-- Metrics Trio Grid -->
+          <div class="grid grid-cols-3 gap-2 pt-1">
+            <div class="flex flex-col items-center justify-center p-3 rounded-2xl bg-surface-container-low text-center hover:bg-surface-container transition-colors">
+              <span class="font-headline-sm text-headline-sm text-primary font-bold">3</span>
+              <span class="font-label-sm text-label-sm text-on-surface-variant mt-0.5">Modul Aktif</span>
+            </div>
+            <div class="flex flex-col items-center justify-center p-3 rounded-2xl bg-surface-container-low text-center hover:bg-surface-container transition-colors">
+              <span class="font-headline-sm text-headline-sm text-secondary font-bold">18</span>
+              <span class="font-label-sm text-label-sm text-on-surface-variant mt-0.5">Flashcard</span>
+            </div>
+            <div class="flex flex-col items-center justify-center p-3 rounded-2xl bg-surface-container-low text-center hover:bg-surface-container transition-colors">
+              <span class="font-headline-sm text-headline-sm text-tertiary font-bold">6 HD</span>
+              <span class="font-label-sm text-label-sm text-on-surface-variant mt-0.5">Infografis</span>
+            </div>
+          </div>
+        </div>
+        
+        <!-- Kategori Pilar Pembelajaran -->
+        <div class="space-y-3">
+          <div class="flex items-center justify-between px-1">
+            <div>
+              <h3 class="font-headline-sm text-headline-sm text-on-surface">Pilar Pembelajaran</h3>
+              <p class="font-body-sm text-[11px] text-on-surface-variant">Kurikulum esensial terstruktur</p>
+            </div>
+            <button class="font-label-md text-label-md text-primary flex items-center gap-0.5 hover:underline" type="button">
+              Lihat Semua
+              <span class="material-symbols-outlined text-[16px]">arrow_forward</span>
+            </button>
+          </div>
+          <div class="flex flex-col gap-3">
+            <!-- Item 1: Rukun Iman & Akidah -->
+            <div class="w-full bg-surface-container-lowest rounded-3xl p-4 shadow-sm flex items-center gap-3 hover:bg-surface-container-low cursor-pointer active:scale-[0.98] transition-all">
+              <div class="w-14 h-14 rounded-2xl bg-primary/10 flex items-center justify-center text-primary text-2xl flex-shrink-0 shadow-sm border border-primary/5">
+                🤲
+              </div>
+              <div class="flex-1 min-w-0">
+                <div class="flex items-center justify-between gap-1">
+                  <h4 class="font-title-md text-title-md text-on-surface truncate">Rukun Iman &amp; Akidah</h4>
+                </div>
+                <p class="font-body-sm text-[12px] text-on-surface-variant line-clamp-2 mt-0.5">
+                  Fondasi keyakinan tauhid, mengenal asma'ul husna, dan malaikat.
+                </p>
+              </div>
+            </div>
+            <!-- Item 2: Kisah Teladan & Sejarah -->
+            <div class="w-full bg-surface-container-lowest rounded-3xl p-4 shadow-sm flex items-center gap-3 hover:bg-surface-container-low cursor-pointer active:scale-[0.98] transition-all">
+              <div class="w-14 h-14 rounded-2xl bg-secondary/10 flex items-center justify-center text-secondary text-2xl flex-shrink-0 shadow-sm border border-secondary/5">
+                📜
+              </div>
+              <div class="flex-1 min-w-0">
+                <div class="flex items-center justify-between gap-1">
+                  <h4 class="font-title-md text-title-md text-on-surface truncate">Kisah Teladan &amp; Sejarah</h4>
+                </div>
+                <p class="font-body-sm text-[12px] text-on-surface-variant line-clamp-2 mt-0.5">
+                  Hikmah perjalanan para Nabi, Khulafaur Rasyidin, dan peradaban.
+                </p>
+              </div>
+            </div>
+          </div>
+        </div>
+        
+        <!-- Interactive Flashcard of the Day (Tap to Flip Demo) -->
+        <div class="space-y-3">
+          <div class="flex items-center justify-between px-1">
+            <div class="flex items-center gap-2">
+              <span class="material-symbols-outlined text-primary text-[20px]">style</span>
+              <h3 class="font-headline-sm text-headline-sm text-on-surface">Flashcard Hari Ini</h3>
+            </div>
+            <span class="font-label-sm text-[10px] text-on-surface-variant bg-surface-container-high px-2 py-0.5 rounded-full animate-pulse">Ketuk kartu</span>
+          </div>
+          <!-- The Flip Container -->
+          <div class="cursor-pointer select-none relative min-h-[190px] rounded-3xl bg-surface-container-lowest shadow-md p-5 flex flex-col justify-between overflow-hidden hover:-translate-y-1 hover:shadow-lg active:scale-[0.97] transition-all duration-300" id="flashcard-container">
+            <div class="absolute -right-8 -top-8 w-32 h-32 bg-primary/10 rounded-full blur-2xl pointer-events-none"></div>
+            <!-- Front View -->
+            <div class="flex flex-col justify-between h-full space-y-3" id="flashcard-front">
+              <div class="flex items-center justify-between">
+                <span class="font-label-sm text-label-sm text-primary bg-primary/10 px-3 py-1 rounded-full font-bold">Rukun Iman #1</span>
+                <span class="material-symbols-outlined text-outline text-[20px]">flip</span>
+              </div>
+              <div class="py-2">
+                <h4 class="font-headline-sm text-[18px] text-on-surface font-bold">Iman kepada Allah SWT</h4>
+                <p class="font-body-sm text-body-sm text-on-surface-variant mt-2 leading-relaxed">
+                  Meyakini dengan hati, mengikrarkan dengan lisan, dan mengamalkan dengan perbuatan bahwa Allah Maha Esa.
+                </p>
+              </div>
+              <div class="flex items-center gap-1.5 text-primary font-label-sm text-label-sm pt-1 opacity-80">
+                <span class="material-symbols-outlined text-[16px]">touch_app</span>
+                Sentuh untuk membalik kartu
+              </div>
+            </div>
+            <!-- Back View (Hidden by default) -->
+            <div class="hidden flex-col justify-between h-full space-y-3" id="flashcard-back">
+              <div class="flex items-center justify-between">
+                <span class="font-label-sm text-label-sm text-secondary bg-secondary/15 px-3 py-1 rounded-full font-bold">QS. Al-Ikhlas: 1-4</span>
+                <span class="material-symbols-outlined text-secondary text-[20px]">verified</span>
+              </div>
+              <div class="py-2">
+                <p class="font-title-md text-[20px] text-primary font-semibold text-right leading-loose">
+                  قُلْ هُوَ اللَّهُ أَحَدٌ ۝
+                </p>
+                <p class="font-body-sm text-body-sm text-on-surface-variant mt-2 italic border-l-2 border-secondary/30 pl-3">
+                  "Katakanlah (Muhammad), Dialah Allah, Yang Maha Esa." Intisari tauhid murni yang membebaskan jiwa.
+                </p>
+              </div>
+              <div class="flex items-center gap-1.5 text-secondary font-label-sm text-label-sm pt-1">
+                <span class="material-symbols-outlined text-[16px]">check_circle</span>
+                Hafalan tersimpan di catatan
+              </div>
+            </div>
+          </div>
+        </div>
+        
+        <!-- Motivational Reminder Footer Snippet -->
+        <div class="bg-gradient-to-r from-surface-container-low to-surface-container rounded-2xl p-4 flex items-center gap-4 mt-2">
+          <div class="w-12 h-12 rounded-full bg-primary/10 flex items-center justify-center text-primary flex-shrink-0 shadow-inner">
+            <span class="material-symbols-outlined text-[24px]">lightbulb</span>
+          </div>
+          <div class="min-w-0">
+            <p class="font-label-sm text-[11px] text-primary uppercase font-bold tracking-wider">Mutiara Hari Ini</p>
+            <p class="font-body-sm text-[13px] text-on-surface-variant italic mt-0.5">"Menuntut ilmu adalah kewajiban bagi setiap muslim." <br><span class="text-[11px] opacity-70 not-italic">(HR. Ibnu Majah)</span></p>
+          </div>
+        </div>
+      </div>
+      
+      <script>
+        (function initFlashcardFlip() {
+          const card = document.getElementById('flashcard-container');
+          const front = document.getElementById('flashcard-front');
+          const back = document.getElementById('flashcard-back');
+          if (!card || !front || !back) return;
+          
+          let isFlipped = false;
+          card.addEventListener('click', function() {
+            isFlipped = !isFlipped;
+            card.style.transform = "scale(0.95)";
+            setTimeout(() => {
+                card.style.transform = "scale(1)";
+                if (isFlipped) {
+                front.classList.add('hidden');
+                front.classList.remove('flex');
+                back.classList.remove('hidden');
+                back.classList.add('flex');
+                } else {
+                back.classList.add('hidden');
+                back.classList.remove('flex');
+                front.classList.remove('hidden');
+                front.classList.add('flex');
+                }
+            }, 150);
+          });
+        })();
+      </script>
+    </main>
+    
+    <div class="absolute bottom-0 w-full z-50 pb-safe pointer-events-none">
+      <div class="bg-gradient-to-t from-surface via-surface/80 to-transparent h-24 absolute bottom-0 w-full -z-10"></div>
+      <nav class="pointer-events-auto mx-auto mb-6 w-[calc(100%-2rem)] max-w-[350px] h-16 rounded-full bg-surface-container-lowest/90 backdrop-blur-2xl shadow-[0_10px_30px_rgba(0,105,72,0.15)] flex items-center justify-around px-2 border border-surface-variant/50" data-active-classes="text-primary font-semibold [&amp;_span.indicator]:opacity-100">
+        <a aria-current="page" class="flex flex-col items-center justify-center flex-1 h-full py-1 transition-all group text-primary font-semibold [&amp;_span.indicator]:opacity-100" data-path="beranda" href="#">
+          <span class="material-symbols-outlined text-[24px] group-hover:-translate-y-1 transition-transform">home</span>
+          <span class="font-label-sm text-[10px] mt-0.5">Beranda</span>
+          <span class="indicator w-1 h-1 rounded-full bg-primary mt-1 opacity-0 transition-opacity"></span>
+        </a>
+        <a class="flex flex-col items-center justify-center flex-1 h-full py-1 text-on-surface-variant hover:text-primary transition-all group" data-path="modul-belajar" href="#">
+          <span class="material-symbols-outlined text-[24px] group-hover:-translate-y-1 transition-transform">menu_book</span>
+          <span class="font-label-sm text-[10px] mt-0.5">Modul</span>
+          <span class="indicator w-1 h-1 rounded-full bg-primary mt-1 opacity-0 transition-opacity"></span>
+        </a>
+        <a class="flex flex-col items-center justify-center flex-1 h-full py-1 text-on-surface-variant hover:text-primary transition-all group" data-path="infografis" href="#">
+          <span class="material-symbols-outlined text-[24px] group-hover:-translate-y-1 transition-transform">auto_stories</span>
+          <span class="font-label-sm text-[10px] mt-0.5">Visual</span>
+          <span class="indicator w-1 h-1 rounded-full bg-primary mt-1 opacity-0 transition-opacity"></span>
+        </a>
+        <a class="flex flex-col items-center justify-center flex-1 h-full py-1 text-on-surface-variant hover:text-primary transition-all group" data-path="kuis-evaluasi" href="#">
+          <span class="material-symbols-outlined text-[24px] group-hover:-translate-y-1 transition-transform">quiz</span>
+          <span class="font-label-sm text-[10px] mt-0.5">Kuis</span>
+          <span class="indicator w-1 h-1 rounded-full bg-primary mt-1 opacity-0 transition-opacity"></span>
+        </a>
+      </nav>
+    </div>
   </div>
 </body>
 </html>
